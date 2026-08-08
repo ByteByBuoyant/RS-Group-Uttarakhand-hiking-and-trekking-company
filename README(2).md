@@ -57,13 +57,13 @@ Quick-access WhatsApp and phone contact options make it easier for visitors to c
 
 The customized trip planning section allows visitors to describe the kind of adventure they are looking for and explore options such as winter summits, high-altitude passes, and hidden alpine lakes.
 
-<img src="screenshots/custom-trip-planner.png" width="750" alt="RS Group Uttarakhand - Custom Trip Planner" />
+<img src="screenshots/trip-planner-preview.png" width="750" alt="RS Group Uttarakhand - Custom Trip Planner" />
 
 ### Our Trek Moments
 
 A visual gallery showcasing memorable RS Group Uttarakhand experiences, including Kedarkantha Summit, team adventures, campsites, forest trails, Madhmaheshwar, and alpine lakes.
 
-<img src="screenshots/trek-moments.png" width="750" alt="RS Group Uttarakhand - Trek Moments" />
+<img src="screenshots/trek-moments-preview.png" width="750" alt="RS Group Uttarakhand - Trek Moments" />
 
 ## Technologies
 
