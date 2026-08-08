@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROVE — AI Trip Planner</title>
+  <!-- Google Fonts: Space Grotesk, Inter, and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Modern Reset & Style Guide Variables */
+    :root {
+      --bg-cream: #f4ede1;
+      --bg-surface: #efe5d5;
+      --text-ink: #2b241d;
+      --text-ink-secondary: #6f6357;
+      --accent-terracotta: #b5763f;
+      --border-hairline: rgba(43, 36, 29, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-ink);
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Faint Warm Ambient Wash (Terracotta gradients) */
+    .ambient-glow-center {
+      position: fixed;
+      top: -20vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80vw;
+      height: 60vh;
+      background: radial-gradient(circle, rgba(181, 118, 63, 0.10) 0%, rgba(181, 118, 63, 0) 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ambient-glow-right {
+      position: fixed;
+      top: -10vh;
+      right: -10vw;
+      width: 50vw;
+      height: 50vh;
+      background: radial-gradient(circle, rgba(181, 118, 63, 0.06) 0%, rgba(181, 118, 63, 0) 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Page Container */
+    .page {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      padding: 26px clamp(28px, 4vw, 54px) 0;
+      overflow: hidden;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Pinned Bottom Illustration Backdrop Band */
+    .backdrop-band {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 55vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .backdrop-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+      transform-origin: center 68%;
+      animation: ken-burns 22s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    /* Melt Mask Overlay */
+    .backdrop-band::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        #f4ede1 0%,
+        rgba(244, 237, 225, 0.88) 16%,
+        rgba(244, 237, 225, 0.38) 36%,
+        rgba(244, 237, 225, 0) 60%,
+        rgba(244, 237, 225, 0.12) 100%
+      );
+    }
+
+    @keyframes ken-burns {
+      from {
+        transform: scale(1.0);
+      }
+      to {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Navigation Header */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+      position: relative;
+    }
+
+    .wordmark-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .compass-logo {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--accent-terracotta);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compass-needle {
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-terracotta);
+      transform: rotate(45deg);
+    }
+
+    .wordmark {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--text-ink);
+      letter-spacing: 0.06em;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14.5px;
+      color: var(--text-ink-secondary);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-ink);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .login-link {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14.5px;
+      color: var(--text-ink);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .login-link:hover {
+      opacity: 0.7;
+    }
+
+    .btn-cta {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--bg-cream);
+      background-color: var(--text-ink);
+      padding: 11px 20px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(43, 36, 29, 0.15);
+    }
+
+    .btn-cta svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* Hero Main Panel */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 8vh;
+      z-index: 2;
+      position: relative;
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      color: var(--text-ink-secondary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .kicker::before,
+    .kicker::after {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 1.5px;
+      background-color: var(--accent-terracotta);
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: clamp(50px, 8vw, 92px);
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      color: var(--text-ink);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span.accent {
+      color: var(--accent-terracotta);
+      font-weight: 600;
+    }
+
+    .subline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 18.5px;
+      color: var(--text-ink-secondary);
+      max-width: 560px;
+      line-height: 1.45;
+      margin-bottom: 38px;
+    }
+
+    /* Floating Input Card */
+    .input-card {
+      width: min(700px, 92vw);
+      background: rgba(255, 251, 244, 0.62);
+      backdrop-filter: blur(18px) saturate(1.2);
+      -webkit-backdrop-filter: blur(18px) saturate(1.2);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 22px;
+      box-shadow: 0 24px 60px -28px rgba(43, 36, 29, 0.42);
+      padding: 14px 14px 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .input-card:focus-within {
+      border-color: rgba(181, 118, 63, 0.3);
+      box-shadow: 0 24px 60px -24px rgba(43, 36, 29, 0.46), 0 0 0 3px rgba(181, 118, 63, 0.08);
+    }
+
+    .input-field-wrapper {
+      flex: 1;
+      text-align: left;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+
+    .typed-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-ink);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .typed-text.placeholder {
+      color: var(--text-ink-secondary);
+      opacity: 0.65;
+    }
+
+    .caret {
+      display: inline-block;
+      width: 2px;
+      height: 19px;
+      background-color: var(--accent-terracotta);
+      margin-left: 2px;
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .btn-upload {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--border-hairline);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-ink-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .btn-upload:hover {
+      background: rgba(43, 36, 29, 0.04);
+      border-color: var(--text-ink);
+      color: var(--text-ink);
+    }
+
+    .btn-upload svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .btn-submit {
+      background-color: var(--text-ink);
+      color: var(--bg-cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(43, 36, 29, 0.1);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(43, 36, 29, 0.15);
+    }
+
+    .btn-submit svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-submit:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* Suggestion Chips */
+    .chips-container {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chip {
+      background: rgba(255, 251, 244, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border-hairline);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-ink-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .chip::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-terracotta);
+      border-radius: 50%;
+    }
+
+    .chip:hover {
+      background: rgba(255, 251, 244, 0.75);
+      border-color: rgba(43, 36, 29, 0.25);
+      color: var(--text-ink);
+    }
+
+    /* staggered fade/blur-rise entrance animations */
+    .animate-item {
+      opacity: 0;
+      animation: fadeRise 0.95s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+
+    @keyframes fadeRise {
+      from {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translateY(26px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    /* Transition delays */
+    .delay-0 { animation-delay: 0ms; }
+    .delay-1 { animation-delay: 60ms; }
+    .delay-2 { animation-delay: 110ms; }
+    .delay-3 { animation-delay: 160ms; }
+    .delay-4 { animation-delay: 200ms; }
+    .delay-5 { animation-delay: 250ms; }
+    .delay-6 { animation-delay: 260ms; }
+    .delay-7 { animation-delay: 340ms; }
+    .delay-8 { animation-delay: 440ms; }
+    .delay-9 { animation-delay: 540ms; }
+    .delay-10 { animation-delay: 640ms; }
+
+    /* Prefers Reduced Motion settings */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-item {
+        opacity: 1 !important;
+        filter: none !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      .backdrop-band img {
+        animation: none !important;
+        transform: scale(1.03) !important;
+      }
+      .caret {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Ambient Washes -->
+  <div class="ambient-glow-center"></div>
+  <div class="ambient-glow-right"></div>
+
+  <!-- Background Landscape Illustration -->
+  <div class="backdrop-band">
+    <img src="https://zxdefgavgwfxastwmmjm.supabase.co/storage/v1/object/public/assets/rove.png" alt="ROVE Adventure Landscape Overlay">
+  </div>
+
+  <!-- Main layout page context -->
+  <div class="page">
+    <nav>
+      <!-- Left wordmark -->
+      <a href="#" class="wordmark-container animate-item delay-0" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="logo.png" alt="RS Group Uttarakhand Logo" style="height: 44px; width: auto; border-radius: 6px; box-shadow: 0 4px 10px rgba(43,36,29,0.08); border: 1px solid var(--border-hairline);">
+        <span class="wordmark" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: var(--text-ink); letter-spacing: 0.04em;">RS Group Uttarakhand</span>
+      </a>
+      <!-- Center navigation links -->
+      <div class="nav-links">
+        <a href="#" class="nav-link animate-item delay-1">Discover</a>
+        <a href="#" class="nav-link animate-item delay-2">Pricing</a>
+        <a href="#" class="nav-link animate-item delay-3">FAQs</a>
+      </div>
+
+      <!-- Right action links -->
+      <div class="nav-right">
+        <a href="#" class="login-link animate-item delay-4">Login</a>
+        <a href="#" class="btn-cta animate-item delay-5">
+          Plan my trip
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H2.75a.75.75 0 0 1 0-1.5h8.44L8.22 4.03a.75.75 0 0 1 0-1.06z"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Centered Hero Panel -->
+    <main class="hero">
+      <!-- Mono Kicker Removed -->
+
+      <!-- Main Headline -->
+      <h1 class="animate-item delay-7">
+        Where should we<br>take <span class="accent">you?</span>
+      </h1>
+
+      <!-- Description Subline -->
+      <p class="subline animate-item delay-8">
+        Tell us where you're headed and what you love — get a trip built just for you.
+      </p>
+
+      <!-- Glassy Input Card -->
+      <div class="input-card animate-item delay-9">
+        <div class="input-field-wrapper">
+          <span class="typed-text placeholder">&nbsp;</span>
+          <span class="caret"></span>
+        </div>
+        
+        <!-- File attachment paperclip -->
+        <button class="btn-upload" title="Attach context file">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Submit Prompt Button -->
+        <button class="btn-submit">
+          Plan my trip
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H2.75a.75.75 0 0 1 0-1.5h8.44L8.22 4.03a.75.75 0 0 1 0-1.06z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Suggestion Pill Chips -->
+      <div class="chips-container animate-item delay-10">
+        <button class="chip">Winter summits</button>
+        <button class="chip">High-altitude passes</button>
+        <button class="chip">Hidden alpine lakes</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Typewriter prompts rendering loop -->
+  <script>
+    const prompts = [
+      "Ready to explore peace in the mountains…",
+      "A scenic winter summit at Kedarkantha…",
+      "Climbing high-altitude trails to Brahmatal…"
+    ];
+
+    const textEl = document.querySelector('.typed-text');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) {
+      // If user prefers reduced motion, print the first prompt statically
+      textEl.textContent = prompts[0];
+      textEl.classList.remove('placeholder');
+    } else {
+      let currentIdx = 0;
+      let isDeleting = false;
+      let txt = '';
+      
+      // Delay initial typing slightly (0.7s)
+      setTimeout(tick, 700);
+
+      function tick() {
+        const fullText = prompts[currentIdx];
+        
+        if (isDeleting) {
+          // Deleting: 22ms per char
+          txt = fullText.substring(0, txt.length - 1);
+          textEl.textContent = txt || "\u00A0"; // keeps box height stable when text is empty
+          
+          if (txt === '') {
+            textEl.classList.add('placeholder');
+            isDeleting = false;
+            currentIdx = (currentIdx + 1) % prompts.length;
+            // Pause before starting the next phrase: 0.3s
+            setTimeout(tick, 300);
+          } else {
+            setTimeout(tick, 22);
+          }
+        } else {
+          // Typing: 42ms per char + jitter
+          txt = fullText.substring(0, txt.length + 1);
+          textEl.textContent = txt;
+          textEl.classList.remove('placeholder');
+          
+          if (txt === fullText) {
+            isDeleting = true;
+            // Hold completed text for 1.9s
+            setTimeout(tick, 1900);
+          } else {
+            // Typing speed jitter
+            setTimeout(tick, 42 + Math.random() * 20);
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
