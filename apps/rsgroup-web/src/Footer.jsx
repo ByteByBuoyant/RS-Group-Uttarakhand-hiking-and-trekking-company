@@ -355,7 +355,7 @@ function Footer() {
                       RS Group Uttarakhand
                     </span>
                   }{" "}
-                  © {new Date().getFullYear()}
+                  © 2017-{new Date().getFullYear()}
                 </p>
               }
             </div>
