@@ -143,8 +143,7 @@ function TrekDetails() {
             />
           }
           {
-            <div className="absolute inset-0 bg-black/50 p-10 flex flex-col justify-end">
-              {
+            <div className="absolute inset-0 bg-black/30 p-10 flex flex-col justify-end">
                 <motion.button
                   onClick={() => o(-1)}
                   initial={{
@@ -161,14 +160,10 @@ function TrekDetails() {
                   whileTap={{
                     scale: 0.95,
                   }}
-                  className={`absolute top-6 left-6 flex items-center gap-2 
-                      px-4 py-2 rounded-full shadow-lg shadow-[rgba(43,36,29,0.12)]-lg
-                      bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md/20 backdrop-blur-md border border-[#2b241d]/30
-                      text-[#2b241d] hover:bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md/30 transition-all`}
+                  className="absolute top-28 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-[#f25b23] text-white font-medium shadow-md hover:bg-[#d44816] transition-all z-20"
                 >
                   {<ArrowLeft className="w-5 h-5" />}Back
                 </motion.button>
-              }
               {
                 <motion.button
                   onClick={() => a(!0)}
@@ -188,15 +183,14 @@ function TrekDetails() {
                     scale: 0.96,
                   }}
                   className={`absolute bottom-1 right-6 flex items-center gap-2 px-5 py-2
-                        bg-gradient-to-r from-[#f25b23] to-[#000000] 
-                        text-[#2b241d] rounded-xl font-medium shadow-lg shadow-[rgba(43,36,29,0.12)]-lg
-                        hover:opacity-95 transition-all`}
+                        bg-[#f25b23] text-white rounded-xl font-medium shadow-lg shadow-[rgba(43,36,29,0.12)]-lg
+                        hover:bg-[#d44816] transition-all`}
                 >
                   {<Download className="w-5 h-5" />}Itinerary
                 </motion.button>
               }
               {
-                <h1 className="text-3xl font-display font-display font-semibold text-[#2b241d] drop-shadow-lg shadow-[rgba(43,36,29,0.12)]-lg">
+                <h1 className="text-3xl font-display font-semibold text-white drop-shadow-md">
                   {c.title}
                 </h1>
               }
@@ -740,7 +734,7 @@ function TrekDetails() {
           {
             <button
               onClick={() => e(!0)}
-              className="px-6 py-2 bg-gradient-to-r from-[#f25b23] to-[#000000] text-[#2b241d] rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)]-lg shadow-lg shadow-[rgba(43,36,29,0.12)]-black/20"
+              className="px-6 py-2 bg-[#f25b23] text-white rounded-xl font-semibold shadow-lg shadow-[rgba(43,36,29,0.12)]-lg hover:bg-[#d44816] transition-all"
             >
               Let's Connect
             </button>
