@@ -237,6 +237,7 @@ function TrekDetails() {
             <div className="w-full flex justify-center">
               {
                 <button
+                  onClick={() => e(!0)}
                   className={`relative w-full max-w-[500px] 
                       bg-gradient-to-r from-[#f25b23] via-[#f25b23] to-[#D94E04]
                       text-[#2b241d] font-semibold 
@@ -610,6 +611,7 @@ function TrekDetails() {
                     "/gallery_6.png",
                     "/gallery_7.png",
                     "/gallery_8.png",
+                    "/gallery_9.png",
                   ].map((Q, be) => (
                     <div
                       className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)]-lg shadow-lg shadow-[rgba(43,36,29,0.12)]-black/20"
