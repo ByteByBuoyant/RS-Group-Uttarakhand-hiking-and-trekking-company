@@ -139,7 +139,7 @@ function TrekDetails() {
             <img
               src={c.banner_image}
               alt={c.title}
-              className="w-full h-[430px] object-cover"
+              className="w-full h-[430px] object-cover object-top"
             />
           }
           {
