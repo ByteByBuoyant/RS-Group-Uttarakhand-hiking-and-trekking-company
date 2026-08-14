@@ -93,7 +93,13 @@ function HeroSlider() {
         <div className="flex flex-wrap gap-6">
           {e.map((s, idx) => {
             const c = UT[s.icon] || UT[$Le],
-              d = s.isLocal ? `/${s.image}` : (s.image ? `${BACKEND_STORAGE_URL}/${s.image}` : ELe);
+              d = s.slug === "winter" || s.name.toLowerCase().includes("winter")
+                ? "/category_winter.png"
+                : s.isLocal
+                ? `/${s.image}`
+                : s.image
+                ? `${BACKEND_STORAGE_URL}/${s.image}`
+                : ELe;
             return (
               <motion.div
                 key={s.id}
