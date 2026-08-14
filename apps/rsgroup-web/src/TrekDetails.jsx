@@ -602,10 +602,14 @@ function TrekDetails() {
               {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                   {[
-                    "https://images.unsplash.com/photo-1716746024271-a480780eeb2d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2VkYXJrYW50aGElMjB0cmVrfGVufDB8fDB8fHww",
-                    "https://plus.unsplash.com/premium_photo-1747852228965-064dbc1910b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8a2VkYXJrYW50aGElMjB0cmVrfGVufDB8fDB8fHww",
-                    "https://images.unsplash.com/photo-1723961471395-a3e2c0acb38b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGtlZGFya2FudGhhJTIwdHJla3xlbnwwfHwwfHx8MA%3D%3D",
-                    "https://images.unsplash.com/photo-1642498709557-b1bd711dd68b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGtlZGFya2FudGhhJTIwdHJla3xlbnwwfHwwfHx8MA%3D%3D",
+                    "/gallery_1.png",
+                    "/gallery_2.png",
+                    "/gallery_3.png",
+                    "/gallery_4.png",
+                    "/gallery_5.png",
+                    "/gallery_6.png",
+                    "/gallery_7.png",
+                    "/gallery_8.png",
                   ].map((Q, be) => (
                     <div
                       className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)]-lg shadow-lg shadow-[rgba(43,36,29,0.12)]-black/20"
@@ -620,45 +624,13 @@ function TrekDetails() {
                       {
                         <img
                           src={Q}
-                          alt="trek"
+                          alt="trek gallery item"
                           className="w-full h-40 object-cover group-hover:scale-110 transition-all duration-300"
                         />
                       }
                       {
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
-                          {<p className="text-[#2b241d] text-sm">View</p>}
-                        </div>
-                      }
-                    </div>
-                  ))}
-                  {[
-                    "https://www.w3schools.com/html/movie.mp4",
-                    "https://www.w3schools.com/html/movie.mp4",
-                    "https://www.w3schools.com/html/movie.mp4",
-                    "https://www.w3schools.com/html/movie.mp4",
-                  ].map((Q, be) => (
-                    <div
-                      className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)]-lg shadow-lg shadow-[rgba(43,36,29,0.12)]-black/20"
-                      onClick={() => {
-                        m({
-                          type: "video",
-                          src: Q,
-                        });
-                        u(!0);
-                      }}
-                    >
-                      {
-                        <video
-                          src={Q}
-                          muted={!0}
-                          autoPlay={!0}
-                          loop={!0}
-                          className="w-full h-40 object-cover group-hover:scale-110 transition-all duration-300"
-                        />
-                      }
-                      {
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
-                          {<p className="text-[#2b241d] text-sm">Play Video</p>}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                          {<p className="text-white text-sm font-semibold">View</p>}
                         </div>
                       }
                     </div>
