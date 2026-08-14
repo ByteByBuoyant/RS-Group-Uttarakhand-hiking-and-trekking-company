@@ -24,7 +24,9 @@ function HomePage() {
           days: `${m.duration_days} Days / ${m.duration_nights} Nights`,
           venue: m.location ?? "-",
           altitude: m.max_altitude ?? "-",
-          image: m.featured_image
+          image: m.slug === "kuari-pass-trek"
+            ? "/kuari_pass_card.png"
+            : m.featured_image
             ? `${BACKEND_STORAGE_URL}/${m.featured_image}`
             : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
           banner_image: m.banner_image
