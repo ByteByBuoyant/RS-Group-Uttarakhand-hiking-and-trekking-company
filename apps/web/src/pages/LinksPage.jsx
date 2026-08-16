@@ -160,10 +160,14 @@ export default function LinksPage() {
 
             {/* Location & Contact badge */}
             <div className="contact-line">
-              <MapPin size={15} className="pink-icon" />
-              <span>Nainital, Uttarakhand</span>
-              <span className="dot">•</span>
-              <a href={`mailto:${CONTACT.email}`}>Get in Touch</a>
+              <div className="contact-top">
+                <span>📍 Nainital, India</span>
+                <span className="dot">•</span>
+                <span>for collabs 💌</span>
+              </div>
+              <div className="contact-bottom">
+                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+              </div>
             </div>
 
             {/* Footer */}
@@ -566,23 +570,28 @@ export default function LinksPage() {
         /* Location badge */
         .contact-line {
           display: inline-flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 8px;
-          font-size: 14px;
+          gap: 6px;
+          font-size: 14.5px;
           font-weight: 700;
-          color: #5C4A6E;
+          color: #4A3A55;
           background: linear-gradient(100deg, #FFFDFB, var(--bg1));
           border: 1px solid rgba(156, 134, 216, 0.15);
           border-radius: 99px;
-          padding: 10px 20px;
+          padding: 12px 30px;
           box-shadow: 0 4px 12px rgba(156, 134, 216, 0.08);
           margin-bottom: 24px;
+          width: calc(100% - 10px);
+          max-width: 380px;
         }
 
-        .pink-icon {
-          color: var(--pink);
+        .contact-top {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          flex-wrap: wrap;
         }
 
         .contact-line .dot {
@@ -590,14 +599,18 @@ export default function LinksPage() {
           opacity: 0.8;
         }
 
-        .contact-line a {
+        .contact-bottom {
+          margin-top: 2px;
+        }
+
+        .contact-bottom a {
           color: var(--lav-deep);
           text-decoration: underline;
           text-underline-offset: 3px;
           transition: color 0.2s ease;
         }
 
-        .contact-line a:hover {
+        .contact-bottom a:hover {
           color: var(--ink);
         }
 
