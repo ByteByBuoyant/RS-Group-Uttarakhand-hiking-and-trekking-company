@@ -232,7 +232,7 @@ function StatsHighlight() {
                 <img
                   src={t.logo}
                   alt={t.name}
-                  className="max-h-12 w-auto object-contain transition-all duration-300"
+                  className="max-h-16 w-auto object-contain transition-all duration-300"
                 />
               </motion.div>
             ))}
