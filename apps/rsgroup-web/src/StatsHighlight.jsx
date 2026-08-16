@@ -55,6 +55,10 @@ const PLe = [
     logo: "https://i.pinimg.com/736x/37/1a/b7/371ab782282a30b3d71f2a82c633feb1.jpg",
   },
   {
+    name: "Run 2 Live",
+    logo: "/partner_run2live.png",
+  },
+  {
     name: "TripAdvisor",
     logo: "https://1000logos.net/wp-content/uploads/2019/08/Tripadvisor-Logo.png",
   },
@@ -209,7 +213,7 @@ function StatsHighlight() {
             Our Trusted Partners
           </motion.h3>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 items-center justify-center">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center justify-center max-w-5xl mx-auto">
             {PLe.map((t, idx) => (
               <motion.div
                 key={t.name}
