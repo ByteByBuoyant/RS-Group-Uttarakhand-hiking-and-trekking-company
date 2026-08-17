@@ -5,6 +5,7 @@ import { CONTACT } from '@/data/portfolio';
 
 // Typewriter prompts cycle
 const PROMPTS = [
+  "digital diary ‧ ₊ ˚ ✧ ﾟ *",
   "Ready to explore peace in the mountains…",
   "A scenic winter summit at Kedarkantha…",
   "Climbing high-altitude trails to Brahmatal…"
@@ -60,142 +61,99 @@ export default function LinksPage() {
       <div className="bg-blob b3"></div>
       <div className="bg-blob b4"></div>
 
+      {/* Floating Viewport Emojis */}
+      <div className="floating-emoji em-strawberry">🍓</div>
+      <div className="floating-emoji em-sparkle">✨</div>
+      <div className="floating-emoji em-heart">💖</div>
+
       {/* Main glassmorphic links container */}
       <div className="card-container animate-fade-rise">
-        <div className="card">
-          
-          {/* Header portrait panel with custom stickers */}
-          <div className="hero-wrap">
-            <img 
-              id="heroImg" 
-              className="hero-img" 
-              src="https://horizons-cdn.hostinger.com/a327e9ac-ed50-4fbc-a9cd-63a73a4a6614/77a1ff76c9a3df66a85f537f09cbb9a1.png" 
-              alt="Samriddhi Gururani" 
-            />
-            <div className="hero-fade"></div>
+        
+        {/* Centered Portrait photo wrapper */}
+        <div className="hero-wrap">
+          <img 
+            id="heroImg" 
+            className="hero-img" 
+            src="https://horizons-cdn.hostinger.com/a327e9ac-ed50-4fbc-a9cd-63a73a4a6614/77a1ff76c9a3df66a85f537f09cbb9a1.png" 
+            alt="samriddhi" 
+          />
 
-            {/* Left Sticker: Mountain Badge */}
-            <div className="sticker-on-photo sticker-left" style={{ '--r': '-8deg' }}>
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="46" fill="#F3A9C6" stroke="#4A3E58" strokeWidth="4" />
-                <circle cx="50" cy="50" r="38" fill="#FFFDFB" />
-                <path d="M50 25 L75 70 L25 70 Z" fill="#B9A6E8" stroke="#4A3E58" strokeWidth="3" strokeLinejoin="round" />
-                <path d="M50 25 L62 47 L45 42 L38 52 Z" fill="#FFFDFB" opacity="0.6" />
-                <circle cx="50" cy="38" r="4" fill="#FFE08A" />
-                <text x="50" y="82" textAnchor="middle" fontFamily="'Baloo 2', cursive" fontSize="12" fontWeight="bold" fill="#4A3E58">WANDER</text>
-              </svg>
-            </div>
-
-            {/* Right Sticker: Hiking Badge */}
-            <div className="sticker-on-photo sticker-right" style={{ '--r': '12deg' }}>
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="10" width="80" height="80" rx="18" fill="#FFE08A" stroke="#4A3E58" strokeWidth="4" />
-                <circle cx="50" cy="50" r="22" fill="#B9A6E8" stroke="#4A3E58" strokeWidth="3" />
-                <path d="M50 34 L50 66 M34 50 L66 50" stroke="#FFFDFB" strokeWidth="4" strokeLinecap="round" />
-                <path d="M44 44 L56 56 M56 44 L44 56" stroke="#4A3E58" strokeWidth="2.5" />
-                <text x="50" y="84" textAnchor="middle" fontFamily="'Baloo 2', cursive" fontSize="11" fontWeight="bold" fill="#4A3E58">EXPLORE</text>
-              </svg>
-            </div>
-          </div>
-
-          {/* Bio profile info section */}
-          <div className="content">
-            <h1 className="name">✿ samriddhi</h1>
-            
-            {/* Typewriter Prompt Display */}
-            <div className="tagline-wrap">
-              <span className="tagline">
-                {text || "\u00A0"}
-                <span className="caret-cursor">|</span>
-              </span>
-            </div>
-
-            <p className="bio-lines">
-              B.Tech CSE student specializing in <span className="highlight-tag">AI/ML & Computer Vision</span>. 
-              Always chasing summits, high-altitude passes, and building code in the mountains. <span className="heart">🏔️</span>
-            </p>
-
-            {/* Social Grid */}
-            <div className="socials">
-              <a href={CONTACT.github} target="_blank" rel="noopener noreferrer" className="social-btn" title="GitHub">
-                <Github />
-              </a>
-              <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn" title="LinkedIn">
-                <Linkedin />
-              </a>
-              <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="social-btn" title="Instagram">
-                <Instagram />
-              </a>
-              <a href={`mailto:${CONTACT.email}`} className="social-btn" title="Email">
-                <Mail />
-              </a>
-              <a href={CONTACT.leetcode} target="_blank" rel="noopener noreferrer" className="social-btn" title="Leetcode">
-                <Code2 />
-              </a>
-            </div>
-
-            {/* Directory Link Pills */}
-            <div className="pill-list">
-              <a href="/" className="pill featured">
-                <Compass className="pill-icon" />
-                <span>Personal Portfolio</span>
-                <span className="badge">New</span>
-              </a>
-              <a href="https://rsgroup-web.vercel.app" target="_blank" rel="noopener noreferrer" className="pill">
-                <span>Winter summits</span>
-                <ExternalLink className="pill-icon-mini" />
-              </a>
-              <a href="https://rsgroup-web.vercel.app" target="_blank" rel="noopener noreferrer" className="pill">
-                <span>High-altitude passes</span>
-                <ExternalLink className="pill-icon-mini" />
-              </a>
-              <a href="https://rsgroup-web.vercel.app" target="_blank" rel="noopener noreferrer" className="pill">
-                <span>Hidden alpine lakes</span>
-                <ExternalLink className="pill-icon-mini" />
-              </a>
-              <a href={CONTACT.resume} target="_blank" rel="noopener noreferrer" className="pill">
-                <span>Download Resume</span>
-              </a>
-            </div>
-
-            {/* Location & Contact badge */}
-            <div className="contact-line">
-              <div className="contact-top">
-                <span>📍 Nainital, India</span>
-                <span className="dot">•</span>
-                <span>for collabs 💌</span>
-              </div>
-              <div className="contact-bottom">
-                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-              </div>
-            </div>
-
-            {/* Footer */}
-            <footer>
-              <span>made with</span>
-              <svg viewBox="0 0 24 24" fill="currentColor" className="heart-svg">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-              <span>by samriddhi · 2026</span>
-            </footer>
-          </div>
-
-          {/* Floating Background Stickers */}
-          <div className="sticker-float sf1" style={{ top: '65%', left: '-20px', '--r': '-15deg' }}>
-            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="50,5 95,90 5,90" fill="#FFFDFB" stroke="#4A3E58" strokeWidth="6" />
-              <polygon points="50,22 82,82 18,82" fill="#B9A6E8" />
-              <polygon points="50,22 65,58 58,54 50,68" fill="#FFFDFB" opacity="0.7" />
-            </svg>
-          </div>
-          <div className="sticker-float sf2" style={{ top: '80%', right: '-25px', '--r': '18deg' }}>
-            <svg width="45" height="45" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50 10 L62 38 L90 50 L62 62 L50 90 L38 62 L10 50 L38 38 Z" fill="#FFE08A" stroke="#4A3E58" strokeWidth="6" strokeLinejoin="round" />
-              <circle cx="50" cy="50" r="10" fill="#F3A9C6" />
-            </svg>
-          </div>
-
+          {/* Cute aesthetic stickers layered on the image */}
+          <div className="sticker-photo sp-tl" style={{ '--r': '-12deg' }}>🎀</div>
+          <div className="sticker-photo sp-tr" style={{ '--r': '15deg' }}>🎀</div>
+          <div className="sticker-photo sp-ml" style={{ '--r': '-8deg' }}>🌸</div>
+          <div className="sticker-photo sp-mr" style={{ '--r': '10deg' }}>🌸</div>
+          <div className="sticker-photo sp-bl" style={{ '--r': '-15deg' }}>💖</div>
         </div>
+
+        {/* Bio profile info section */}
+        <div className="content">
+          <h1 className="name">hi, i'm samriddhi</h1>
+          <div className="flower-divider">✿</div>
+          
+          {/* Typewriter Prompt Display */}
+          <div className="tagline-wrap">
+            <span className="tagline">
+              {text || "\u00A0"}
+              <span className="caret-cursor">|</span>
+            </span>
+          </div>
+
+          {/* Centered bio list */}
+          <div className="bio-list">
+            <div className="bio-item">♡ powered by curiosity & coffee</div>
+            <div className="bio-item">♡ AI &nbsp;&nbsp; ♡ tiny side quests</div>
+            <div className="bio-item">♡ professional tab hoarder</div>
+          </div>
+
+          {/* Social Grid (Instagram, GitHub, LinkedIn) */}
+          <div className="socials">
+            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="social-btn" title="Instagram">
+              <Instagram />
+            </a>
+            <a href={CONTACT.github} target="_blank" rel="noopener noreferrer" className="social-btn" title="GitHub">
+              <Github />
+            </a>
+            <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn" title="LinkedIn">
+              <Linkedin />
+            </a>
+          </div>
+
+          {/* Directory Link Pills */}
+          <div className="pill-list">
+            <a href="/" className="pill">
+              <span>my portfolio ·*˚.</span>
+            </a>
+            <a href={CONTACT.github} target="_blank" rel="noopener noreferrer" className="pill">
+              <span>my github ˙ᵕ˙</span>
+            </a>
+            <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer" className="pill">
+              <span>my linkedin ✭</span>
+            </a>
+            <a href={CONTACT.leetcode} target="_blank" rel="noopener noreferrer" className="pill">
+              <span>my leetcode ˚☆</span>
+            </a>
+            <a href={`mailto:${CONTACT.email}`} className="pill">
+              <span>email me ✩</span>
+            </a>
+          </div>
+
+          {/* Location & Contact badge */}
+          <div className="contact-line">
+            <div className="contact-top">
+              <span>📍 Nainital, India · for collabs 💌</span>
+            </div>
+            <div className="contact-bottom">
+              <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <footer>
+            <span>made with 💖 by samriddhi · 2026</span>
+          </footer>
+        </div>
+
       </div>
 
       {/* Styled Embed CSS */}
@@ -225,7 +183,7 @@ export default function LinksPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 40px 20px;
+          padding: 60px 20px;
           z-index: 1;
         }
 
@@ -280,24 +238,16 @@ export default function LinksPage() {
           50% { transform: translate(30px, -30px) scale(1.1); }
         }
 
-        /* Main card setup */
+        /* Cardless content layout */
         .card-container {
           width: 100%;
           max-width: 440px;
           position: relative;
           z-index: 2;
-        }
-
-        .card {
-          background: rgba(255, 253, 251, 0.65);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1.5px solid rgba(255, 253, 251, 0.8);
-          border-radius: 40px;
-          box-shadow: 0 20px 50px rgba(74, 62, 88, 0.08), 
-                      0 4px 12px rgba(74, 62, 88, 0.02);
-          overflow: visible;
-          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
         }
 
         /* Entrance animation */
@@ -314,106 +264,118 @@ export default function LinksPage() {
           }
         }
 
-        /* Portrait Wrap styling */
+        /* Portrait Wrap styling - Centered rounded square */
         .hero-wrap {
           position: relative;
-          width: 100%;
-          height: 340px;
-          overflow: hidden;
-          border-radius: 40px 40px 0 0;
+          width: 240px;
+          height: 240px;
+          margin: 0 auto 28px;
+          overflow: visible;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
         .hero-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center 25%;
+          border-radius: 40px;
+          border: 2.5px solid rgba(74, 62, 88, 0.12);
+          box-shadow: 0 12px 36px rgba(74, 62, 88, 0.08);
           display: block;
         }
 
-        .hero-fade {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: -1px;
-          height: 100px;
-          background: linear-gradient(to bottom, transparent, rgba(255, 253, 251, 0.65) 95%);
-          pointer-events: none;
-        }
-
         /* Stickers Bobbing animations */
-        .sticker-on-photo {
+        .sticker-photo {
           position: absolute;
-          width: 72px;
-          height: 72px;
-          filter: drop-shadow(0 6px 12px rgba(74, 62, 88, 0.16));
+          font-size: 28px;
+          filter: drop-shadow(0 6px 12px rgba(74, 62, 88, 0.12));
           pointer-events: none;
-          z-index: 10;
+          z-index: 5;
           animation: bob 5s ease-in-out infinite;
         }
 
-        .sticker-left {
-          top: 15px;
-          left: 15px;
-          animation-delay: 0.2s;
+        .sp-tl {
+          top: -16px;
+          left: -16px;
+          animation-delay: 0s;
         }
 
-        .sticker-right {
-          top: 25px;
-          right: 15px;
+        .sp-tr {
+          top: -16px;
+          right: -16px;
           animation-delay: 1.2s;
+        }
+
+        .sp-ml {
+          top: 50%;
+          left: -26px;
+          transform: translateY(-50%);
+          animation-delay: 0.6s;
+        }
+
+        .sp-mr {
+          top: 60%;
+          right: -26px;
+          transform: translateY(-50%);
+          animation-delay: 1.8s;
+        }
+
+        .sp-bl {
+          bottom: -12px;
+          left: -10px;
+          font-size: 34px;
+          animation-delay: 0.9s;
         }
 
         @keyframes bob {
           0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
-          50% { transform: translateY(-8px) rotate(var(--r, 0deg)); }
+          50% { transform: translateY(-8px) rotate(calc(var(--r, 0deg) + 3deg)); }
         }
 
         /* Bio Content Section styling */
         .content {
-          padding: 24px 32px 32px;
-          text-align: center;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .name {
-          font-family: var(--font-funky);
-          font-weight: 800;
-          font-size: 40px;
-          letter-spacing: 0.2px;
-          background: linear-gradient(100deg, var(--pink), var(--lav-deep) 90%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          color: var(--pink);
-          line-height: 1.15;
-          margin-bottom: 8px;
+          font-family: var(--font-body);
+          font-weight: 500;
+          font-size: 25px;
+          color: var(--ink);
+          text-transform: lowercase;
+          margin-bottom: 4px;
+          letter-spacing: 0.5px;
+        }
+
+        .flower-divider {
+          font-size: 18px;
+          color: var(--lav-deep);
+          margin-bottom: 20px;
+          opacity: 0.85;
         }
 
         .tagline-wrap {
-          display: inline-block;
-          margin-bottom: 16px;
-          position: relative;
-          min-height: 38px;
-        }
-
-        .tagline-wrap::before {
-          content: '';
-          position: absolute;
-          left: -10px;
-          right: -10px;
-          bottom: 2px;
-          top: 36%;
-          background: linear-gradient(100deg, #FFE08A, var(--pink) 85%);
-          opacity: 0.45;
-          transform: rotate(-1.5deg);
-          border-radius: 6px;
-          z-index: -1;
+          background: #FFE08A;
+          border: 1.5px solid rgba(74, 62, 88, 0.1);
+          padding: 6px 20px;
+          border-radius: 99px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 6px 16px rgba(255, 224, 138, 0.25);
+          margin-bottom: 24px;
+          min-height: 40px;
         }
 
         .tagline {
           font-family: var(--font-hand);
           font-weight: 700;
-          font-size: 24px;
+          font-size: 23px;
           color: #5B3E7A;
           display: inline-flex;
           align-items: center;
@@ -433,22 +395,20 @@ export default function LinksPage() {
           50% { opacity: 0; }
         }
 
-        .bio-lines {
+        .bio-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 28px;
+          align-items: center;
+        }
+
+        .bio-item {
           font-size: 15.5px;
           font-weight: 600;
           color: #5C4A6E;
-          line-height: 1.75;
-          margin-bottom: 24px;
-        }
-
-        .highlight-tag {
-          color: #9C86D8;
-          font-weight: 700;
-        }
-
-        .heart {
-          color: var(--pink);
-          font-size: 17px;
+          text-transform: lowercase;
+          line-height: 1.4;
         }
 
         /* Social icons styling */
@@ -456,134 +416,87 @@ export default function LinksPage() {
           display: flex;
           justify-content: center;
           gap: 16px;
-          margin-bottom: 28px;
+          margin-bottom: 32px;
         }
 
         .social-btn {
-          width: 48px;
-          height: 48px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           background: #FFFDFB;
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 1px solid rgba(74, 62, 88, 0.06);
-          box-shadow: 0 3px 0 rgba(74, 62, 88, 0.05);
+          border: 1.5px solid rgba(74, 62, 88, 0.08);
+          box-shadow: 0 4px 12px rgba(74, 62, 88, 0.04);
           color: var(--ink);
-          transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition: all 0.2s ease;
         }
 
         .social-btn svg {
-          width: 20px;
-          height: 20px;
+          width: 19px;
+          height: 19px;
         }
 
         .social-btn:hover {
-          transform: translateY(-4px) scale(1.1) rotate(-6deg);
+          transform: translateY(-3px) scale(1.05);
           background: var(--bg1);
+          border-color: rgba(156, 134, 216, 0.25);
+          box-shadow: 0 6px 15px rgba(156, 134, 216, 0.15);
           color: var(--lav-deep);
-          border-color: rgba(156, 134, 216, 0.2);
-          box-shadow: 0 6px 12px rgba(156, 134, 216, 0.15);
         }
 
         /* Directory Pills List styling */
         .pill-list {
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          margin-bottom: 28px;
+          gap: 14px;
+          width: 100%;
+          margin-bottom: 32px;
         }
 
         .pill {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
           width: 100%;
-          padding: 16px 24px;
+          padding: 15px 24px;
           background: #FFFDFB;
-          border: 1.5px solid var(--line);
-          border-radius: 999px;
+          border: 1.5px solid rgba(74, 62, 88, 0.08);
+          border-radius: 99px;
           font-family: var(--font-body);
           font-weight: 700;
-          font-size: 15px;
+          font-size: 15.5px;
           color: var(--ink);
-          box-shadow: 0 3px 0 rgba(74, 62, 88, 0.04);
+          box-shadow: 0 4px 15px rgba(74, 62, 88, 0.03);
           transition: all 0.25s ease;
           position: relative;
         }
 
         .pill:hover {
           transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba(156, 134, 216, 0.15);
+          box-shadow: 0 8px 24px rgba(156, 134, 216, 0.12);
           background: var(--bg1);
-          border-color: rgba(156, 134, 216, 0.2);
+          border-color: rgba(156, 134, 216, 0.25);
           color: var(--lav-deep);
-        }
-
-        .pill.featured {
-          background: linear-gradient(135deg, #FFFDFB 0%, var(--bg1) 100%);
-          border: 1.5px solid rgba(156, 134, 216, 0.25);
-          box-shadow: 0 4px 10px rgba(156, 134, 216, 0.08);
-        }
-
-        .pill.featured:hover {
-          background: linear-gradient(135deg, var(--bg1) 0%, #EFE7FB 100%);
-          border-color: rgba(156, 134, 216, 0.4);
-        }
-
-        .pill-icon {
-          width: 18px;
-          height: 18px;
-          color: var(--pink);
-        }
-
-        .pill-icon-mini {
-          width: 14px;
-          height: 14px;
-          color: var(--muted);
-          opacity: 0.7;
-          margin-left: 2px;
-          transition: transform 0.2s ease;
-        }
-
-        .pill:hover .pill-icon-mini {
-          transform: translate(1px, -1px);
-          color: var(--lav-deep);
-        }
-
-        .badge {
-          position: absolute;
-          right: 20px;
-          top: 50%;
-          transform: translateY(-50%);
-          background: var(--pink);
-          color: #FFFDFB;
-          font-size: 10px;
-          font-weight: 700;
-          padding: 2px 8px;
-          border-radius: 99px;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
         }
 
         /* Location badge */
         .contact-line {
-          display: inline-flex;
+          display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 6px;
-          font-size: 14.5px;
+          gap: 4px;
+          font-size: 14px;
           font-weight: 700;
           color: #4A3A55;
-          background: linear-gradient(100deg, #FFFDFB, var(--bg1));
-          border: 1px solid rgba(156, 134, 216, 0.15);
-          border-radius: 99px;
-          padding: 12px 30px;
-          box-shadow: 0 4px 12px rgba(156, 134, 216, 0.08);
-          margin-bottom: 24px;
-          width: calc(100% - 10px);
-          max-width: 380px;
+          background: #FFFDFB;
+          border: 1.5px solid rgba(156, 134, 216, 0.15);
+          border-radius: 24px;
+          padding: 12px 24px;
+          box-shadow: 0 4px 15px rgba(156, 134, 216, 0.06);
+          margin-bottom: 28px;
+          width: 100%;
         }
 
         .contact-top {
@@ -592,11 +505,6 @@ export default function LinksPage() {
           justify-content: center;
           gap: 8px;
           flex-wrap: wrap;
-        }
-
-        .contact-line .dot {
-          color: var(--pink);
-          opacity: 0.8;
         }
 
         .contact-bottom {
@@ -616,86 +524,105 @@ export default function LinksPage() {
 
         /* Footer styling */
         footer {
-          margin-top: 16px;
-          font-size: 12px;
+          margin-top: 12px;
+          font-size: 12.5px;
           color: var(--muted);
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
-          opacity: 0.8;
+          opacity: 0.85;
+          text-transform: lowercase;
         }
 
-        .heart-svg {
-          width: 14px;
-          height: 14px;
-          color: var(--pink);
-          animation: beat 1.2s ease-in-out infinite;
-        }
-
-        @keyframes beat {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.15); }
-        }
-
-        /* Floating content stickers */
-        .sticker-float {
+        /* Floating Viewport Emojis */
+        .floating-emoji {
           position: absolute;
-          filter: drop-shadow(0 6px 12px rgba(74, 62, 88, 0.1));
           pointer-events: none;
-          z-index: 10;
-          animation: floatSticker 6s ease-in-out infinite;
+          z-index: 1;
+          animation: floatEmoji 8s ease-in-out infinite;
+          filter: drop-shadow(0 6px 12px rgba(74, 62, 88, 0.08));
         }
 
-        .sf1 {
-          animation-delay: 0.5s;
+        .em-strawberry {
+          font-size: 42px;
+          bottom: 8%;
+          left: 10%;
+          animation-delay: 0s;
         }
 
-        .sf2 {
+        .em-sparkle {
+          font-size: 30px;
+          top: 15%;
+          right: 10%;
           animation-delay: 2s;
         }
 
-        @keyframes floatSticker {
-          0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
-          50% { transform: translateY(-10px) rotate(calc(var(--r, 0deg) + 3deg)); }
+        .em-heart {
+          font-size: 32px;
+          top: 50%;
+          left: 8%;
+          animation-delay: 4s;
+        }
+
+        @keyframes floatEmoji {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-15px) rotate(8deg);
+          }
         }
 
         /* Mobile responsiveness */
         @media (max-width: 480px) {
           .links-page-wrapper {
-            padding: 20px 10px;
-          }
-          .card {
-            border-radius: 30px;
+            padding: 40px 16px;
           }
           .hero-wrap {
-            height: 280px;
-            border-radius: 30px 30px 0 0;
-          }
-          .content {
-            padding: 20px 20px 24px;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 24px;
           }
           .name {
-            font-size: 32px;
+            font-size: 22px;
+          }
+          .tagline-wrap {
+            padding: 4px 16px;
+            margin-bottom: 20px;
           }
           .tagline {
             font-size: 20px;
           }
-          .bio-lines {
+          .bio-item {
             font-size: 14.5px;
-            line-height: 1.6;
           }
           .social-btn {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
           }
           .social-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
           }
           .pill {
-            padding: 12px 18px;
-            font-size: 14px;
+            padding: 13px 20px;
+            font-size: 14.5px;
+          }
+          .floating-emoji.em-strawberry {
+            font-size: 32px;
+            left: 5%;
+            bottom: 5%;
+          }
+          .floating-emoji.em-sparkle {
+            font-size: 24px;
+            right: 5%;
+            top: 10%;
+          }
+          .floating-emoji.em-heart {
+            font-size: 26px;
+            left: 4%;
+            top: 45%;
           }
         }
 
@@ -706,7 +633,7 @@ export default function LinksPage() {
             transform: none;
             animation: none;
           }
-          .sticker-on-photo, .sticker-float, .heart-svg {
+          .sticker-photo, .floating-emoji {
             animation: none;
           }
           .caret-cursor {
