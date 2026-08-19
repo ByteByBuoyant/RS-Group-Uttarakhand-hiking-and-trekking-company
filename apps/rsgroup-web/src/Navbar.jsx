@@ -80,18 +80,18 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden md:flex items-center gap-10">
         <div className="relative">
           <input
             type="text"
             onKeyDown={handleSearchKeyPress}
             placeholder="Search treks..."
-            className="w-64 px-4 py-1.5 text-sm font-medium text-white border border-white/30 rounded-full bg-white/10 placeholder-white/80 focus:outline-none focus:ring-1 focus:ring-white focus:w-80 transition-all duration-300"
+            className="w-80 px-5 py-2.5 text-base font-medium text-white border border-white/35 rounded-full bg-white/10 placeholder-white/80 focus:outline-none focus:ring-1 focus:ring-white focus:w-[350px] transition-all duration-300"
           />
-          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/80 pointer-events-none" />
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/80 pointer-events-none" />
         </div>
 
-        <ul className="flex items-center gap-8 text-white font-semibold text-[16.5px]">
+        <ul className="flex items-center gap-10 text-white font-bold text-[18px]">
           {v.map((w) => (
             <li
               key={w.name}
@@ -117,7 +117,7 @@ function Navbar() {
             ) : (
               <button
                 onClick={() => o(true)}
-                className="bg-white text-[#f25b23] font-semibold rounded-full px-5 py-2 text-xs shadow-lg hover:bg-white/90 hover:scale-[1.03] transition-all duration-200"
+                className="bg-white text-[#f25b23] font-bold rounded-full px-6 py-2.5 text-sm shadow-lg hover:bg-white/90 hover:scale-[1.03] transition-all duration-200"
               >
                 Login
               </button>
