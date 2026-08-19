@@ -80,7 +80,7 @@ function Navbar() {
         </div>
       </div>
 
-      <div className="hidden md:flex items-center gap-6">
+      <div className="hidden md:flex items-center gap-8">
         <div className="relative">
           <input
             type="text"
@@ -91,7 +91,7 @@ function Navbar() {
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/80 pointer-events-none" />
         </div>
 
-        <ul className="flex items-center gap-6 text-white font-semibold text-[15px]">
+        <ul className="flex items-center gap-8 text-white font-semibold text-[16.5px]">
           {v.map((w) => (
             <li
               key={w.name}

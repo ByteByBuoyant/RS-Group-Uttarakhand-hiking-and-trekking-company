@@ -135,7 +135,7 @@ function Categories() {
 
         {/* Prompt Input Card */}
         <DivTag
-          className="w-full max-w-[680px] bg-white/62 backdrop-blur-xl border border-white/50 rounded-[22px] shadow-2xl shadow-[rgba(43,36,29,0.15)] p-2 pl-3.5 sm:p-3 sm:pl-5 flex items-center gap-1.5 sm:gap-3 mb-6 overflow-hidden"
+          className="w-full max-w-[680px] bg-white/62 backdrop-blur-xl border border-white/50 rounded-[22px] shadow-2xl shadow-[rgba(43,36,29,0.15)] p-2.5 pl-4 sm:p-3.5 sm:pl-7 flex items-center gap-3 sm:gap-5 mb-6 overflow-hidden"
           {...(!shouldReduceMotion && {
             initial: { opacity: 0, y: 20, filter: "blur(8px)" },
             animate: { opacity: 1, y: 0, filter: "blur(0)" },
@@ -155,22 +155,14 @@ function Categories() {
             )}
           </div>
 
-          {/* Paperclip upload */}
-          <button
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#2b241d]/12 flex items-center justify-center text-[#6f6357] hover:text-[#2b241d] hover:bg-[#2b241d]/5 transition-all duration-200 shrink-0"
-            title="Attach file"
-          >
-            <Paperclip size={18} />
-          </button>
-
           {/* Action CTA */}
           <button
             onClick={() => navigate("/alltreks")}
-            className="group bg-[#2b241d] hover:bg-[#f25b23] text-[#f4ede1] font-medium text-[10px] sm:text-sm px-2.5 py-2 sm:px-5 sm:py-3 rounded-[10px] sm:rounded-[14px] flex items-center gap-1 sm:gap-2 shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-[rgba(43,36,29,0.15)]"
+            className="group bg-[#2b241d] hover:bg-[#f25b23] text-[#f4ede1] font-semibold text-xs sm:text-base px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-[12px] sm:rounded-[16px] flex items-center gap-1.5 sm:gap-2.5 shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-[rgba(43,36,29,0.15)]"
           >
             Plan my trip
             <ArrowRight
-              size={12}
+              size={14}
               className="transition-transform duration-200 group-hover:translate-x-0.5"
             />
           </button>
