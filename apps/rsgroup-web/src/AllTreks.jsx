@@ -59,7 +59,12 @@ function AllTreks() {
             j.title?.toLowerCase().includes(searchParam) ||
             j.location?.toLowerCase().includes(searchParam) ||
             j.venue?.toLowerCase().includes(searchParam) ||
-            j.short_description?.toLowerCase().includes(searchParam)
+            j.short_description?.toLowerCase().includes(searchParam) ||
+            j.category?.name?.toLowerCase().includes(searchParam) ||
+            j.category?.slug?.toLowerCase().includes(searchParam) ||
+            (Array.isArray(j.categories) &&
+              j.categories.some((cat) => cat.toLowerCase().includes(searchParam))) ||
+            j.why_choose?.toLowerCase().includes(searchParam)
         );
       }
       const N = rawTreks.map((j) => ({
@@ -95,6 +100,15 @@ function AllTreks() {
     }
     w();
   }, [s, t.search]);
+
+  const categoryList = Array.isArray(y) ? [...y] : [];
+  if (!categoryList.some((item) => item.slug === "winter")) {
+    categoryList.unshift({ name: "Winter Trek", slug: "winter" });
+  }
+  if (!categoryList.some((item) => item.slug === "summer")) {
+    categoryList.push({ name: "Summer Trek", slug: "summer" });
+  }
+
   const b = [
     {
       label: "All Treks",
@@ -104,12 +118,10 @@ function AllTreks() {
       label: "Upcoming",
       value: "upcoming",
     },
-    ...(Array.isArray(y)
-      ? y.map((w) => ({
-          label: w.name,
-          value: w.slug,
-        }))
-      : []),
+    ...categoryList.map((w) => ({
+      label: w.slug === "summer" ? "Summer Trek" : w.name,
+      value: w.slug,
+    })),
   ];
 
   return (

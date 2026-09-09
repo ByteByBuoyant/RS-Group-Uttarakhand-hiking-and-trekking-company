@@ -6,7 +6,8 @@ import { motion } from "framer-motion";
 const prompts = [
   "Ready to explore peace in the mountains…",
   "A scenic winter summit at Kedarkantha…",
-  "Climbing high-altitude trails to Brahmatal…"
+  "Climbing high-altitude trails to Brahmatal…",
+  "Uncovering summer & winter trails in Niti Valley…"
 ];
 
 function Categories() {

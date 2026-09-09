@@ -69,14 +69,16 @@ export const NITI_VALLEY_TREK = {
   status: 1,
   category: {
     id: 2,
-    name: "Winter Trek",
+    name: "Summer & Winter Trek",
     slug: "winter",
     sort_order: 1,
     status: true,
-    image: "categories/wqGhpOrK5oqRdVdXKocR5hg7eLee3G93luRKDmhF.jpg",
-    short_description: "Traverse snow-covered trails and magical valleys.",
-    icon: "Snowflake",
+    image: "category_summer_monsoon.png",
+    short_description: "Traverse snow-covered trails and ice caves in winter and lush alpine border meadows in summer.",
+    icon: "Sun",
   },
+  categories: ["winter", "summer"],
+  season: "Summer & Winter",
 };
 
 async function fetchTreks(t = {}) {
@@ -85,6 +87,8 @@ async function fetchTreks(t = {}) {
     a = await n.json();
   if (!n.ok) throw a;
   const list = a.data ? [...a.data] : [];
+  const cat = (t.category || t.type || "").toLowerCase();
+
   if (
     !list.some(
       (item) =>
@@ -92,7 +96,6 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("brahmatal")
     )
   ) {
-    const cat = t.category;
     if (!cat || cat === "all" || cat === "winter" || t.upcoming) {
       list.push(BRAHMATAL_TREK);
     }
@@ -105,9 +108,16 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("timmersain")
     )
   ) {
-    const cat = t.category;
     if (!cat || cat === "all" || cat === "winter" || cat === "summer" || t.upcoming) {
-      list.push(NITI_VALLEY_TREK);
+      const adaptedNiti = {
+        ...NITI_VALLEY_TREK,
+        category: {
+          ...NITI_VALLEY_TREK.category,
+          name: cat === "summer" ? "Summer Trek" : cat === "winter" ? "Winter Trek" : "Summer & Winter Trek",
+          slug: cat === "summer" ? "summer" : "winter",
+        },
+      };
+      list.push(adaptedNiti);
     }
   }
   return list;

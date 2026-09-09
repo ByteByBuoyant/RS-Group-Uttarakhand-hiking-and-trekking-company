@@ -204,7 +204,8 @@ const NITI_VALLEY_ATTRIBUTES = [
   { label: "Trek Distance", value: "~12 km total (round trip)" },
   { label: "Altitude", value: "~3,600 m (11,800 ft)" },
   { label: "Difficulty Level", value: "Easy to Moderate" },
-  { label: "Best Time to Visit", value: "April to June & September to November" },
+  { label: "Season", value: "Summer & Winter (All-Season Himalayan Destination)" },
+  { label: "Best Time to Visit", value: "Summer (April - June) & Winter (September - March)" },
   { label: "Special Highlight", value: "Timmersain Mahadev (Chota Amarnath Ice Shivling)" },
 ];
 
@@ -597,7 +598,9 @@ function TrekDetails() {
             <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-lg shadow-[rgba(43,36,29,0.12)]-lg shadow-lg shadow-[rgba(43,36,29,0.12)]-black/20 shadow-lg shadow-[rgba(43,36,29,0.12)]-black/10 border border-[#2b241d]/12">
               {
                 <h2 className="text-3xl font-display font-semibold mb-4 text-[#2b241d]">
-                  Why to do Winter Trek – {c.title}?
+                  {isNiti
+                    ? `Why to do Summer & Winter Trek – ${c.title}?`
+                    : `Why to do ${c?.category?.name || "Winter Trek"} – ${c.title}?`}
                 </h2>
               }
               {

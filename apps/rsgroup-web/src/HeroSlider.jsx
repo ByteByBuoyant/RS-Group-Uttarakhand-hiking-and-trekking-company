@@ -32,6 +32,17 @@ function HeroSlider() {
           }
           return item;
         });
+        list = list.map((item) => {
+          if (item.slug === "summer") {
+            return {
+              ...item,
+              name: "Summer Trek",
+              short_description:
+                "Explore lush green meadows, border valleys & alpine passes.",
+            };
+          }
+          return item;
+        });
         if (!list.some((item) => item.slug === "summer")) {
           const winterIndex = list.findIndex(
             (item) =>
@@ -39,12 +50,12 @@ function HeroSlider() {
               item.name.toLowerCase().includes("winter")
           );
           const customSummer = {
-            id: "summer-monsoon-custom",
-            name: "Summer/Monsoon Trek",
+            id: "summer-custom",
+            name: "Summer Trek",
             slug: "summer",
             icon: "Sun",
             image: "category_summer_monsoon.png",
-            short_description: "Explore lush green meadows and clear skies.",
+            short_description: "Explore lush green meadows, border valleys & alpine passes.",
             isLocal: true,
           };
           const customMonsoon = {
