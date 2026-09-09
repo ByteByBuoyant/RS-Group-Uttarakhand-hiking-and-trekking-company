@@ -4,8 +4,19 @@ import {
   Routes,
   Route,
   Outlet,
+  useLocation,
 } from "react-router-dom";
 import { AuthProvider } from "@/lib/AuthContext";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
+  return null;
+}
 
 // Front-facing pages & components
 import Navbar from "./Navbar";
@@ -61,6 +72,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           {/* Front-facing routes wrapped in layout */}
           <Route element={<FrontLayout />}>

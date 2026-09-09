@@ -56,7 +56,10 @@ function TrekCard({ event: t, className }) {
 
         <div className="pt-2 flex justify-start">
           <button
-            onClick={() => e(t.url, { state: { event: t } })}
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+              e(t.url, { state: { event: t } });
+            }}
             className="group flex items-center justify-center gap-2 
                        px-5 py-2 rounded-full text-[#f4ede1] font-medium text-sm
                        bg-[#f25b23] hover:bg-[#2b241d]

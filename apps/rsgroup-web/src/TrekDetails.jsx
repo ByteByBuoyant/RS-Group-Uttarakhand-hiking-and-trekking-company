@@ -278,6 +278,10 @@ function TrekDetails() {
     slug?.toLowerCase().includes("niti");
 
   React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [slug]);
+
+  React.useEffect(() => {
     if (!c && slug) {
       if (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")) {
         setTrekEvent(BRAHMATAL_TREK);
@@ -456,12 +460,12 @@ function TrekDetails() {
             <img
               src={c.banner_image}
               alt={c.title}
-              className="w-full h-[430px] object-cover"
+              className="w-full h-[380px] sm:h-[430px] object-cover"
               style={{ objectPosition: "center 35%" }}
             />
           }
           {
-            <div className="absolute inset-0 bg-black/30 p-10 flex flex-col justify-end">
+            <div className="absolute inset-0 bg-black/35 p-6 sm:p-10 flex flex-col justify-end">
                 <motion.button
                   onClick={() => o(-1)}
                   initial={{
@@ -478,9 +482,9 @@ function TrekDetails() {
                   whileTap={{
                     scale: 0.95,
                   }}
-                  className="absolute top-28 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-[#f25b23] text-white font-medium shadow-md hover:bg-[#d44816] transition-all z-20"
+                  className="absolute top-24 sm:top-28 left-4 sm:left-6 flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#f25b23] text-white font-medium text-sm sm:text-base shadow-md hover:bg-[#d44816] transition-all z-20"
                 >
-                  {<ArrowLeft className="w-5 h-5" />}Back
+                  {<ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />}Back
                 </motion.button>
               {
                 <motion.button
@@ -500,19 +504,19 @@ function TrekDetails() {
                   whileTap={{
                     scale: 0.96,
                   }}
-                  className={`absolute bottom-1 right-6 flex items-center gap-2 px-5 py-2
-                        bg-[#f25b23] text-white rounded-xl font-medium shadow-lg shadow-[rgba(43,36,29,0.12)]-lg
-                        hover:bg-[#d44816] transition-all`}
+                  className={`absolute bottom-4 sm:bottom-6 right-4 sm:right-6 flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 sm:px-5 sm:py-2
+                        bg-[#f25b23] text-white rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-[rgba(43,36,29,0.12)]-lg
+                        hover:bg-[#d44816] transition-all z-20`}
                 >
-                  {<Download className="w-5 h-5" />}Itinerary
+                  {<Download className="w-4 h-4 sm:w-5 sm:h-5" />}Itinerary
                 </motion.button>
               }
               {
-                <h1 className="text-3xl font-display font-semibold text-white drop-shadow-md">
+                <h1 className="text-2xl sm:text-3xl font-display font-semibold text-white drop-shadow-md pr-24 sm:pr-0">
                   {c.title}
                 </h1>
               }
-              {<p className="text-gray-200 mt-2">{c.short_description}</p>}
+              {<p className="text-gray-200 mt-1 sm:mt-2 text-sm sm:text-base pr-20 sm:pr-0">{c.short_description}</p>}
             </div>
           }
         </div>
