@@ -26,11 +26,15 @@ function HomePage() {
           altitude: m.max_altitude ?? "-",
           image: m.slug === "kuari-pass-trek"
             ? "/kuari_pass_card.png"
+            : m.slug === "brahmatal-winter-trek" || m.id === "brahmatal"
+            ? "/brahmatal_card.jpg"
             : m.featured_image
-            ? `${BACKEND_STORAGE_URL}/${m.featured_image}`
+            ? (m.featured_image.startsWith("/") ? m.featured_image : `${BACKEND_STORAGE_URL}/${m.featured_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
-          banner_image: m.banner_image
-            ? `${BACKEND_STORAGE_URL}/${m.banner_image}`
+          banner_image: m.slug === "brahmatal-winter-trek" || m.id === "brahmatal"
+            ? "/brahmatal_banner.jpg"
+            : m.banner_image
+            ? (m.banner_image.startsWith("/") ? m.banner_image : `${BACKEND_STORAGE_URL}/${m.banner_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",
           url: `/treks/${m.slug}`,
           price: m.price ?? "00",

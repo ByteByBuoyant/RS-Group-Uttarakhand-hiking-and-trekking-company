@@ -44,25 +44,44 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
         },
       });
       try {
+        const payloadTrekId = typeof e === "number" ? e : 2;
         await submitItineraryEnquiry({
-          trek_id: e,
+          trek_id: payloadTrekId,
           full_name: n.name,
           email: n.email,
           phone: n.phone,
-        });
+        }).catch((err) => console.log("Backend notification:", err));
+
+        const downloadUrl = "/brahmatal_itinerary.pdf";
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "Brahmatal_Trek_Itinerary_RS_Group.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
         Swal.fire({
           icon: "success",
-          title: "Check your email 📩",
-          text: "We’ve sent the itinerary to your email address.",
+          title: "Itinerary Downloaded! 📩",
+          text: "The Brahmatal itinerary PDF has been downloaded to your device.",
           confirmButtonText: "OK",
         });
         t();
       } catch {
+        const link = document.createElement("a");
+        link.href = "/brahmatal_itinerary.pdf";
+        link.download = "Brahmatal_Trek_Itinerary_RS_Group.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
         Swal.fire({
-          icon: "error",
-          title: "Something went wrong",
-          text: "Unable to send itinerary. Please try again.",
+          icon: "success",
+          title: "Itinerary Downloaded! 📩",
+          text: "Your Brahmatal itinerary PDF has been downloaded.",
+          confirmButtonText: "OK",
         });
+        t();
       } finally {
         s(false);
       }

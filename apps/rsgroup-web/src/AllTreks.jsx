@@ -18,12 +18,21 @@ const oIe = {
 function AllTreks() {
   const t = useLocation(),
     e = useNavigate(),
-    a = new URLSearchParams(t.search).get("type")?.toLowerCase() || "all",
-    o = oIe[a] || "all",
+    searchParams = new URLSearchParams(t.search),
+    a = searchParams.get("type")?.toLowerCase() || searchParams.get("category")?.toLowerCase() || "all",
+    o = oIe[a] || (a === "winter" ? "winter" : "all"),
     [s, c] = React.useState(o),
     [d, u] = React.useState([]),
     [y, m] = React.useState([]),
     [k, v] = React.useState(!0);
+
+  React.useEffect(() => {
+    const newCategory = new URLSearchParams(t.search).get("category")?.toLowerCase() || new URLSearchParams(t.search).get("type")?.toLowerCase();
+    if (newCategory) {
+      c(newCategory);
+    }
+  }, [t.search]);
+
   React.useEffect(() => {
     async function w() {
       try {
@@ -41,7 +50,19 @@ function AllTreks() {
       v(!0);
       const _ = {};
       s === "upcoming" ? (_.upcoming = 1) : s !== "all" && (_.category = s);
-      const N = (await fetchTreks(_)).map((j) => ({
+      const searchParam = new URLSearchParams(t.search).get("search")?.toLowerCase();
+      let rawTreks = await fetchTreks(_);
+      if (searchParam) {
+        rawTreks = rawTreks.filter(
+          (j) =>
+            j.name?.toLowerCase().includes(searchParam) ||
+            j.title?.toLowerCase().includes(searchParam) ||
+            j.location?.toLowerCase().includes(searchParam) ||
+            j.venue?.toLowerCase().includes(searchParam) ||
+            j.short_description?.toLowerCase().includes(searchParam)
+        );
+      }
+      const N = rawTreks.map((j) => ({
         id: j.id,
         title: j.name ?? "-",
         grade: j.difficulty ?? "-",
@@ -50,11 +71,15 @@ function AllTreks() {
         altitude: j.max_altitude ?? "-",
         image: j.slug === "kuari-pass-trek"
           ? "/kuari_pass_card.png"
+          : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
+          ? "/brahmatal_card.jpg"
           : j.featured_image
-          ? `${BACKEND_STORAGE_URL}/${j.featured_image}`
+          ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
-        banner_image: j.banner_image
-          ? `${BACKEND_STORAGE_URL}/${j.banner_image}`
+        banner_image: j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
+          ? "/brahmatal_banner.jpg"
+          : j.banner_image
+          ? (j.banner_image.startsWith("/") ? j.banner_image : `${BACKEND_STORAGE_URL}/${j.banner_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",
         url: `/treks/${j.slug}`,
         price: j.price ?? "00",
@@ -65,7 +90,7 @@ function AllTreks() {
       v(!1);
     }
     w();
-  }, [s]);
+  }, [s, t.search]);
   const b = [
     {
       label: "All Treks",

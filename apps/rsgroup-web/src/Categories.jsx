@@ -158,7 +158,7 @@ function Categories() {
           {/* Action CTA */}
           <button
             onClick={() => navigate("/alltreks")}
-            className="group bg-[#2b241d] hover:bg-[#f25b23] text-[#f4ede1] font-semibold text-xs sm:text-base px-4 py-2.5 sm:px-7 sm:py-3.5 rounded-[12px] sm:rounded-[16px] flex items-center gap-1.5 sm:gap-2.5 shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-[rgba(43,36,29,0.15)]"
+            className="group bg-[#2b241d] hover:bg-[#f25b23] text-[#f4ede1] font-semibold text-xs sm:text-base px-4 py-2.5 sm:px-6 sm:py-3.5 rounded-[12px] sm:rounded-[16px] flex items-center justify-center gap-1.5 sm:gap-2.5 shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-[rgba(43,36,29,0.15)] w-[120px] sm:w-[220px]"
           >
             Plan my trip
             <ArrowRight

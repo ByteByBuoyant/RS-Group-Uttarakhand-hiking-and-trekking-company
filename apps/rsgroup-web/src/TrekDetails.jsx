@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   Download,
@@ -11,7 +11,8 @@ import {
   CircleHelp,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { BACKEND_API_URL } from "@/lib/config";
+import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
+import fetchTreks, { BRAHMATAL_TREK } from "./FetchTreksAPI";
 import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
@@ -39,17 +40,177 @@ const MX = async (trekId) => {
   return data.data ?? [];
 };
 
+const BRAHMATAL_ITINERARY = [
+  {
+    day_number: 1,
+    title: "RISHIKESH TO LOHAJUNG (DRIVE 250KM | 9-10 HOURS)",
+    description:
+      "<p>Your journey kicks off with a long yet scenic drive from Rishikesh to Lohajung, the base camp of the Brahmatal trek.</p><p>The 250 km road trip takes you through the enchanting towns of Devprayag, Srinagar, Rudraprayag, and Karnaprayag, following the sacred rivers Ganga and Alaknanda.</p><p>Along the way, you'll witness breathtaking views of terraced fields, pine and oak forests, and distant Himalayan peaks.</p><p>By evening, you'll reach Lohajung — a serene Himalayan village surrounded by snow-clad mountains, where you check into a guesthouse and prepare for the trek ahead.</p>",
+  },
+  {
+    day_number: 2,
+    title: "LOHAJUNG TO BEKALTAL (TREK 6 KM | 4-5 HOURS)",
+    description:
+      "<p>Your first trekking day begins from Lohajung, gradually ascending through dense oak and rhododendron forests.</p><p>The trail is filled with the soothing sound of mountain streams and chirping birds, making the walk peaceful and refreshing.</p><p>During winters, the path is often covered with snow, adding to the charm of the trek. After a few hours of hiking, you'll reach the beautiful Bekaltal Lake, surrounded by thick forests and snow-laden trees.</p><p>The campsite near Bekaltal is serene and magical, offering a perfect Himalayan camping experience under the starry night sky.</p>",
+  },
+  {
+    day_number: 3,
+    title: "BEKALTAL TO BRAHMATAL (TREK 7 KM | 5-6 HOURS)",
+    description:
+      "<p>The trail today takes you on a gradual ascent from Bekaltal through enchanting oak and rhododendron forests, slowly opening up to snow-covered meadows.</p><p>As you trek higher, the forest gives way to breathtaking views of towering Himalayan ranges, including peaks like Mt. Trishul and Nanda Ghunti.</p><p>The serene beauty of the snow-laden landscapes makes the journey truly magical.</p><p>By afternoon, you reach the Brahmatal campsite, located in a wide meadow surrounded by snowy ridges, offering a mesmerizing setting for your overnight stay.</p>",
+  },
+  {
+    day_number: 4,
+    title: "BRAHMATAL TO BRAHMATAL TOP AND BACK (TREK 7 KM | 6-7 HOURS)",
+    description:
+      "<p>Today is the most awaited summit day of the Brahmatal trek! The trail begins with a steady ascent through snow-laden ridges, gradually opening up to vast alpine meadows.</p><p>As you climb higher, the majestic Himalayan panorama unfolds — with peaks like Mt. Trishul, Nanda Ghunti, and Chaukhamba dominating the skyline.</p><p>Reaching the Brahmatal Top feels rewarding as you stand amidst 360° views of the mighty mountains, an unforgettable Himalayan spectacle.</p><p>After spending some time at the summit, soaking in the beauty and capturing memories, you descend back to the campsite for the night.</p>",
+  },
+  {
+    day_number: 5,
+    title:
+      "BRAHMATAL TO LOHAJUNG & DRIVE TO RISHIKESH (TREK 9 KM | 5-6 HOURS, DRIVE 250 KM | 9-10 HOURS)",
+    description:
+      "<p>Your final day begins with a descent from the Brahmatal campsite back to Lohajung.</p><p>The trail winds through snow-covered forests and meadows, offering one last chance to admire the pristine beauty of the Himalayas.</p><p>After reaching Lohajung by late morning or afternoon, you bid farewell to the mountains and begin the return journey.</p><p>A scenic drive along the Alaknanda and Ganga rivers brings you back to Rishikesh by late evening, marking the end of your unforgettable Brahmatal adventure.</p>",
+  },
+];
+
+const BRAHMATAL_INCLUSIONS = [
+  { item: "Accommodation (Guest house, Home stay, Camping)" },
+  { item: "Meals while on trek (Veg)" },
+  { item: "Trek equipment: Sleeping bag, mattress, tent, kitchen & dinning" },
+  { item: "Tent, toilet tent, Utensils" },
+  { item: "All necessary permits and entry fees" },
+  { item: "First aid medical kits" },
+  {
+    item: "Mountaineering qualified & professional trek Leader, guide and Support staff",
+  },
+  { item: "Transport from Rishikesh to Rishikesh" },
+];
+
+const BRAHMATAL_EXCLUSIONS = [
+  { item: "Any kind of personal expenses" },
+  { item: "Food during the transit" },
+  { item: "Insurance" },
+  { item: "Any kind of emergency evacuation charges" },
+  { item: "Mules or porter to carry personal luggage" },
+  { item: "Anything not specifically mentioned under the head" },
+];
+
+const BRAHMATAL_ATTRIBUTES = [
+  { label: "Region", value: "Garhwal Himalayas, Uttarakhand" },
+  { label: "Base Village", value: "Lohajung" },
+  { label: "Nearest City", value: "Haldwani / Rishikesh" },
+  { label: "Trek Distance", value: "~25-29 km total (round trip)" },
+  {
+    label: "Best Time to Visit",
+    value: "December to February & March to Mid-April",
+  },
+  { label: "Difficulty Level", value: "Easy to Moderate" },
+  { label: "Best For", value: "Beginners as well as experienced trekkers" },
+];
+
+const BRAHMATAL_FAQS = [
+  {
+    q: "Can a beginner go for Brahmatal trek?",
+    a: "Yes! Brahmatal is an Easy to Moderate trek, highly recommended for beginners as well as experienced trekkers looking for snow trails.",
+  },
+  {
+    q: "What is the summit altitude of Brahmatal?",
+    a: "The summit point at Brahmatal Top is 12,250 ft (3,735 meters), offering panoramic 360° views of Mt. Trishul and Nanda Ghunti.",
+  },
+  {
+    q: "Is there electricity or mobile network on the trek?",
+    a: "Mobile connectivity and charging are available up to Lohajung base camp. Beyond Lohajung, network is scarce and there is no electricity at the campsites.",
+  },
+  {
+    q: "What is the best time to visit Brahmatal?",
+    a: "December to February is best for heavy snow lovers and frozen lakes. March to mid-April is ideal for pleasant weather and blooming rhododendrons.",
+  },
+  {
+    q: "Where does the Brahmatal trek start and end?",
+    a: "The trek starts from Lohajung village in Chamoli district, Uttarakhand, with transport provided from Rishikesh to Rishikesh.",
+  },
+];
+
+const BRAHMATAL_GALLERY = [
+  "/brahmatal_gallery_1.jpg",
+  "/brahmatal_gallery_2.jpg",
+  "/brahmatal_gallery_3.jpg",
+  "/brahmatal_gallery_4.jpg",
+  "/brahmatal_gallery_5.jpg",
+  "/brahmatal_gallery_6.jpg",
+  "/brahmatal_gallery_7.jpg",
+  "/brahmatal_gallery_8.jpg",
+];
+
 function TrekDetails() {
   const [t, e] = React.useState(!1),
     [n, a] = React.useState(!1),
     o = useNavigate(),
     { state: s } = useLocation(),
-    c = s?.event,
+    { slug } = useParams(),
+    initialEvent =
+      s?.event ||
+      (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")
+        ? BRAHMATAL_TREK
+        : null),
+    [c, setTrekEvent] = React.useState(initialEvent),
     [d, u] = React.useState(!1),
     [y, m] = React.useState(null),
     [k, v] = React.useState([]),
     [b, w] = React.useState(!0);
+
+  const isBrahmatal =
+    c?.slug === "brahmatal-winter-trek" ||
+    c?.id === "brahmatal" ||
+    c?.title?.toLowerCase().includes("brahmatal") ||
+    slug === "brahmatal-winter-trek" ||
+    slug?.toLowerCase().includes("brahmatal");
+
   React.useEffect(() => {
+    if (!c && slug) {
+      if (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")) {
+        setTrekEvent(BRAHMATAL_TREK);
+      } else {
+        fetchTreks().then((treks) => {
+          const found = treks.find((item) => item.slug === slug);
+          if (found) {
+            setTrekEvent({
+              id: found.id,
+              title: found.name ?? "-",
+              grade: found.difficulty ?? "-",
+              days: `${found.duration_days} Days / ${found.duration_nights} Nights`,
+              venue: found.location ?? "-",
+              altitude: found.max_altitude ?? "-",
+              image:
+                found.slug === "kuari-pass-trek"
+                  ? "/kuari_pass_card.png"
+                  : found.featured_image?.startsWith("/")
+                  ? found.featured_image
+                  : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
+              banner_image:
+                found.slug === "brahmatal-winter-trek"
+                  ? "/brahmatal_banner.jpg"
+                  : found.banner_image?.startsWith("/")
+                  ? found.banner_image
+                  : `${BACKEND_STORAGE_URL}/${found.banner_image}`,
+              url: `/treks/${found.slug}`,
+              price: found.price ?? "00",
+              short_description: found.short_description,
+              why_choose: found.why_choose,
+            });
+          }
+        });
+      }
+    }
+  }, [c, slug]);
+
+  React.useEffect(() => {
+    if (isBrahmatal) {
+      v(BRAHMATAL_ITINERARY);
+      w(!1);
+      return;
+    }
     c?.id &&
       GTe(c.id)
         .then(v)
@@ -58,11 +219,19 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c]);
+  }, [c, isBrahmatal]);
+
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
     [z, P] = React.useState(!0);
+
   React.useEffect(() => {
+    if (isBrahmatal) {
+      C(BRAHMATAL_INCLUSIONS);
+      j(BRAHMATAL_EXCLUSIONS);
+      P(!1);
+      return;
+    }
     c?.id &&
       Promise.all([_X(c.id), CX(c.id)])
         .then(([Q, be]) => {
@@ -75,10 +244,17 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c]);
+  }, [c, isBrahmatal]);
+
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
+
   React.useEffect(() => {
+    if (isBrahmatal) {
+      U(BRAHMATAL_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
     c?.id &&
       MX(c.id)
         .then((Q) => U(Q || []))
@@ -87,8 +263,9 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c]);
-  const te = [
+  }, [c, isBrahmatal]);
+
+  const defaultFaqs = [
     {
       q: "Can a beginner go for Kedarkantha trek?",
       a: "Yes, it is a beginner friendly trek.",
@@ -111,6 +288,8 @@ function TrekDetails() {
     },
   ];
 
+  const te = isBrahmatal ? BRAHMATAL_FAQS : defaultFaqs;
+
   if (c) console.log("event details passed : ", c);
   else
     return (
@@ -123,7 +302,7 @@ function TrekDetails() {
         {
           <button
             onClick={() => o(-1)}
-            className="px-4 py-2 bg-blue-600 text-[#2b241d] rounded-lg hover:bg-blue-700"
+            className="px-4 py-2 bg-[#f25b23] text-white rounded-lg hover:bg-[#d44816]"
           >
             Go Back
           </button>
@@ -451,147 +630,195 @@ function TrekDetails() {
           }
           {
             <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-6 rounded-2xl shadow-lg shadow-[rgba(43,36,29,0.12)]">
-              {
+                    {
                 <h2 className="text-2xl font-display font-semibold mb-3">
                   Things to Carry
                 </h2>
               }
               {
                 <p className="text-[#6f6357] mb-5">
-                  Here is a detailed list of essential items you must carry for
-                  the Kedarkantha Trek.
+                  Here is a detailed list of essential items you must carry for{" "}
+                  {c?.title || "the trek"}.
                 </p>
               }
-              {
-                <h3 className="font-semibold text-lg mb-2">
-                  1. Essential Documents
-                </h3>
-              }
-              {
-                <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
-                  {<li>• Original + photocopies of ID proof (Aadhar card)</li>}
-                </ul>
-              }
-              {<h3 className="font-semibold text-lg mb-2">2. Clothing</h3>}
-              {<p className="font-medium mt-2 mb-1">Base Layers</p>}
-              {
-                <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
-                  {<li>• Thermal inners (1 pair)</li>}
-                  {<li>• Moisture-wicking T-shirts (3–4)</li>}
-                  {<li>• Trek pants (2, quick-dry)</li>}
-                </ul>
-              }
-              {<p className="font-medium mb-1">Mid Layers</p>}
-              {
-                <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
-                  {<li>• Fleece jacket (1–2)</li>}
-                </ul>
-              }
-              {<p className="font-medium mb-1">Outer Layers</p>}
-              {
-                <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
-                  {<li>• Insulated jacket (down/synthetic)</li>}
-                  {<li>• Windproof jacket</li>}
-                  {<li>• Waterproof pants (optional)</li>}
-                </ul>
-              }
-              {<p className="font-medium mb-1">Accessories</p>}
-              {
-                <ul className="pl-3 space-y-1 mb-4 text-[#2b241d]">
-                  {<li>• Woolen cap/beanie</li>}
-                  {<li>• Neck gaiter/scarf</li>}
-                  {<li>• Woolen gloves (1 pair)</li>}
-                  {<li>• Waterproof gloves (1 pair)</li>}
-                  {<li>• Woolen socks (2 pairs)</li>}
-                  {<li>• Synthetic socks (3–4 pairs)</li>}
-                </ul>
-              }
-              {<h3 className="font-semibold text-lg mt-4 mb-2">3. Footwear</h3>}
-              {
-                <ul className="pl-3 space-y-2 mb-3 text-[#2b241d]">
-                  {<li>• Trekking shoes with ankle support</li>}
-                  {<li>• Lightweight sandals/slippers</li>}
-                </ul>
-              }
-              {
-                <h3 className="font-semibold text-lg mb-2">
-                  4. Trekking Equipment
-                </h3>
-              }
-              {
-                <ul className="pl-3 space-y-2 mb-3 text-[#2b241d]">
-                  {<li>• Backpack (40–60L) + rain cover</li>}
-                  {<li>• Daypack (optional)</li>}
-                  {<li>• Trekking poles</li>}
-                  {<li>• Headlamp + extra batteries</li>}
-                </ul>
-              }
-              {<h3 className="font-semibold text-lg mb-2">5. Toiletries</h3>}
-              {
-                <ul className="pl-3 space-y-2 mb-3 text-[#2b241d]">
-                  {<li>• Biodegradable soap, toothpaste, toothbrush</li>}
-                  {<li>• Towel</li>}
-                  {<li>• Sunscreen (SPF 50+)</li>}
-                  {<li>• Lip balm</li>}
-                  {<li>• Moisturizer</li>}
-                  {<li>• Wet wipes</li>}
-                  {<li>• Hand sanitizer</li>}
-                </ul>
-              }
-              {<h3 className="font-semibold text-lg mb-2">6. Medical Kit</h3>}
-              {
-                <ul className="pl-3 space-y-2 mb-4 text-[#2b241d]">
-                  {<li>• Personal medication</li>}
-                  {<li>• Pain relief spray/ointment</li>}
-                  {<li>• ORS packets</li>}
-                </ul>
-              }
-              {
-                <h3 className="font-semibold text-lg mb-2">
-                  7. Snacks & Hydration
-                </h3>
-              }
-              {
-                <ul className="pl-3 space-y-2 mb-4 text-[#2b241d]">
-                  {<li>• Energy bars, dry fruits, chocolates</li>}
-                  {<li>• 2L water bottle</li>}
-                  {<li>• Insulated flask for hot water</li>}
-                </ul>
-              }
-              {
-                <h3 className="font-semibold text-lg mb-2">
-                  8. Protective Gear
-                </h3>
-              }
-              {
-                <ul className="pl-3 space-y-2 mb-4 text-[#2b241d]">
-                  {<li>• Sunglasses (UV protection)</li>}
-                  {<li>• Sun hat/cap</li>}
-                  {<li>• Poncho or raincoat</li>}
-                </ul>
-              }
-              {
-                <h3 className="font-semibold text-lg mb-2">
-                  9. Optional but Useful
-                </h3>
-              }
-              {
-                <ul className="pl-3 space-y-2 mb-1 text-[#2b241d]">
-                  {<li>• Small lock for backpack</li>}
-                  {<li>• Ziplock bags for waterproofing</li>}
-                </ul>
-              }
-              {
-                <div className="bg-[#efe5d5]/40 border border-[#f25b23]/20 p-4 rounded-xl mt-5 border border-[#2b241d]/12">
-                  {<h4 className="font-semibold text-[#f25b23] mb-1">Tips</h4>}
-                  {
+              {isBrahmatal ? (
+                <div className="space-y-6 text-[#2b241d]">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      1. Essential Documents
+                    </h3>
+                    <ul className="pl-3 space-y-1 text-[#2b241d]">
+                      <li>• Authentic Government ID Card (Aadhar card / Voter ID / Passport)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      2. Bags & Backpacks
+                    </h3>
+                    <ul className="pl-3 space-y-1 text-[#2b241d]">
+                      <li>• A rucksack bag (50–60L) and a day pack</li>
+                      <li>• Rain cover for backpacks</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      3. Clothing & Warm Layers
+                    </h3>
+                    <ul className="pl-3 space-y-1 text-[#2b241d]">
+                      <li>• Thermals (base layer inners)</li>
+                      <li>• 1 cotton long sleeve and 2 short sleeve t-shirts</li>
+                      <li>• 1 fleece jacket</li>
+                      <li>• 1 heavy thick jacket / down jacket</li>
+                      <li>• At least 2 long pants (trek pants and cargo pants are favorable)</li>
+                      <li>• 4 pairs of socks</li>
+                      <li>• 1 pair of gloves and neck warmer</li>
+                      <li>• A sun cap and a woollen cap</li>
+                      <li>• A rain jacket or a poncho</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      4. Footwear & Trail Gear
+                    </h3>
+                    <ul className="pl-3 space-y-1 text-[#2b241d]">
+                      <li>• Above-the-ankle waterproof and breathable hiking boots</li>
+                      <li>• Trekking pole</li>
+                      <li>• UV protected sunglasses</li>
+                      <li>• LED torchlight / Headlamp (Must Carry)</li>
+                      <li>• 1-liter water bladder or water bottle</li>
+                      <li>• Power bank</li>
+                      <li>• A small towel</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      5. Personal Accessories & Toiletries
+                    </h3>
+                    <ul className="pl-3 space-y-1 text-[#2b241d]">
+                      <li>• Toothpaste, toothbrush, paper soap, or sanitizer</li>
+                      <li>• Sunscreen minimum of SPF 40, lip balm, cold creams</li>
+                      <li>• Body spray / deodorant</li>
+                      <li>• Personal toiletries and toilet paper</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2">
+                      6. Health & Medical
+                    </h3>
+                    <ul className="pl-3 space-y-1 text-[#2b241d]">
+                      <li>• Glucose powder (ORS / Electral)</li>
+                      <li>• Personal medicines and first aid supplies</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-[#efe5d5]/40 border border-[#f25b23]/20 p-4 rounded-xl mt-5">
+                    <h4 className="font-semibold text-[#f25b23] mb-1">Tips</h4>
+                    <p className="text-[#2b241d]">
+                      Layering is key for sub-zero Himalayan weather. Pack light and carry only essential items.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">
+                    1. Essential Documents
+                  </h3>
+                  <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
+                    <li>• Original + photocopies of ID proof (Aadhar card)</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">2. Clothing</h3>
+                  <p className="font-medium mt-2 mb-1">Base Layers</p>
+                  <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
+                    <li>• Thermal inners (1 pair)</li>
+                    <li>• Moisture-wicking T-shirts (3–4)</li>
+                    <li>• Trek pants (2, quick-dry)</li>
+                  </ul>
+                  <p className="font-medium mb-1">Mid Layers</p>
+                  <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
+                    <li>• Fleece jacket (1–2)</li>
+                  </ul>
+                  <p className="font-medium mb-1">Outer Layers</p>
+                  <ul className="pl-3 space-y-1 mb-3 text-[#2b241d]">
+                    <li>• Insulated jacket (down/synthetic)</li>
+                    <li>• Windproof jacket</li>
+                    <li>• Waterproof pants (optional)</li>
+                  </ul>
+                  <p className="font-medium mb-1">Accessories</p>
+                  <ul className="pl-3 space-y-1 mb-4 text-[#2b241d]">
+                    <li>• Woolen cap/beanie</li>
+                    <li>• Neck gaiter/scarf</li>
+                    <li>• Woolen gloves (1 pair)</li>
+                    <li>• Waterproof gloves (1 pair)</li>
+                    <li>• Woolen socks (2 pairs)</li>
+                    <li>• Synthetic socks (3–4 pairs)</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mt-4 mb-2">3. Footwear</h3>
+                  <ul className="pl-3 space-y-2 mb-3 text-[#2b241d]">
+                    <li>• Trekking shoes with ankle support</li>
+                    <li>• Lightweight sandals/slippers</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">
+                    4. Trekking Equipment
+                  </h3>
+                  <ul className="pl-3 space-y-2 mb-3 text-[#2b241d]">
+                    <li>• Backpack (40–60L) + rain cover</li>
+                    <li>• Daypack (optional)</li>
+                    <li>• Trekking poles</li>
+                    <li>• Headlamp + extra batteries</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">5. Toiletries</h3>
+                  <ul className="pl-3 space-y-2 mb-3 text-[#2b241d]">
+                    <li>• Biodegradable soap, toothpaste, toothbrush</li>
+                    <li>• Towel</li>
+                    <li>• Sunscreen (SPF 50+)</li>
+                    <li>• Lip balm</li>
+                    <li>• Moisturizer</li>
+                    <li>• Wet wipes</li>
+                    <li>• Hand sanitizer</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">6. Medical Kit</h3>
+                  <ul className="pl-3 space-y-2 mb-4 text-[#2b241d]">
+                    <li>• Personal medication</li>
+                    <li>• Pain relief spray/ointment</li>
+                    <li>• ORS packets</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">
+                    7. Snacks & Hydration
+                  </h3>
+                  <ul className="pl-3 space-y-2 mb-4 text-[#2b241d]">
+                    <li>• Energy bars, dry fruits, chocolates</li>
+                    <li>• 2L water bottle</li>
+                    <li>• Insulated flask for hot water</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">
+                    8. Protective Gear
+                  </h3>
+                  <ul className="pl-3 space-y-2 mb-4 text-[#2b241d]">
+                    <li>• Sunglasses (UV protection)</li>
+                    <li>• Sun hat/cap</li>
+                    <li>• Poncho or raincoat</li>
+                  </ul>
+                  <h3 className="font-semibold text-lg mb-2">
+                    9. Optional but Useful
+                  </h3>
+                  <ul className="pl-3 space-y-2 mb-1 text-[#2b241d]">
+                    <li>• Small lock for backpack</li>
+                    <li>• Ziplock bags for waterproofing</li>
+                  </ul>
+                  <div className="bg-[#efe5d5]/40 border border-[#f25b23]/20 p-4 rounded-xl mt-5 border border-[#2b241d]/12">
+                    <h4 className="font-semibold text-[#f25b23] mb-1">Tips</h4>
                     <p className="text-[#2b241d]">
                       Layering is key for cold weather. Pack light and carry
                       only essential items.
                     </p>
-                  }
+                  </div>
                 </div>
-              }
+              )}
             </div>
           }
           {
@@ -603,16 +830,19 @@ function TrekDetails() {
               }
               {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {[
-                    "/gallery_1.png",
-                    "/gallery_2.png",
-                    "/gallery_3.png",
-                    "/gallery_4.png",
-                    "/gallery_5.png",
-                    "/gallery_6.png",
-                    "/gallery_7.png",
-                    "/gallery_8.png",
-                  ].map((Q, be) => (
+                  {(isBrahmatal
+                    ? BRAHMATAL_GALLERY
+                    : [
+                        "/gallery_1.png",
+                        "/gallery_2.png",
+                        "/gallery_3.png",
+                        "/gallery_4.png",
+                        "/gallery_5.png",
+                        "/gallery_6.png",
+                        "/gallery_7.png",
+                        "/gallery_8.png",
+                      ]
+                  ).map((Q, be) => (
                     <div
                       className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)]-lg shadow-lg shadow-[rgba(43,36,29,0.12)]-black/20"
                       onClick={() => {
