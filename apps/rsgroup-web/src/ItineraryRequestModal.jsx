@@ -52,10 +52,20 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           phone: n.phone,
         }).catch((err) => console.log("Backend notification:", err));
 
-        const downloadUrl = "/brahmatal_itinerary.pdf";
+        const isNiti =
+          e === "niti-valley" ||
+          e === "niti-valley-timmersain-mahadev" ||
+          (typeof e === "string" && e.includes("niti"));
+        const downloadUrl = isNiti
+          ? "/niti_valley_itinerary.pdf"
+          : "/brahmatal_itinerary.pdf";
+        const downloadFileName = isNiti
+          ? "Niti_Valley_Timmersain_Mahadev_Itinerary_RS_Group.pdf"
+          : "Brahmatal_Trek_Itinerary_RS_Group.pdf";
+
         const link = document.createElement("a");
         link.href = downloadUrl;
-        link.download = "Brahmatal_Trek_Itinerary_RS_Group.pdf";
+        link.download = downloadFileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -63,14 +73,25 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
         Swal.fire({
           icon: "success",
           title: "Itinerary Downloaded! 📩",
-          text: "The Brahmatal itinerary PDF has been downloaded to your device.",
+          text: "The trek itinerary PDF has been downloaded to your device.",
           confirmButtonText: "OK",
         });
         t();
       } catch {
+        const isNiti =
+          e === "niti-valley" ||
+          e === "niti-valley-timmersain-mahadev" ||
+          (typeof e === "string" && e.includes("niti"));
+        const downloadUrl = isNiti
+          ? "/niti_valley_itinerary.pdf"
+          : "/brahmatal_itinerary.pdf";
+        const downloadFileName = isNiti
+          ? "Niti_Valley_Timmersain_Mahadev_Itinerary_RS_Group.pdf"
+          : "Brahmatal_Trek_Itinerary_RS_Group.pdf";
+
         const link = document.createElement("a");
-        link.href = "/brahmatal_itinerary.pdf";
-        link.download = "Brahmatal_Trek_Itinerary_RS_Group.pdf";
+        link.href = downloadUrl;
+        link.download = downloadFileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -78,7 +99,7 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
         Swal.fire({
           icon: "success",
           title: "Itinerary Downloaded! 📩",
-          text: "Your Brahmatal itinerary PDF has been downloaded.",
+          text: "Your trek itinerary PDF has been downloaded.",
           confirmButtonText: "OK",
         });
         t();

@@ -11,6 +11,8 @@ const Portal = ({ children }) => createPortal(children, document.body);
 const jLe = [
   "Kedarkantha Trek",
   "Brahmatal Trek",
+  "Niti Valley & Timmersain Mahadev",
+  "Kuari Pass Trek",
   "Har Ki Dun Trek",
   "Valley of Flowers",
   "Dayara Bugyal",

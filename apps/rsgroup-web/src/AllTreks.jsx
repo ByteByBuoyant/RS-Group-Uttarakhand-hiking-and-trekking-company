@@ -73,11 +73,15 @@ function AllTreks() {
           ? "/kuari_pass_card.png"
           : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
           ? "/brahmatal_card.jpg"
+          : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
+          ? "/niti_valley_card.jpg"
           : j.featured_image
           ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
         banner_image: j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
           ? "/brahmatal_banner.jpg"
+          : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
+          ? "/niti_valley_banner.jpg"
           : j.banner_image
           ? (j.banner_image.startsWith("/") ? j.banner_image : `${BACKEND_STORAGE_URL}/${j.banner_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",

@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
-import fetchTreks, { BRAHMATAL_TREK } from "./FetchTreksAPI";
+import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK } from "./FetchTreksAPI";
 import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
@@ -143,6 +143,105 @@ const BRAHMATAL_GALLERY = [
   "/brahmatal_gallery_8.jpg",
 ];
 
+const NITI_VALLEY_ITINERARY = [
+  {
+    day_number: 1,
+    title: "RISHIKESH TO JOSHIMATH (DRIVE 250 KM | 9-10 HOURS)",
+    description:
+      "<p>Depart from Rishikesh early morning (5:00–6:00 AM) to avoid traffic and maximize daylight. Follow the scenic highway along the Alaknanda River, one of the most beautiful Himalayan road journeys.</p><p><strong>En Route Highlights:</strong><br>• <strong>Devprayag:</strong> Witness the sacred confluence of Alaknanda &amp; Bhagirathi, forming the holy Ganga.<br>• <strong>Rudraprayag:</strong> Confluence of Alaknanda &amp; Mandakini River.<br>• <strong>Karnaprayag:</strong> Mythological meeting point of Alaknanda and Pindar rivers.</p><p>Lunch en route at a highway dhaba. Arrive at Joshimath by evening (5:00–7:00 PM), check into your hotel, with an optional short walk in the local market or visit to Narasimha Temple. Dinner &amp; overnight stay.</p>",
+  },
+  {
+    day_number: 2,
+    title: "JOSHIMATH TO NITI VILLAGE (DRIVE 80 KM | 4-5 HOURS)",
+    description:
+      "<p>Morning breakfast at the hotel, followed by an exhilarating drive along the Dhauliganga River, famed for its rugged grandeur.</p><p><strong>Drive Highlights:</strong><br>• <strong>Malari Village:</strong> First major settlement in Niti Valley with traditional stone houses and Indo-Tibetan culture.<br>• Dramatic views of deep gorges, snow-clad peaks, and remote border landscapes.</p><p>Arrive at Niti Village by afternoon—one of India's last villages near the Indo-Tibetan border. Check in to your homestay or camp. In the evening, explore village lanes, interact with the local Bhotia tribe community, and savor sunset views over Himalayan ranges. Dinner &amp; overnight stay.</p>",
+  },
+  {
+    day_number: 3,
+    title: "NITI VILLAGE TO GAMSHALI BUGYAL TREK & RETURN (TREK 12 KM | 6-7 HOURS)",
+    description:
+      "<p>Wake up early to crisp mountain air and clear panoramic views. After breakfast, set out on the trek to Gamshali Bugyal.</p><p><strong>Trek Highlights:</strong><br>• Traverse scenic alpine meadows, rocky patches, and high-altitude grasslands.<br>• Admire vibrant alpine flora and seasonal Himalayan wildflowers.<br>• Packed lunch enjoyed amidst the open bugyal with panoramic views.</p><p>Descend back to Niti/Gamshali village by late afternoon. Rest with evening tea, enjoy a cozy bonfire (weather permitting), and stargaze under crystal-clear night skies with zero light pollution. Dinner &amp; overnight stay.</p>",
+  },
+  {
+    day_number: 4,
+    title: "NITI VILLAGE TO TIMMERSAIN MAHADEV & JOSHIMATH (DRIVE 80 KM | 4-5 HOURS)",
+    description:
+      "<p>Early morning departure for a spiritually uplifting excursion to <strong>Timmersain Mahadev (Chota Amarnath)</strong>.</p><p><strong>Highlights:</strong><br>• Short scenic trek to reach the ancient cave temple.<br>• Natural ice Shivling formation (seasonal, closely resembling Amarnath).<br>• Sacred and pristine pilgrimage atmosphere amidst raw Himalayan terrain.</p><p>Begin the return journey driving back to Joshimath. Arrive by evening, check into your hotel, and unwind after an eventful day. Dinner &amp; overnight stay in Joshimath.</p>",
+  },
+  {
+    day_number: 5,
+    title: "JOSHIMATH TO RISHIKESH (DRIVE 250 KM | 9-10 HOURS)",
+    description:
+      "<p>Morning breakfast and hotel checkout. Drive back via Karnaprayag, Rudraprayag, and Devprayag.</p><p>Enjoy optional stops at river-side cafés and local souvenir shops. Reach Rishikesh by evening where this unforgettable expedition completes.</p>",
+  },
+];
+
+const NITI_VALLEY_INCLUSIONS = [
+  { item: "Accommodation (Guest house, Home stay, Camping)" },
+  { item: "Meals while on trek/trip (Veg)" },
+  { item: "Trek equipment: Sleeping bag, mattress, tent, Utensils" },
+  { item: "Kitchen & dining Tent, toilet tent" },
+  { item: "All necessary permits and entry fees (Inner Line Permit for Niti Valley)" },
+  { item: "First aid medical kits" },
+  { item: "Mountaineering qualified & professional trek Leader, Guide and Support staff" },
+  { item: "Transport from Rishikesh to Rishikesh" },
+];
+
+const NITI_VALLEY_EXCLUSIONS = [
+  { item: "Any kind of personal expenses" },
+  { item: "Food during the transit" },
+  { item: "Insurance" },
+  { item: "Any kind of emergency evacuation charges" },
+  { item: "Mules or porter to carry personal luggage" },
+  { item: "Anything not specifically mentioned under the head" },
+];
+
+const NITI_VALLEY_ATTRIBUTES = [
+  { label: "Region", value: "Chamoli District, Garhwal Himalayas, Uttarakhand" },
+  { label: "Base Village", value: "Niti Village (Last Indian Village)" },
+  { label: "Nearest Town", value: "Joshimath" },
+  { label: "Nearest Major City", value: "Rishikesh / Dehradun" },
+  { label: "Trek Distance", value: "~12 km total (round trip)" },
+  { label: "Altitude", value: "~3,600 m (11,800 ft)" },
+  { label: "Difficulty Level", value: "Easy to Moderate" },
+  { label: "Best Time to Visit", value: "April to June & September to November" },
+  { label: "Special Highlight", value: "Timmersain Mahadev (Chota Amarnath Ice Shivling)" },
+];
+
+const NITI_VALLEY_FAQS = [
+  {
+    q: "Is an Inner Line Permit required for Niti Valley?",
+    a: "Yes, since Niti Valley is located close to the Indo-Tibetan border, an Inner Line Permit is required for all visitors. RS Group arranges all necessary permits and paperwork for you.",
+  },
+  {
+    q: "What is Timmersain Mahadev and when does the ice Shivling form?",
+    a: "Timmersain Mahadev is a sacred cave temple revered as 'Chota Amarnath' where a natural ice Shivling forms during the winter and early spring months.",
+  },
+  {
+    q: "Can beginners and families join the Niti Valley expedition?",
+    a: "Yes! The trip is rated Easy to Moderate, featuring scenic drives and manageable day treks suitable for beginners, nature enthusiasts, and spiritual seekers.",
+  },
+  {
+    q: "What kind of stay is provided in Niti Village?",
+    a: "Authentic local homestays or high-quality alpine camping, offering warm hospitality and an opportunity to experience traditional Bhotia culture.",
+  },
+  {
+    q: "Where does the trip start and end?",
+    a: "The expedition starts and ends in Rishikesh with full round-trip private transport included.",
+  },
+];
+
+const NITI_VALLEY_GALLERY = [
+  "/niti_valley_gallery_1.jpg",
+  "/niti_valley_gallery_2.jpg",
+  "/niti_valley_gallery_3.jpg",
+  "/niti_valley_gallery_4.jpg",
+  "/niti_valley_gallery_5.jpg",
+  "/niti_valley_gallery_6.jpg",
+  "/niti_valley_gallery_7.jpg",
+  "/niti_valley_gallery_8.jpg",
+];
+
 function TrekDetails() {
   const [t, e] = React.useState(!1),
     [n, a] = React.useState(!1),
@@ -153,6 +252,8 @@ function TrekDetails() {
       s?.event ||
       (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")
         ? BRAHMATAL_TREK
+        : slug === "niti-valley-timmersain-mahadev" || slug?.toLowerCase().includes("niti")
+        ? NITI_VALLEY_TREK
         : null),
     [c, setTrekEvent] = React.useState(initialEvent),
     [d, u] = React.useState(!1),
@@ -167,10 +268,20 @@ function TrekDetails() {
     slug === "brahmatal-winter-trek" ||
     slug?.toLowerCase().includes("brahmatal");
 
+  const isNiti =
+    c?.slug === "niti-valley-timmersain-mahadev" ||
+    c?.id === "niti-valley" ||
+    c?.title?.toLowerCase().includes("niti") ||
+    c?.title?.toLowerCase().includes("timmersain") ||
+    slug === "niti-valley-timmersain-mahadev" ||
+    slug?.toLowerCase().includes("niti");
+
   React.useEffect(() => {
     if (!c && slug) {
       if (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")) {
         setTrekEvent(BRAHMATAL_TREK);
+      } else if (slug === "niti-valley-timmersain-mahadev" || slug?.toLowerCase().includes("niti")) {
+        setTrekEvent(NITI_VALLEY_TREK);
       } else {
         fetchTreks().then((treks) => {
           const found = treks.find((item) => item.slug === slug);
@@ -185,12 +296,18 @@ function TrekDetails() {
               image:
                 found.slug === "kuari-pass-trek"
                   ? "/kuari_pass_card.png"
+                  : found.slug === "brahmatal-winter-trek"
+                  ? "/brahmatal_card.jpg"
+                  : found.slug === "niti-valley-timmersain-mahadev"
+                  ? "/niti_valley_card.jpg"
                   : found.featured_image?.startsWith("/")
                   ? found.featured_image
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
               banner_image:
                 found.slug === "brahmatal-winter-trek"
                   ? "/brahmatal_banner.jpg"
+                  : found.slug === "niti-valley-timmersain-mahadev"
+                  ? "/niti_valley_banner.jpg"
                   : found.banner_image?.startsWith("/")
                   ? found.banner_image
                   : `${BACKEND_STORAGE_URL}/${found.banner_image}`,
@@ -211,6 +328,11 @@ function TrekDetails() {
       w(!1);
       return;
     }
+    if (isNiti) {
+      v(NITI_VALLEY_ITINERARY);
+      w(!1);
+      return;
+    }
     c?.id &&
       GTe(c.id)
         .then(v)
@@ -219,7 +341,7 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c, isBrahmatal]);
+  }, [c, isBrahmatal, isNiti]);
 
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
@@ -229,6 +351,12 @@ function TrekDetails() {
     if (isBrahmatal) {
       C(BRAHMATAL_INCLUSIONS);
       j(BRAHMATAL_EXCLUSIONS);
+      P(!1);
+      return;
+    }
+    if (isNiti) {
+      C(NITI_VALLEY_INCLUSIONS);
+      j(NITI_VALLEY_EXCLUSIONS);
       P(!1);
       return;
     }
@@ -244,7 +372,7 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c, isBrahmatal]);
+  }, [c, isBrahmatal, isNiti]);
 
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
@@ -252,6 +380,11 @@ function TrekDetails() {
   React.useEffect(() => {
     if (isBrahmatal) {
       U(BRAHMATAL_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
+    if (isNiti) {
+      U(NITI_VALLEY_ATTRIBUTES);
       Z(!1);
       return;
     }
@@ -263,7 +396,7 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c, isBrahmatal]);
+  }, [c, isBrahmatal, isNiti]);
 
   const defaultFaqs = [
     {
@@ -288,7 +421,11 @@ function TrekDetails() {
     },
   ];
 
-  const te = isBrahmatal ? BRAHMATAL_FAQS : defaultFaqs;
+  const te = isBrahmatal
+    ? BRAHMATAL_FAQS
+    : isNiti
+    ? NITI_VALLEY_FAQS
+    : defaultFaqs;
 
   if (c) console.log("event details passed : ", c);
   else
@@ -641,14 +778,17 @@ function TrekDetails() {
                   {c?.title || "the trek"}.
                 </p>
               }
-              {isBrahmatal ? (
+              {isBrahmatal || isNiti ? (
                 <div className="space-y-6 text-[#2b241d]">
                   <div>
                     <h3 className="font-semibold text-lg mb-2">
                       1. Essential Documents
                     </h3>
                     <ul className="pl-3 space-y-1 text-[#2b241d]">
-                      <li>• Authentic Government ID Card (Aadhar card / Voter ID / Passport)</li>
+                      <li>
+                        • Authentic Government ID Card (Aadhar card / Voter ID / Passport
+                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : ""})
+                      </li>
                     </ul>
                   </div>
 
@@ -832,6 +972,8 @@ function TrekDetails() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                   {(isBrahmatal
                     ? BRAHMATAL_GALLERY
+                    : isNiti
+                    ? NITI_VALLEY_GALLERY
                     : [
                         "/gallery_1.png",
                         "/gallery_2.png",

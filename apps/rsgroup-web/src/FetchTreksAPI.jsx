@@ -41,6 +41,44 @@ export const BRAHMATAL_TREK = {
   },
 };
 
+export const NITI_VALLEY_TREK = {
+  id: "niti-valley",
+  category_id: 2,
+  name: "NITI VALLEY & TIMMERSAIN MAHADEV",
+  title: "NITI VALLEY & TIMMERSAIN MAHADEV",
+  slug: "niti-valley-timmersain-mahadev",
+  location: "Chamoli, Uttarakhand",
+  venue: "Niti Village, Joshimath",
+  difficulty: "Easy to Moderate",
+  grade: "Easy to Moderate",
+  duration_days: 5,
+  duration_nights: 4,
+  days: "5 Days / 4 Nights",
+  max_altitude: 11800,
+  altitude: 11800,
+  price: "7500.00",
+  featured_image: "/niti_valley_card.jpg",
+  image: "/niti_valley_card.jpg",
+  banner_image: "/niti_valley_banner.jpg",
+  itinerary_pdf: "/niti_valley_itinerary.pdf",
+  url: "/treks/niti-valley-timmersain-mahadev",
+  short_description: "Remote Indo-Tibetan Border & Chota Amarnath Cave Expedition",
+  why_choose: `<p><strong>Niti Valley</strong> is a remote Himalayan valley near the Indo-Tibet border, offering raw alpine landscapes, traditional Bhotiya villages, and stunning views of snow-clad peaks. Known for its untouched beauty and restricted access.</p><p><strong>Timmersain Mahadev</strong> is a unique natural shrine where a towering ice Shivling forms inside a cave during winter, often compared to Amarnath Cave (revered as <em>Chota Amarnath</em>). Surrounded by dense forests and rugged terrain, it combines spiritual significance with an offbeat trekking experience.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>Last Villages of India:</strong> Explore Niti Village and Malari, ancient settlements steeped in Indo-Tibetan trade culture and stone architecture.</p><p>• <strong>Chota Amarnath Ice Shivling:</strong> Trek to the sacred Timmersain Mahadev cave to witness the miraculous natural ice Shivling formation.</p><p>• <strong>Gamshali Bugyal:</strong> Experience serene day treks through pristine alpine meadows with panoramic views of snow-clad Himalayan giants.</p><p>• <strong>The Grand Canyon of India:</strong> Marvel at the awe-inspiring gorge carved by the Dhauliganga river.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 2,
+    name: "Winter Trek",
+    slug: "winter",
+    sort_order: 1,
+    status: true,
+    image: "categories/wqGhpOrK5oqRdVdXKocR5hg7eLee3G93luRKDmhF.jpg",
+    short_description: "Traverse snow-covered trails and magical valleys.",
+    icon: "Snowflake",
+  },
+};
+
 async function fetchTreks(t = {}) {
   const e = new URLSearchParams(t).toString(),
     n = await fetch(`${x2}/${e ? `?${e}` : ""}`),
@@ -57,6 +95,19 @@ async function fetchTreks(t = {}) {
     const cat = t.category;
     if (!cat || cat === "all" || cat === "winter" || t.upcoming) {
       list.push(BRAHMATAL_TREK);
+    }
+  }
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "niti-valley-timmersain-mahadev" ||
+        item.name?.toLowerCase().includes("niti valley") ||
+        item.name?.toLowerCase().includes("timmersain")
+    )
+  ) {
+    const cat = t.category;
+    if (!cat || cat === "all" || cat === "winter" || cat === "summer" || t.upcoming) {
+      list.push(NITI_VALLEY_TREK);
     }
   }
   return list;
