@@ -30,6 +30,8 @@ function HomePage() {
             ? "/brahmatal_card.jpg"
             : m.slug === "niti-valley-timmersain-mahadev" || m.id === "niti-valley"
             ? "/niti_valley_card.jpg"
+            : m.slug === "panchachuli-base-camp-trek" || m.id === "panchachuli"
+            ? "/panchachuli_card.jpg"
             : m.featured_image
             ? (m.featured_image.startsWith("/") ? m.featured_image : `${BACKEND_STORAGE_URL}/${m.featured_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
@@ -37,6 +39,8 @@ function HomePage() {
             ? "/brahmatal_banner.jpg"
             : m.slug === "niti-valley-timmersain-mahadev" || m.id === "niti-valley"
             ? "/niti_valley_banner.jpg"
+            : m.slug === "panchachuli-base-camp-trek" || m.id === "panchachuli"
+            ? "/panchachuli_banner.jpg"
             : m.banner_image
             ? (m.banner_image.startsWith("/") ? m.banner_image : `${BACKEND_STORAGE_URL}/${m.banner_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",

@@ -81,6 +81,46 @@ export const NITI_VALLEY_TREK = {
   season: "Summer & Winter",
 };
 
+export const PANCHACHULI_TREK = {
+  id: "panchachuli",
+  category_id: 3,
+  name: "PANCHACHULI BASE CAMP TREK",
+  title: "PANCHACHULI BASE CAMP TREK",
+  slug: "panchachuli-base-camp-trek",
+  location: "Darma Valley, Pithoragarh, Uttarakhand",
+  venue: "Dugtu & Dantu Village, Dharchula",
+  difficulty: "Easy to Moderate",
+  grade: "Easy to Moderate",
+  duration_days: 5,
+  duration_nights: 4,
+  days: "5 Days / 4 Nights",
+  max_altitude: 14000,
+  altitude: 14000,
+  price: "7500.00",
+  featured_image: "/panchachuli_card.jpg",
+  image: "/panchachuli_card.jpg",
+  banner_image: "/panchachuli_banner.jpg",
+  itinerary_pdf: "/panchachuli_itinerary.pdf",
+  url: "/treks/panchachuli-base-camp-trek",
+  short_description: "Darma Valley & The Five Himalayan Peaks of Pandavas Expedition",
+  why_choose: `<p><strong>Panchachuli Base Camp Trek</strong> is a spectacular Himalayan journey in Uttarakhand near Dharchula in the remote Darma Valley.</p><p>It offers breathtaking up-close views of the five snow-covered Panchachuli peaks and the vast Panchachuli Glacier. The journey winds through pristine alpine villages like Dugtu and Dantu with traditional Kumaoni stone architecture.</p><p>The trail passes vibrant rhododendron forests, lush meadows (bugyals), roaring mountain rivers, and untouched Himalayan valleys. Ideal for nature lovers, photographers, and adventurers seeking a peaceful offbeat expedition.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>The Five Legendary Peaks:</strong> Stand beneath the towering Panchachuli massif revered as the legendary chimneys where the Pandavas cooked their last meal.</p><p>• <strong>Remote Darma Valley:</strong> Experience ancient Himalayan lifestyle, carved wooden windows, and warm hospitality in Dugtu and Dantu villages.</p><p>• <strong>Glacial Moraines &amp; Wildflowers:</strong> Hike to the base of the massive Panchachuli glacier surrounded by blooming rhododendrons and alpine flora.</p><p>• <strong>Kumaon Border Route:</strong> Scenic mountain drives connecting Kathgodam, Almora, Didihat, and Dharchula along the Kali River bordering Nepal.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 3,
+    name: "Summer & Monsoon Trek",
+    slug: "summer",
+    sort_order: 2,
+    status: true,
+    image: "category_valley_of_flowers.jpg",
+    short_description: "Explore lush green meadows, border valleys & alpine passes in summer and post-monsoon.",
+    icon: "Sun",
+  },
+  categories: ["summer", "monsoon"],
+  season: "Summer & Post-Monsoon (May - Jun & Sep - Oct)",
+};
+
 async function fetchTreks(t = {}) {
   const e = new URLSearchParams(t).toString(),
     n = await fetch(`${x2}/${e ? `?${e}` : ""}`),
@@ -118,6 +158,30 @@ async function fetchTreks(t = {}) {
         },
       };
       list.push(adaptedNiti);
+    }
+  }
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "panchachuli-base-camp-trek" ||
+        item.name?.toLowerCase().includes("panchachuli")
+    )
+  ) {
+    if (!cat || cat === "all" || cat === "summer" || cat === "monsoon" || t.upcoming) {
+      const adaptedPanchachuli = {
+        ...PANCHACHULI_TREK,
+        category: {
+          ...PANCHACHULI_TREK.category,
+          name:
+            cat === "monsoon"
+              ? "Monsoon Trek"
+              : cat === "summer"
+              ? "Summer Trek"
+              : "Summer & Monsoon Trek",
+          slug: cat === "monsoon" ? "monsoon" : "summer",
+        },
+      };
+      list.push(adaptedPanchachuli);
     }
   }
   return list;

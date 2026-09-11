@@ -56,10 +56,19 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "niti-valley" ||
           e === "niti-valley-timmersain-mahadev" ||
           (typeof e === "string" && e.includes("niti"));
-        const downloadUrl = isNiti
+        const isPanchachuli =
+          e === "panchachuli" ||
+          e === "panchachuli-base-camp-trek" ||
+          (typeof e === "string" && e.includes("panchachuli"));
+
+        const downloadUrl = isPanchachuli
+          ? "/panchachuli_itinerary.pdf"
+          : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isNiti
+        const downloadFileName = isPanchachuli
+          ? "Panchachuli_Base_Camp_Itinerary_RS_Group.pdf"
+          : isNiti
           ? "Niti_Valley_Timmersain_Mahadev_Itinerary_RS_Group.pdf"
           : "Brahmatal_Trek_Itinerary_RS_Group.pdf";
 
@@ -82,10 +91,19 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "niti-valley" ||
           e === "niti-valley-timmersain-mahadev" ||
           (typeof e === "string" && e.includes("niti"));
-        const downloadUrl = isNiti
+        const isPanchachuli =
+          e === "panchachuli" ||
+          e === "panchachuli-base-camp-trek" ||
+          (typeof e === "string" && e.includes("panchachuli"));
+
+        const downloadUrl = isPanchachuli
+          ? "/panchachuli_itinerary.pdf"
+          : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isNiti
+        const downloadFileName = isPanchachuli
+          ? "Panchachuli_Base_Camp_Itinerary_RS_Group.pdf"
+          : isNiti
           ? "Niti_Valley_Timmersain_Mahadev_Itinerary_RS_Group.pdf"
           : "Brahmatal_Trek_Itinerary_RS_Group.pdf";
 

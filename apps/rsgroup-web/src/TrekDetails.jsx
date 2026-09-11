@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
-import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK } from "./FetchTreksAPI";
+import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK, PANCHACHULI_TREK } from "./FetchTreksAPI";
 import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
@@ -243,6 +243,116 @@ const NITI_VALLEY_GALLERY = [
   "/niti_valley_gallery_8.jpg",
 ];
 
+const PANCHACHULI_ITINERARY = [
+  {
+    day: 1,
+    title: "KATHGODAM to DHARCHULA",
+    distance: "Drive 300 km",
+    duration: "9-11 Hours",
+    description:
+      "<p>Early morning departure from Kathgodam, the gateway to Kumaon Himalayas.</p><p>Enjoy a scenic mountain drive through the picturesque hill regions of Almora and Didihat, witnessing deep valleys, pine forests, gushing rivers, and traditional mountain villages.</p><p>Experience peaceful tea stops and authentic Kumaoni landscapes along the route. By evening, arrive at Dharchula, a beautiful border town on the banks of the Kali River overlooking Nepal. Check-in at hotel and relax after the journey.</p><p><strong>Overnight Stay:</strong> Hotel in Dharchula.</p>",
+  },
+  {
+    day: 2,
+    title: "DHARCHULA to DUGTU VILLAGE",
+    distance: "Drive 80-90 km",
+    duration: "4-6 Hours",
+    description:
+      "<p>After breakfast at Dharchula, begin the drive towards Dugtu Village in the remote and enchanting Darma Valley.</p><p>The route traces the scenic Kali River through rugged Himalayan terrain, passing waterfalls, steep cliff roads, hanging bridges, and remote border-region landscapes.</p><p>Pass through army checkpoints and small alpine villages before reaching Dugtu Village by afternoon. As you enter the valley, witness the first breathtaking close-up views of the five snow-capped Panchachuli peaks. Soak in the peaceful village surroundings and traditional mountain lifestyle.</p><p><strong>Overnight Stay:</strong> Authentic homestay / alpine camp at Dugtu Village.</p>",
+  },
+  {
+    day: 3,
+    title: "DUGTU to PANCHACHULI BASE CAMP & BACK",
+    distance: "Trek 12-14 km",
+    duration: "6-7 Hours",
+    description:
+      "<p>Wake up early to golden morning rays illuminating the Panchachuli peaks. After a hearty breakfast, begin the trek towards Panchachuli Base Camp (~4,260 m / 14,000 ft).</p><p>The trail winds through lush alpine meadows (bugyals), rocky trails, bubbling mountain streams, blooming rhododendrons, and pristine glacier landscapes.</p><p>Reach Panchachuli Base Camp and spend quality time exploring the snout of the Panchachuli Glacier, photography, and absorbing the awe-inspiring presence of the five peaks of the Pandavas.</p><p>Begin the return hike to Dugtu Village by afternoon/evening. Enjoy an optional walk to neighboring Dantu Village, renowned for its heritage stone houses and dramatic panoramic viewpoints. Enjoy hot dinner and stargazing.</p><p><strong>Overnight Stay:</strong> Dugtu Village.</p>",
+  },
+  {
+    day: 4,
+    title: "DUGTU to DHARCHULA / PITHORAGARH",
+    distance: "Drive 90 km / 190 km",
+    duration: "6-9 Hours",
+    description:
+      "<p>Post breakfast, bid farewell to the warm locals of Dugtu and the majestic Panchachuli peaks as you commence the return drive.</p><p>Take in final vistas of the Darma Valley landscapes, descending along mountain roads, cascading waterfalls, and riverside terrain.</p><p>Reach Dharchula or continue further towards the scenic district headquarters of Pithoragarh depending on the customized travel schedule. Relax and unwind after the mountain road journey.</p><p><strong>Overnight Stay:</strong> Hotel in Dharchula or Pithoragarh.</p>",
+  },
+  {
+    day: 5,
+    title: "DHARCHULA / PITHORAGARH to KATHGODAM",
+    distance: "Drive 210 / 300 km",
+    duration: "8-11 Hours",
+    description:
+      "<p>After breakfast, depart on the return drive to Kathgodam through the picturesque mountain roads of Kumaon.</p><p>Enjoy scenic views of terraced hills, pine and oak forests, and serene lake towns near Bhimtal.</p><p>Arrive at Kathgodam railway station by evening, where your memorable Panchachuli Base Camp adventure concludes with unforgettable Himalayan memories.</p>",
+  },
+];
+
+const PANCHACHULI_INCLUSIONS = [
+  { item: "Accommodation (Guest house, Home stay, Alpine Camping)" },
+  { item: "Meals while on trek/trip (Nutritious Vegetarian meals)" },
+  { item: "Trek equipment: Sleeping bag, mattress, tent, utensils" },
+  { item: "Kitchen & dining Tent, toilet tent" },
+  { item: "All necessary Inner Line permits and entry fees (Darma Valley border pass)" },
+  { item: "First aid medical kits and basic emergency equipment" },
+  { item: "Mountaineering qualified & professional trek Leader, Guide and Support staff" },
+  { item: "Transport from Kathgodam to Kathgodam (all drives included)" },
+];
+
+const PANCHACHULI_EXCLUSIONS = [
+  { item: "Any kind of personal expenses" },
+  { item: "Food during the transit" },
+  { item: "Insurance" },
+  { item: "Any kind of emergency evacuation charges" },
+  { item: "Mules or porter to carry personal luggage" },
+  { item: "Anything not specifically mentioned under the head" },
+];
+
+const PANCHACHULI_ATTRIBUTES = [
+  { label: "Region", value: "Darma Valley, Pithoragarh District, Kumaon Himalayas, Uttarakhand" },
+  { label: "Base Village", value: "Dugtu Village & Dantu Village" },
+  { label: "Nearest Town", value: "Dharchula" },
+  { label: "Nearest Railhead / Major City", value: "Kathgodam / Pithoragarh" },
+  { label: "Trek Distance", value: "~14 km total (round trip)" },
+  { label: "Altitude", value: "~4,260 m (14,000 ft)" },
+  { label: "Difficulty Level", value: "Easy to Moderate" },
+  { label: "Season", value: "Summer & Post-Monsoon" },
+  { label: "Best Time to Visit", value: "May to June (Summer) & September to October (Post-Monsoon)" },
+  { label: "Special Highlight", value: "Panchachuli Glacier & Five Peaks of Pandavas" },
+];
+
+const PANCHACHULI_FAQS = [
+  {
+    q: "What is the best time to visit Panchachuli Base Camp?",
+    a: "The ideal seasons are May to June (pre-monsoon/summer) with blooming rhododendrons and September to October (post-monsoon) with crisp skies and clear mountain panoramas.",
+  },
+  {
+    q: "Is an Inner Line Permit required for Darma Valley?",
+    a: "Yes, because Darma Valley borders Tibet/Nepal, an Inner Line Permit / SDM border permit is mandatory. RS Group takes care of all documentation and permit arrangements for you.",
+  },
+  {
+    q: "Can beginners undertake the Panchachuli Base Camp trek?",
+    a: "Yes! The trek from Dugtu to Base Camp is only about 12-14 km round trip and graded Easy to Moderate, making it very accessible for beginners with basic fitness as well as families.",
+  },
+  {
+    q: "Where does the expedition start and end?",
+    a: "The trip starts and ends in Kathgodam (the main railway station of Kumaon) with full round-trip mountain transit included.",
+  },
+  {
+    q: "What kind of stay is provided during the trip?",
+    a: "Comfortable hotel accommodation in Dharchula/Pithoragarh, and traditional Kumaoni homestays or high-quality alpine tents in Dugtu Village.",
+  },
+];
+
+const PANCHACHULI_GALLERY = [
+  "/panchachuli_gallery_1.jpg",
+  "/panchachuli_gallery_2.jpg",
+  "/panchachuli_gallery_3.jpg",
+  "/panchachuli_gallery_4.jpg",
+  "/panchachuli_gallery_5.jpg",
+  "/panchachuli_gallery_6.jpg",
+  "/panchachuli_gallery_7.jpg",
+  "/panchachuli_gallery_8.jpg",
+];
+
 function TrekDetails() {
   const [t, e] = React.useState(!1),
     [n, a] = React.useState(!1),
@@ -255,6 +365,8 @@ function TrekDetails() {
         ? BRAHMATAL_TREK
         : slug === "niti-valley-timmersain-mahadev" || slug?.toLowerCase().includes("niti")
         ? NITI_VALLEY_TREK
+        : slug === "panchachuli-base-camp-trek" || slug?.toLowerCase().includes("panchachuli")
+        ? PANCHACHULI_TREK
         : null),
     [c, setTrekEvent] = React.useState(initialEvent),
     [d, u] = React.useState(!1),
@@ -277,6 +389,13 @@ function TrekDetails() {
     slug === "niti-valley-timmersain-mahadev" ||
     slug?.toLowerCase().includes("niti");
 
+  const isPanchachuli =
+    c?.slug === "panchachuli-base-camp-trek" ||
+    c?.id === "panchachuli" ||
+    c?.title?.toLowerCase().includes("panchachuli") ||
+    slug === "panchachuli-base-camp-trek" ||
+    slug?.toLowerCase().includes("panchachuli");
+
   React.useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [slug]);
@@ -287,6 +406,8 @@ function TrekDetails() {
         setTrekEvent(BRAHMATAL_TREK);
       } else if (slug === "niti-valley-timmersain-mahadev" || slug?.toLowerCase().includes("niti")) {
         setTrekEvent(NITI_VALLEY_TREK);
+      } else if (slug === "panchachuli-base-camp-trek" || slug?.toLowerCase().includes("panchachuli")) {
+        setTrekEvent(PANCHACHULI_TREK);
       } else {
         fetchTreks().then((treks) => {
           const found = treks.find((item) => item.slug === slug);
@@ -305,6 +426,8 @@ function TrekDetails() {
                   ? "/brahmatal_card.jpg"
                   : found.slug === "niti-valley-timmersain-mahadev"
                   ? "/niti_valley_card.jpg"
+                  : found.slug === "panchachuli-base-camp-trek"
+                  ? "/panchachuli_card.jpg"
                   : found.featured_image?.startsWith("/")
                   ? found.featured_image
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
@@ -313,6 +436,8 @@ function TrekDetails() {
                   ? "/brahmatal_banner.jpg"
                   : found.slug === "niti-valley-timmersain-mahadev"
                   ? "/niti_valley_banner.jpg"
+                  : found.slug === "panchachuli-base-camp-trek"
+                  ? "/panchachuli_banner.jpg"
                   : found.banner_image?.startsWith("/")
                   ? found.banner_image
                   : `${BACKEND_STORAGE_URL}/${found.banner_image}`,
@@ -338,6 +463,11 @@ function TrekDetails() {
       w(!1);
       return;
     }
+    if (isPanchachuli) {
+      v(PANCHACHULI_ITINERARY);
+      w(!1);
+      return;
+    }
     c?.id &&
       GTe(c.id)
         .then(v)
@@ -346,7 +476,7 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c, isBrahmatal, isNiti]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli]);
 
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
@@ -365,6 +495,12 @@ function TrekDetails() {
       P(!1);
       return;
     }
+    if (isPanchachuli) {
+      C(PANCHACHULI_INCLUSIONS);
+      j(PANCHACHULI_EXCLUSIONS);
+      P(!1);
+      return;
+    }
     c?.id &&
       Promise.all([_X(c.id), CX(c.id)])
         .then(([Q, be]) => {
@@ -377,7 +513,7 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c, isBrahmatal, isNiti]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli]);
 
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
@@ -393,6 +529,11 @@ function TrekDetails() {
       Z(!1);
       return;
     }
+    if (isPanchachuli) {
+      U(PANCHACHULI_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
     c?.id &&
       MX(c.id)
         .then((Q) => U(Q || []))
@@ -401,7 +542,7 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c, isBrahmatal, isNiti]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli]);
 
   const defaultFaqs = [
     {
@@ -430,6 +571,8 @@ function TrekDetails() {
     ? BRAHMATAL_FAQS
     : isNiti
     ? NITI_VALLEY_FAQS
+    : isPanchachuli
+    ? PANCHACHULI_FAQS
     : defaultFaqs;
 
   if (c) console.log("event details passed : ", c);
@@ -604,6 +747,8 @@ function TrekDetails() {
                 <h2 className="text-3xl font-display font-semibold mb-4 text-[#2b241d]">
                   {isNiti
                     ? `Why to do Summer & Winter Trek – ${c.title}?`
+                    : isPanchachuli
+                    ? `Why to do Summer & Post-Monsoon Trek – ${c.title}?`
                     : `Why to do ${c?.category?.name || "Winter Trek"} – ${c.title}?`}
                 </h2>
               }
@@ -785,16 +930,16 @@ function TrekDetails() {
                   {c?.title || "the trek"}.
                 </p>
               }
-              {isBrahmatal || isNiti ? (
+              {isBrahmatal || isNiti || isPanchachuli ? (
                 <div className="space-y-6 text-[#2b241d]">
                   <div>
                     <h3 className="font-semibold text-lg mb-2">
-                      1. Essential Documents
+                       1. Essential Documents
                     </h3>
                     <ul className="pl-3 space-y-1 text-[#2b241d]">
                       <li>
                         • Authentic Government ID Card (Aadhar card / Voter ID / Passport
-                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : ""})
+                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : ""})
                       </li>
                     </ul>
                   </div>
@@ -981,6 +1126,8 @@ function TrekDetails() {
                     ? BRAHMATAL_GALLERY
                     : isNiti
                     ? NITI_VALLEY_GALLERY
+                    : isPanchachuli
+                    ? PANCHACHULI_GALLERY
                     : [
                         "/gallery_1.png",
                         "/gallery_2.png",

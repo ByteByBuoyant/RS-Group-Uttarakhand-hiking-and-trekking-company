@@ -12,6 +12,7 @@ const jLe = [
   "Kedarkantha Trek",
   "Brahmatal Trek",
   "Niti Valley & Timmersain Mahadev",
+  "Panchachuli Base Camp Trek",
   "Kuari Pass Trek",
   "Har Ki Dun Trek",
   "Valley of Flowers",

@@ -80,6 +80,8 @@ function AllTreks() {
           ? "/brahmatal_card.jpg"
           : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
           ? "/niti_valley_card.jpg"
+          : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
+          ? "/panchachuli_card.jpg"
           : j.featured_image
           ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
@@ -87,6 +89,8 @@ function AllTreks() {
           ? "/brahmatal_banner.jpg"
           : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
           ? "/niti_valley_banner.jpg"
+          : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
+          ? "/panchachuli_banner.jpg"
           : j.banner_image
           ? (j.banner_image.startsWith("/") ? j.banner_image : `${BACKEND_STORAGE_URL}/${j.banner_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",
@@ -107,6 +111,9 @@ function AllTreks() {
   }
   if (!categoryList.some((item) => item.slug === "summer")) {
     categoryList.push({ name: "Summer Trek", slug: "summer" });
+  }
+  if (!categoryList.some((item) => item.slug === "monsoon")) {
+    categoryList.push({ name: "Monsoon Trek", slug: "monsoon" });
   }
 
   const b = [
