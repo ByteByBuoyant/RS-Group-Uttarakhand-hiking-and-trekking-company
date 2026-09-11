@@ -117,7 +117,47 @@ export const PANCHACHULI_TREK = {
     short_description: "Explore lush green meadows, border valleys & alpine passes in summer and post-monsoon.",
     icon: "Sun",
   },
-  categories: ["summer", "monsoon"],
+  categories: ["summer", "monsoon", "post-monsoon"],
+  season: "Summer & Post-Monsoon (May - Jun & Sep - Oct)",
+};
+
+export const RUDRANATH_TREK = {
+  id: "rudranath",
+  category_id: 3,
+  name: "RUDRANATH YATRA TREK",
+  title: "RUDRANATH YATRA TREK",
+  slug: "rudranath-yatra-trek",
+  location: "Chamoli, Uttarakhand",
+  venue: "Sagar Village, Gopeshwar",
+  difficulty: "Moderate to Tough",
+  grade: "Moderate to Tough",
+  duration_days: 5,
+  duration_nights: 4,
+  days: "5 Days / 4 Nights",
+  max_altitude: 11800,
+  altitude: 11800,
+  price: "7500.00",
+  featured_image: "/rudranath_card.jpg",
+  image: "/rudranath_card.jpg",
+  banner_image: "/rudranath_banner.jpg",
+  itinerary_pdf: "/rudranath_itinerary.pdf",
+  url: "/treks/rudranath-yatra-trek",
+  short_description: "The Second Kedar & Sacred Cave Shrine of Lord Shiva",
+  why_choose: `<p><strong>Rudranath Trek</strong> leads to one of the most sacred Panch Kedar temples dedicated to Lord Shiva, where his divine face (<em>Mukha</em>) is worshipped in a natural rock formation.</p><p>Spiritually, the trek is considered a journey of pure devotion, with serene ancient forests, holy rivers, and vast alpine meadows enhancing meditation and inner peace. Historically linked to the Mahabharata, where the Pandavas sought forgiveness from Lord Shiva.</p><p>Rudranath seamlessly blends pristine nature, vibrant bugyals, ancient mythology, and deep Himalayan spirituality into an enriching pilgrimage and adventure.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>The Second Kedar Shrine:</strong> Pay homage at the remote rock-hewn temple surrounded by sacred silence and attend the soul-stirring evening Aarti.</p><p>• <strong>Vast Alpine Bugyals:</strong> Trek across the enchanting rolling grasslands of Pung Bugyal and Lweti Bugyal adorned with wildflowers and rhododendrons.</p><p>• <strong>Pitra Dhar &amp; Himalayan Panoramas:</strong> Stand atop the high ridge of Pitra Dhar offering dramatic panoramic views of Nanda Devi, Trishul, and Chaukhamba peaks.</p><p>• <strong>Sacred Saraswati Kund:</strong> Visit the tranquil, holy alpine tarn nestled amidst towering rocky knolls and prayer flags.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 3,
+    name: "Summer & Post-Monsoon Trek",
+    slug: "monsoon",
+    sort_order: 3,
+    status: true,
+    image: "category_valley_of_flowers.jpg",
+    short_description: "Experience divine shrines, alpine bugyals & crystal peaks in summer and post-monsoon.",
+    icon: "Sun",
+  },
+  categories: ["summer", "monsoon", "post-monsoon"],
   season: "Summer & Post-Monsoon (May - Jun & Sep - Oct)",
 };
 
@@ -128,6 +168,7 @@ async function fetchTreks(t = {}) {
   if (!n.ok) throw a;
   const list = a.data ? [...a.data] : [];
   const cat = (t.category || t.type || "").toLowerCase();
+  const isPostMonsoonCat = cat === "monsoon" || cat === "post-monsoon";
 
   if (
     !list.some(
@@ -167,21 +208,45 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("panchachuli")
     )
   ) {
-    if (!cat || cat === "all" || cat === "summer" || cat === "monsoon" || t.upcoming) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
       const adaptedPanchachuli = {
         ...PANCHACHULI_TREK,
         category: {
           ...PANCHACHULI_TREK.category,
           name:
-            cat === "monsoon"
-              ? "Monsoon Trek"
+            isPostMonsoonCat
+              ? "Post-Monsoon Trek"
               : cat === "summer"
               ? "Summer Trek"
-              : "Summer & Monsoon Trek",
-          slug: cat === "monsoon" ? "monsoon" : "summer",
+              : "Summer & Post-Monsoon Trek",
+          slug: isPostMonsoonCat ? "monsoon" : "summer",
         },
       };
       list.push(adaptedPanchachuli);
+    }
+  }
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "rudranath-yatra-trek" ||
+        item.name?.toLowerCase().includes("rudranath")
+    )
+  ) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+      const adaptedRudranath = {
+        ...RUDRANATH_TREK,
+        category: {
+          ...RUDRANATH_TREK.category,
+          name:
+            isPostMonsoonCat
+              ? "Post-Monsoon Trek"
+              : cat === "summer"
+              ? "Summer Trek"
+              : "Summer & Post-Monsoon Trek",
+          slug: isPostMonsoonCat ? "monsoon" : "summer",
+        },
+      };
+      list.push(adaptedRudranath);
     }
   }
   return list;

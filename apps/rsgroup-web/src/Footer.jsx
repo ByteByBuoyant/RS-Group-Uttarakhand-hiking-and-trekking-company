@@ -187,7 +187,7 @@ function Footer() {
                           href="/alltreks?type=monsoon"
                           className="hover:text-[#f25b23] transition"
                         >
-                          Monsoon Treks
+                          Post-Monsoon Treks
                         </a>
                       }
                     </li>

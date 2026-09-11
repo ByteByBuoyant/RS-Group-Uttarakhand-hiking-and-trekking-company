@@ -60,13 +60,22 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "panchachuli" ||
           e === "panchachuli-base-camp-trek" ||
           (typeof e === "string" && e.includes("panchachuli"));
+        const isRudranath =
+          e === "rudranath" ||
+          e === "rudranath-yatra-trek" ||
+          e === "rudranath-yatra" ||
+          (typeof e === "string" && e.includes("rudranath"));
 
-        const downloadUrl = isPanchachuli
+        const downloadUrl = isRudranath
+          ? "/rudranath_itinerary.pdf"
+          : isPanchachuli
           ? "/panchachuli_itinerary.pdf"
           : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isPanchachuli
+        const downloadFileName = isRudranath
+          ? "Rudranath_Yatra_Itinerary_RS_Group.pdf"
+          : isPanchachuli
           ? "Panchachuli_Base_Camp_Itinerary_RS_Group.pdf"
           : isNiti
           ? "Niti_Valley_Timmersain_Mahadev_Itinerary_RS_Group.pdf"
@@ -95,13 +104,22 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "panchachuli" ||
           e === "panchachuli-base-camp-trek" ||
           (typeof e === "string" && e.includes("panchachuli"));
+        const isRudranath =
+          e === "rudranath" ||
+          e === "rudranath-yatra-trek" ||
+          e === "rudranath-yatra" ||
+          (typeof e === "string" && e.includes("rudranath"));
 
-        const downloadUrl = isPanchachuli
+        const downloadUrl = isRudranath
+          ? "/rudranath_itinerary.pdf"
+          : isPanchachuli
           ? "/panchachuli_itinerary.pdf"
           : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isPanchachuli
+        const downloadFileName = isRudranath
+          ? "Rudranath_Yatra_Itinerary_RS_Group.pdf"
+          : isPanchachuli
           ? "Panchachuli_Base_Camp_Itinerary_RS_Group.pdf"
           : isNiti
           ? "Niti_Valley_Timmersain_Mahadev_Itinerary_RS_Group.pdf"

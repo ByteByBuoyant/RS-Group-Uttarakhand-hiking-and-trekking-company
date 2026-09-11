@@ -41,6 +41,14 @@ function HeroSlider() {
                 "Explore lush green meadows, border valleys & alpine passes.",
             };
           }
+          if (item.slug === "monsoon" || item.slug === "post-monsoon") {
+            return {
+              ...item,
+              name: "Post-Monsoon Trek",
+              short_description:
+                "Crisp mountain air, crystal clear peaks & golden meadows.",
+            };
+          }
           return item;
         });
         if (!list.some((item) => item.slug === "summer")) {
@@ -60,11 +68,11 @@ function HeroSlider() {
           };
           const customMonsoon = {
             id: "monsoon-custom",
-            name: "Monsoon Trek",
+            name: "Post-Monsoon Trek",
             slug: "monsoon",
             icon: "CloudRain",
             image: "category_valley_of_flowers.jpg",
-            short_description: "Experience the majestic Valley of Flowers in full bloom.",
+            short_description: "Crisp mountain air, crystal clear peaks & golden meadows.",
             isLocal: true,
           };
           if (winterIndex !== -1) {

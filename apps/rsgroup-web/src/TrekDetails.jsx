@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
-import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK, PANCHACHULI_TREK } from "./FetchTreksAPI";
+import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK, PANCHACHULI_TREK, RUDRANATH_TREK } from "./FetchTreksAPI";
 import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
@@ -353,6 +353,134 @@ const PANCHACHULI_GALLERY = [
   "/panchachuli_gallery_8.jpg",
 ];
 
+const RUDRANATH_ITINERARY = [
+  {
+    day: 1,
+    title: "RISHIKESH TO SAGAR VILLAGE",
+    altitude: "1,500 m / 4,920 ft",
+    details: `<p><strong>Drive: 220 km | 9-10 Hours</strong></p>
+<p>• The sacred journey starts with an early morning pickup from Rishikesh.</p>
+<p>• Enjoy breakfast along the mountain highway and continue through the breathtaking Garhwal Himalayan valleys.</p>
+<p>• En route, witness the holy Devprayag Sangam (sacred confluence of Bhagirathi and Alaknanda forming the holy Ganga), Dhari Devi temple, and ancient Gopinath Temple in Gopeshwar.</p>
+<p>• Reach the base village Sagar by sunset. Check into the hotel/guest house and unwind.</p>
+<p>• Our certified Trek Leader conducts an orientation and briefing session.</p>
+<p>• Enjoy a hot, wholesome dinner with fellow trekkers and rest for the trek ahead.</p>`,
+  },
+  {
+    day: 2,
+    title: "SAGAR VILLAGE TO LWETI BUGYAL",
+    altitude: "2,800 m / 9,186 ft",
+    details: `<p><strong>Trek: 10 km | 7-8 Hours</strong></p>
+<p>• Wake up to a crisp Himalayan morning in base village Sagar.</p>
+<p>• After a nutritious breakfast, begin the uphill trek through dense, fragrant oak, pine, and rhododendron forests.</p>
+<p>• En route, encounter the scenic alpine meadow of Pung Bugyal, offering your first panoramic vistas of Garhwal hills.</p>
+<p>• Stop for a packed lunch and relish refreshing authentic local Buransh (rhododendron) juice.</p>
+<p>• By late afternoon/evening, arrive at the breathtaking alpine grassland of Lweti Bugyal.</p>
+<p>• Join your Trek Leader for a warm-up and stretching exercise session to relax your muscles.</p>
+<p>• Dinner with fellow trekkers and overnight stay in homestay / guest house / alpine camp.</p>`,
+  },
+  {
+    day: 3,
+    title: "LWETI BUGYAL TO RUDRANATH",
+    altitude: "3,600 m / 11,800 ft",
+    details: `<p><strong>Trek: 10 km | 7-8 Hours</strong></p>
+<p>• Here comes the most critical and visually spectacular day of the yatra.</p>
+<p>• Cross the highest vantage point of the trail — <strong>Pitra Dhar</strong>. <em>Important:</em> Carry at least 2 liters of drinking water from Lweti base, as water sources are scarce for nearly 7 km.</p>
+<p>• The route features a 5 km ascent to the ridge followed by a 5 km descent and gentle walk touching ~3,600 m (11,800 ft).</p>
+<p>• Reach the sacred Rudranath Temple by lunchtime and settle into your high-altitude accommodations.</p>
+<p>• In the evening, immerse yourself in the divine and soul-stirring Rudranath Temple "Sandhya Aarti".</p>
+<p>• Visit the sacred, tranquil Saraswati Kund nestled amid towering rocky knolls.</p>
+<p>• Enjoy hot dinner under the starlit Himalayan sky and overnight stay.</p>`,
+  },
+  {
+    day: 4,
+    title: "RUDRANATH TO SAGAR VILLAGE",
+    altitude: "Descent to 1,500 m / 4,920 ft",
+    details: `<p><strong>Trek: 20 km | 8-9 Hours</strong></p>
+<p>• The longest and most demanding trekking day begins at 5:00 AM to cover the 20 km descent.</p>
+<p>• Trek past alpine meadows with golden morning light illuminating majestic Himalayan peaks like Nanda Devi, Trishul, and Chaukhamba.</p>
+<p>• Stop at Lweti Bugyal for a hot meal and energy recharge, then resume the descent towards Sagar Village.</p>
+<p>• Arrive at base village Sagar, take a well-deserved rest, and join the evening debriefing session.</p>
+<p>• Receive your official RS Group Trekking Certificates and share heartfelt stories and experiences with fellow trekkers.</p>
+<p>• Enjoy a celebration dinner and good night.</p>`,
+  },
+  {
+    day: 5,
+    title: "SAGAR VILLAGE TO RISHIKESH",
+    altitude: "Drive back to Rishikesh",
+    details: `<p><strong>Drive: 220 km | 9-10 Hours</strong></p>
+<p>• Our final morning starts with breakfast in Sagar Village, taking in last views of the Garhwal mountains.</p>
+<p>• Board the vehicles for the scenic return drive back towards Rishikesh.</p>
+<p>• Trekkers share memories, listen to music, and reminisce over an unforgettable pilgrimage and adventure.</p>
+<p>• Reach Rishikesh by evening where our memorable Rudranath Yatra completes.</p>`,
+  },
+];
+
+const RUDRANATH_INCLUSIONS = [
+  "Accommodation (Guest house, Home stay, and high-altitude alpine Camping)",
+  "Nutritious, hygienic vegetarian meals while on the trek (Breakfast, Lunch, Evening Snacks & Dinner)",
+  "Trek equipment: High-grade sleeping bags, insulated mattresses, alpine tents, kitchen & dining tents, toilet tents, and utensils",
+  "All necessary Kedarnath Wildlife Sanctuary forest permits, entry fees, and government taxes",
+  "First aid medical kit, oxygen cylinder, pulse oximeter, and emergency safety support",
+  "Mountaineering qualified & professional Trek Leader, local guides, cook, and support staff",
+  "Transport from Rishikesh to Sagar Village and return to Rishikesh",
+];
+
+const RUDRANATH_EXCLUSIONS = [
+  "Any kind of personal expenses or shopping",
+  "Food and snacks during highway road transit",
+  "Travel and personal medical insurance",
+  "Any emergency evacuation or medical hospitalization charges",
+  "Mules or porter charges for carrying personal luggage / offloading",
+  "Anything not specifically mentioned under the inclusions list",
+];
+
+const RUDRANATH_ATTRIBUTES = [
+  { label: "Trek Duration", value: "5 Days / 4 Nights" },
+  { label: "Trek Distance", value: "~40 - 44 km total" },
+  { label: "Max Altitude", value: "3,600 m (~11,800 ft)" },
+  { label: "Difficulty Level", value: "Moderate to Tough" },
+  { label: "Base Village", value: "Sagar Village (near Gopeshwar)" },
+  { label: "Region", value: "Chamoli District, Garhwal Himalayas" },
+  { label: "Pickup & Drop", value: "Rishikesh" },
+  { label: "Season", value: "Summer & Post-Monsoon" },
+  { label: "Best Time to Visit", value: "May to June (Summer) & September to October (Post-Monsoon)" },
+];
+
+const RUDRANATH_FAQS = [
+  {
+    q: "What is the spiritual significance of Rudranath Yatra?",
+    a: "Rudranath is revered as the Fourth (or Second) Kedar among the holy Panch Kedar temples. It is the only shrine where Lord Shiva's divine face (Mukha) is worshipped in a natural rock cave formation.",
+  },
+  {
+    q: "When is the best time to visit Rudranath?",
+    a: "The two ideal seasons are May to June (pre-monsoon/summer) with blooming rhododendrons and emerald green bugyals, and September to October (post-monsoon) with crystal clear blue skies and sharp Himalayan views.",
+  },
+  {
+    q: "How difficult is the Rudranath trek?",
+    a: "The trek is graded Moderate to Tough. Day 3 involves a steep climb across Pitra Dhar ridge (11,800 ft), and Day 4 is a long 20 km descent back to Sagar Village. Good cardiovascular fitness and regular walking/jogging before the trek are advised.",
+  },
+  {
+    q: "Is drinking water available along the trail?",
+    a: "Between Lweti Bugyal and Rudranath (spanning Pitra Dhar), there are no water sources for approximately 7 km. Trekkers are strictly advised to carry at least 2 liters of drinking water with them from Lweti base.",
+  },
+  {
+    q: "What network connectivity and electricity is available?",
+    a: "Network connectivity (BSNL/Jio) is available at Sagar Village, but becomes intermittent or nonexistent past Lweti Bugyal. There is no electricity at the high camps, so carrying a high-capacity power bank is essential.",
+  },
+];
+
+const RUDRANATH_GALLERY = [
+  "/rudranath_gallery_1.jpg",
+  "/rudranath_gallery_2.jpg",
+  "/rudranath_gallery_3.jpg",
+  "/rudranath_gallery_4.jpg",
+  "/rudranath_gallery_5.jpg",
+  "/rudranath_gallery_6.jpg",
+  "/rudranath_gallery_7.jpg",
+  "/rudranath_gallery_8.jpg",
+];
+
 function TrekDetails() {
   const [t, e] = React.useState(!1),
     [n, a] = React.useState(!1),
@@ -367,6 +495,8 @@ function TrekDetails() {
         ? NITI_VALLEY_TREK
         : slug === "panchachuli-base-camp-trek" || slug?.toLowerCase().includes("panchachuli")
         ? PANCHACHULI_TREK
+        : slug === "rudranath-yatra-trek" || slug === "rudranath-yatra" || slug?.toLowerCase().includes("rudranath")
+        ? RUDRANATH_TREK
         : null),
     [c, setTrekEvent] = React.useState(initialEvent),
     [d, u] = React.useState(!1),
@@ -396,6 +526,15 @@ function TrekDetails() {
     slug === "panchachuli-base-camp-trek" ||
     slug?.toLowerCase().includes("panchachuli");
 
+  const isRudranath =
+    c?.slug === "rudranath-yatra-trek" ||
+    c?.slug === "rudranath-yatra" ||
+    c?.id === "rudranath" ||
+    c?.title?.toLowerCase().includes("rudranath") ||
+    slug === "rudranath-yatra-trek" ||
+    slug === "rudranath-yatra" ||
+    slug?.toLowerCase().includes("rudranath");
+
   React.useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [slug]);
@@ -408,6 +547,8 @@ function TrekDetails() {
         setTrekEvent(NITI_VALLEY_TREK);
       } else if (slug === "panchachuli-base-camp-trek" || slug?.toLowerCase().includes("panchachuli")) {
         setTrekEvent(PANCHACHULI_TREK);
+      } else if (slug === "rudranath-yatra-trek" || slug === "rudranath-yatra" || slug?.toLowerCase().includes("rudranath")) {
+        setTrekEvent(RUDRANATH_TREK);
       } else {
         fetchTreks().then((treks) => {
           const found = treks.find((item) => item.slug === slug);
@@ -428,6 +569,8 @@ function TrekDetails() {
                   ? "/niti_valley_card.jpg"
                   : found.slug === "panchachuli-base-camp-trek"
                   ? "/panchachuli_card.jpg"
+                  : found.slug === "rudranath-yatra-trek" || found.slug === "rudranath-yatra"
+                  ? "/rudranath_card.jpg"
                   : found.featured_image?.startsWith("/")
                   ? found.featured_image
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
@@ -438,6 +581,8 @@ function TrekDetails() {
                   ? "/niti_valley_banner.jpg"
                   : found.slug === "panchachuli-base-camp-trek"
                   ? "/panchachuli_banner.jpg"
+                  : found.slug === "rudranath-yatra-trek" || found.slug === "rudranath-yatra"
+                  ? "/rudranath_banner.jpg"
                   : found.banner_image?.startsWith("/")
                   ? found.banner_image
                   : `${BACKEND_STORAGE_URL}/${found.banner_image}`,
@@ -468,6 +613,11 @@ function TrekDetails() {
       w(!1);
       return;
     }
+    if (isRudranath) {
+      v(RUDRANATH_ITINERARY);
+      w(!1);
+      return;
+    }
     c?.id &&
       GTe(c.id)
         .then(v)
@@ -476,7 +626,7 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath]);
 
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
@@ -501,6 +651,12 @@ function TrekDetails() {
       P(!1);
       return;
     }
+    if (isRudranath) {
+      C(RUDRANATH_INCLUSIONS);
+      j(RUDRANATH_EXCLUSIONS);
+      P(!1);
+      return;
+    }
     c?.id &&
       Promise.all([_X(c.id), CX(c.id)])
         .then(([Q, be]) => {
@@ -513,7 +669,7 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath]);
 
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
@@ -534,6 +690,11 @@ function TrekDetails() {
       Z(!1);
       return;
     }
+    if (isRudranath) {
+      U(RUDRANATH_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
     c?.id &&
       MX(c.id)
         .then((Q) => U(Q || []))
@@ -542,7 +703,7 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath]);
 
   const defaultFaqs = [
     {
@@ -573,6 +734,8 @@ function TrekDetails() {
     ? NITI_VALLEY_FAQS
     : isPanchachuli
     ? PANCHACHULI_FAQS
+    : isRudranath
+    ? RUDRANATH_FAQS
     : defaultFaqs;
 
   if (c) console.log("event details passed : ", c);
@@ -747,7 +910,7 @@ function TrekDetails() {
                 <h2 className="text-3xl font-display font-semibold mb-4 text-[#2b241d]">
                   {isNiti
                     ? `Why to do Summer & Winter Trek – ${c.title}?`
-                    : isPanchachuli
+                    : isPanchachuli || isRudranath
                     ? `Why to do Summer & Post-Monsoon Trek – ${c.title}?`
                     : `Why to do ${c?.category?.name || "Winter Trek"} – ${c.title}?`}
                 </h2>
@@ -930,7 +1093,7 @@ function TrekDetails() {
                   {c?.title || "the trek"}.
                 </p>
               }
-              {isBrahmatal || isNiti || isPanchachuli ? (
+              {isBrahmatal || isNiti || isPanchachuli || isRudranath ? (
                 <div className="space-y-6 text-[#2b241d]">
                   <div>
                     <h3 className="font-semibold text-lg mb-2">
@@ -939,7 +1102,7 @@ function TrekDetails() {
                     <ul className="pl-3 space-y-1 text-[#2b241d]">
                       <li>
                         • Authentic Government ID Card (Aadhar card / Voter ID / Passport
-                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : ""})
+                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : isRudranath ? " - Mandatory for Kedarnath Sanctuary Forest Registration" : ""})
                       </li>
                     </ul>
                   </div>
@@ -1128,6 +1291,8 @@ function TrekDetails() {
                     ? NITI_VALLEY_GALLERY
                     : isPanchachuli
                     ? PANCHACHULI_GALLERY
+                    : isRudranath
+                    ? RUDRANATH_GALLERY
                     : [
                         "/gallery_1.png",
                         "/gallery_2.png",

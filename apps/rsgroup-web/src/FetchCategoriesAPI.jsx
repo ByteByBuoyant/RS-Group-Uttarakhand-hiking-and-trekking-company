@@ -28,12 +28,12 @@ export const STATIC_CATEGORIES = [
   },
   {
     id: "monsoon-custom",
-    name: "Monsoon Trek",
+    name: "Post-Monsoon Trek",
     slug: "monsoon",
     sort_order: 3,
     status: true,
     image: "category_valley_of_flowers.jpg",
-    short_description: "Experience the majestic Valley of Flowers in full bloom.",
+    short_description: "Crisp mountain air, crystal clear peaks & golden meadows.",
     icon: "CloudRain",
     isLocal: true,
   },
@@ -44,11 +44,21 @@ async function fetchCategories() {
     const t = await fetch(k2),
       e = await t.json();
     if (!t.ok) throw e;
-    const list = e.data ? [...e.data] : [];
+    let list = e.data ? [...e.data] : [];
+    list = list.map((item) => {
+      if (item.slug === "monsoon" || item.slug === "post-monsoon") {
+        return {
+          ...item,
+          name: "Post-Monsoon Trek",
+          short_description: "Crisp mountain air, crystal clear peaks & golden meadows.",
+        };
+      }
+      return item;
+    });
     if (!list.some((item) => item.slug === "summer")) {
       list.push(STATIC_CATEGORIES[1]);
     }
-    if (!list.some((item) => item.slug === "monsoon")) {
+    if (!list.some((item) => item.slug === "monsoon" || item.slug === "post-monsoon")) {
       list.push(STATIC_CATEGORIES[2]);
     }
     return { success: true, data: list };

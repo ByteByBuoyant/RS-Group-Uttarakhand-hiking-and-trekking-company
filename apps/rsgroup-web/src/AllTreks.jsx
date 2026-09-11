@@ -11,6 +11,7 @@ const oIe = {
   winter: "winter",
   summer: "summer",
   monsoon: "monsoon",
+  "post-monsoon": "monsoon",
   autumn: "autumn",
   spring: "spring",
 };
@@ -82,6 +83,8 @@ function AllTreks() {
           ? "/niti_valley_card.jpg"
           : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
           ? "/panchachuli_card.jpg"
+          : j.slug === "rudranath-yatra-trek" || j.slug === "rudranath-yatra" || j.id === "rudranath"
+          ? "/rudranath_card.jpg"
           : j.featured_image
           ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
@@ -91,6 +94,8 @@ function AllTreks() {
           ? "/niti_valley_banner.jpg"
           : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
           ? "/panchachuli_banner.jpg"
+          : j.slug === "rudranath-yatra-trek" || j.slug === "rudranath-yatra" || j.id === "rudranath"
+          ? "/rudranath_banner.jpg"
           : j.banner_image
           ? (j.banner_image.startsWith("/") ? j.banner_image : `${BACKEND_STORAGE_URL}/${j.banner_image}`)
           : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",
@@ -112,8 +117,8 @@ function AllTreks() {
   if (!categoryList.some((item) => item.slug === "summer")) {
     categoryList.push({ name: "Summer Trek", slug: "summer" });
   }
-  if (!categoryList.some((item) => item.slug === "monsoon")) {
-    categoryList.push({ name: "Monsoon Trek", slug: "monsoon" });
+  if (!categoryList.some((item) => item.slug === "monsoon" || item.slug === "post-monsoon")) {
+    categoryList.push({ name: "Post-Monsoon Trek", slug: "monsoon" });
   }
 
   const b = [
@@ -126,7 +131,12 @@ function AllTreks() {
       value: "upcoming",
     },
     ...categoryList.map((w) => ({
-      label: w.slug === "summer" ? "Summer Trek" : w.name,
+      label:
+        w.slug === "summer"
+          ? "Summer Trek"
+          : w.slug === "monsoon" || w.slug === "post-monsoon"
+          ? "Post-Monsoon Trek"
+          : w.name,
       value: w.slug,
     })),
   ];
