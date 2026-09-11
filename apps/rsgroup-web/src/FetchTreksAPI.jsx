@@ -161,6 +161,46 @@ export const RUDRANATH_TREK = {
   season: "Summer & Post-Monsoon (May - Jun & Sep - Oct)",
 };
 
+export const VALLEY_OF_FLOWERS_TREK = {
+  id: "valley-of-flowers",
+  category_id: 3,
+  name: "VALLEY OF FLOWERS & HEMKUND SAHIB",
+  title: "VALLEY OF FLOWERS & HEMKUND SAHIB",
+  slug: "valley-of-flowers-trek",
+  location: "Chamoli, Uttarakhand",
+  venue: "Ghangaria, Joshimath",
+  difficulty: "Moderate",
+  grade: "Moderate",
+  duration_days: 6,
+  duration_nights: 5,
+  days: "6 Days / 5 Nights",
+  max_altitude: 14200,
+  altitude: 14200,
+  price: "7500.00",
+  featured_image: "/valley_of_flowers_card.jpg",
+  image: "/valley_of_flowers_card.jpg",
+  banner_image: "/valley_of_flowers_banner.jpg",
+  itinerary_pdf: "/valley_of_flowers_itinerary.pdf",
+  url: "/treks/valley-of-flowers-trek",
+  short_description: "UNESCO World Heritage Alpine Paradise & World's Highest Gurdwara",
+  why_choose: `<p><strong>Valley of Flowers (\"Phoolon ki Ghati\")</strong> is one of the most celebrated trekking expeditions in the world, flawlessly nestled in the Western Garhwal Himalayas at an elevation of 3,600 m.</p><p>Recognized as a UNESCO World Heritage Site, this alpine valley transforms during monsoon and early autumn into a mesmerizing floral carpet with hundreds of rare Himalayan wildflowers, including the legendary Blue Poppy, Brahmakamal, and Meadow Geranium.</p><p>The expedition also ascends to <strong>Hemkund Sahib</strong>, the world's highest Gurdwara situated at 4,329 meters beside a crystal-clear glacial lake reflecting the sacred Saptrishi peaks.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>UNESCO World Heritage Valley:</strong> Traverse endless vibrant meadows of rare alpine blossoms framed by majestic snow-clad Himalayan peaks.</p><p>• <strong>Sacred Hemkund Sahib:</strong> Climb to the revered high-altitude shrine and crystal glacial lake at 14,200 ft with views of Hathi Parvat and Saptrishi peaks.</p><p>• <strong>Pushpavati River &amp; Waterfalls:</strong> Follow the dramatic alpine trail along the Pushpavati river passing roaring cascades like Laxman Waterfall.</p><p>• <strong>Panchaprayag Confluences:</strong> Scenic mountain journey tracing the holy confluences of Devprayag, Rudraprayag, Karnaprayag, Nandaprayag, and Vishnuprayag.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 3,
+    name: "Post-Monsoon Trek",
+    slug: "monsoon",
+    sort_order: 3,
+    status: true,
+    image: "category_valley_of_flowers.jpg",
+    short_description: "Explore the legendary UNESCO World Heritage floral paradise & sacred Hemkund Sahib.",
+    icon: "CloudRain",
+  },
+  categories: ["monsoon", "post-monsoon"],
+  season: "July to September (Post-Monsoon & Bloom Season)",
+};
+
 async function fetchTreks(t = {}) {
   const e = new URLSearchParams(t).toString(),
     n = await fetch(`${x2}/${e ? `?${e}` : ""}`),
@@ -247,6 +287,18 @@ async function fetchTreks(t = {}) {
         },
       };
       list.push(adaptedRudranath);
+    }
+  }
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "valley-of-flowers-trek" ||
+        item.slug === "valley-of-flowers" ||
+        item.name?.toLowerCase().includes("valley of flowers")
+    )
+  ) {
+    if (!cat || cat === "all" || isPostMonsoonCat || t.upcoming) {
+      list.push(VALLEY_OF_FLOWERS_TREK);
     }
   }
   return list;

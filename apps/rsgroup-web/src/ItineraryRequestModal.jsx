@@ -66,14 +66,23 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "rudranath-yatra" ||
           (typeof e === "string" && e.includes("rudranath"));
 
-        const downloadUrl = isRudranath
+        const isValleyOfFlowers =
+          e === "valley-of-flowers" ||
+          e === "valley-of-flowers-trek" ||
+          (typeof e === "string" && e.includes("flowers"));
+
+        const downloadUrl = isValleyOfFlowers
+          ? "/valley_of_flowers_itinerary.pdf"
+          : isRudranath
           ? "/rudranath_itinerary.pdf"
           : isPanchachuli
           ? "/panchachuli_itinerary.pdf"
           : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isRudranath
+        const downloadFileName = isValleyOfFlowers
+          ? "Valley_of_Flowers_Hemkund_Sahib_Itinerary_RS_Group.pdf"
+          : isRudranath
           ? "Rudranath_Yatra_Itinerary_RS_Group.pdf"
           : isPanchachuli
           ? "Panchachuli_Base_Camp_Itinerary_RS_Group.pdf"
@@ -109,15 +118,23 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "rudranath-yatra-trek" ||
           e === "rudranath-yatra" ||
           (typeof e === "string" && e.includes("rudranath"));
+        const isValleyOfFlowers =
+          e === "valley-of-flowers" ||
+          e === "valley-of-flowers-trek" ||
+          (typeof e === "string" && e.includes("flowers"));
 
-        const downloadUrl = isRudranath
+        const downloadUrl = isValleyOfFlowers
+          ? "/valley_of_flowers_itinerary.pdf"
+          : isRudranath
           ? "/rudranath_itinerary.pdf"
           : isPanchachuli
           ? "/panchachuli_itinerary.pdf"
           : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isRudranath
+        const downloadFileName = isValleyOfFlowers
+          ? "Valley_of_Flowers_Hemkund_Sahib_Itinerary_RS_Group.pdf"
+          : isRudranath
           ? "Rudranath_Yatra_Itinerary_RS_Group.pdf"
           : isPanchachuli
           ? "Panchachuli_Base_Camp_Itinerary_RS_Group.pdf"

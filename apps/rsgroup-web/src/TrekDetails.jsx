@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
-import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK, PANCHACHULI_TREK, RUDRANATH_TREK } from "./FetchTreksAPI";
+import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK, PANCHACHULI_TREK, RUDRANATH_TREK, VALLEY_OF_FLOWERS_TREK } from "./FetchTreksAPI";
 import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
@@ -481,6 +481,141 @@ const RUDRANATH_GALLERY = [
   "/rudranath_gallery_8.jpg",
 ];
 
+const VALLEY_OF_FLOWERS_ITINERARY = [
+  {
+    day: 1,
+    title: "RISHIKESH TO JOSHIMATH",
+    altitude: "1,890 m / 6,200 ft",
+    details: `<p><strong>Drive: 260 km | 9-10 Hours</strong></p>
+<p>• The expedition starts with an early morning pickup at 6:00 AM from Rishikesh.</p>
+<p>• Embark on a scenic mountain drive through the Garhwal Himalayas along the holy river banks.</p>
+<p>• Witness 4 of the sacred Panchaprayags (holy confluences): Devprayag, Rudraprayag, Karnaprayag, and Nandaprayag.</p>
+<p>• Reach the mountain town of Joshimath by evening.</p>
+<p>• Check into the hotel, unwind, and attend the trek briefing by your Trek Leader.</p>
+<p>• Delicious dinner and overnight stay in Joshimath.</p>`,
+  },
+  {
+    day: 2,
+    title: "JOSHIMATH TO GOVINDGHAT & TREK TO GHANGARIA",
+    altitude: "3,050 m / 10,000 ft",
+    details: `<p><strong>Drive: 25 km | Trek: 9 km (7-8 Hours)</strong></p>
+<p>• After an early breakfast, drive 25 km from Joshimath to Govindghat / Pulna.</p>
+<p>• En route, spot Vishnuprayag — the 5th and final Panchaprayag where Alaknanda meets Dhauliganga.</p>
+<p>• Begin the 9 km uphill trek along the roaring Pushpavati and Bhyundar Ganga rivers.</p>
+<p>• The stone-paved trail features scenic rest points, local dhabas, and fresh mountain vistas.</p>
+<p>• Arrive at Ghangaria (Govind Dham), the base hamlet for both Valley of Flowers and Hemkund Sahib, before evening.</p>
+<p>• Check into the guest house/hotel, enjoy warm dinner, and rest.</p>`,
+  },
+  {
+    day: 3,
+    title: "GHANGARIA TO VALLEY OF FLOWERS & BACK",
+    altitude: "3,600 m / 11,800 ft",
+    details: `<p><strong>Trek: 8 km | 7-8 Hours</strong></p>
+<p>• Wake up to crisp mountain air and start the 4 km trek to the Valley of Flowers National Park entrance.</p>
+<p>• Pass by the gushing Laxman Waterfall and cross a wooden bridge over the furiously roaring Pushpavati river.</p>
+<p>• Enter the UNESCO World Heritage floral paradise stretching 5-7 km up to the glacial moraines.</p>
+<p>• Marvel at hundreds of species of blooming wildflowers: Blue Poppy, Brahmakamal, Snake Foil, White Leaf Hog Foot, Himalayan Rose, Meadow Geranium, and Dog Flower.</p>
+<p>• Soak in stunning backdrops of Himalayan giants: Nilgiri Parvat, Bhyundar Khal, Rattaban, and Gauri Parvat.</p>
+<p>• Trek back to Ghangaria by late afternoon for hot tea, dinner, and overnight stay.</p>`,
+  },
+  {
+    day: 4,
+    title: "GHANGARIA TO HEMKUND SAHIB & BACK",
+    altitude: "4,329 m / 14,200 ft",
+    details: `<p><strong>Trek: 12 km | 8-9 Hours</strong></p>
+<p>• Start early in the morning for the 6 km steep ascent to the sacred Sikh pilgrimage shrine of Hemkund Sahib.</p>
+<p>• Reaching an altitude of 4,329 meters, Hemkund Sahib is the highest Gurdwara in the world.</p>
+<p>• Spot the rare and sacred Brahmakamal flower and Blue Poppy blooming naturally in high-altitude rocky crevices.</p>
+<p>• Behold the pristine, mirror-like glacial lake Hemkund reflecting the snow-clad Saptrishi and Hathi Parvat peaks.</p>
+<p>• Visit the sacred Gurdwara and adjoining Laxman Temple; savor hot tea and langar.</p>
+<p>• Descend 6 km back to Ghangaria in the afternoon for a relaxing evening and overnight stay.</p>`,
+  },
+  {
+    day: 5,
+    title: "GHANGARIA TO GOVINDGHAT & DRIVE TO JOSHIMATH",
+    altitude: "1,890 m / 6,200 ft",
+    details: `<p><strong>Trek: 9 km (5 Hours) | Drive to Joshimath</strong></p>
+<p>• After breakfast, begin the downhill trek from Ghangaria to Govindghat.</p>
+<p>• Board the vehicles and drive back to Joshimath.</p>
+<p>• <em>Optional Badrinath Visit:</em> Badrinath is 25 km away and can be visited if road and weather conditions permit safely.</p>
+<p>• Check into the hotel in Joshimath and celebrate the successful expedition with fellow trekkers.</p>
+<p>• Dinner and overnight stay in Joshimath.</p>`,
+  },
+  {
+    day: 6,
+    title: "JOSHIMATH TO RISHIKESH",
+    altitude: "Drive back to Rishikesh",
+    details: `<p><strong>Drive: 260 km | 9-10 Hours</strong></p>
+<p>• After morning tea and breakfast, bid farewell to Joshimath and start the return drive to Rishikesh.</p>
+<p>• Reminisce over unforgettable memories of vibrant floral meadows and high-altitude glacial lakes.</p>
+<p>• Arrive at Rishikesh between 7:00 PM and 8:00 PM where the tour concludes.</p>`,
+  },
+];
+
+const VALLEY_OF_FLOWERS_INCLUSIONS = [
+  "Accommodation (Hotel in Joshimath and guest house / lodge in Ghangaria)",
+  "Nutritious, hygienic vegetarian meals while on the trek (Breakfast, Packed/Hot Lunch, Evening Tea & Dinner)",
+  "Trek equipment: Trekking gear, first aid kits, emergency oxygen support, and pulse oximeter",
+  "All necessary Valley of Flowers National Park entry permits, forest fees, and government taxes",
+  "Mountaineering certified & experienced Trek Leader, local guides, and support staff",
+  "Transport from Rishikesh to Joshimath/Govindghat and return to Rishikesh",
+];
+
+const VALLEY_OF_FLOWERS_EXCLUSIONS = [
+  "Any kind of personal expenses, tips, or souvenirs",
+  "Meals and food during highway road transit between Rishikesh and Joshimath",
+  "Travel and medical emergency insurance",
+  "Emergency medical evacuation or hospitalization charges",
+  "Mule or porter charges for personal luggage offloading",
+  "Anything not explicitly mentioned under the inclusions list",
+];
+
+const VALLEY_OF_FLOWERS_ATTRIBUTES = [
+  { label: "Trek Duration", value: "6 Days / 5 Nights" },
+  { label: "Trek Distance", value: "~40 km total" },
+  { label: "Max Altitude", value: "4,329 m (~14,200 ft) at Hemkund Sahib" },
+  { label: "Difficulty Level", value: "Moderate" },
+  { label: "Base Village", value: "Ghangaria / Govindghat" },
+  { label: "Region", value: "Chamoli District, Garhwal Himalayas" },
+  { label: "Pickup & Drop", value: "Rishikesh" },
+  { label: "Season", value: "July to September (Post-Monsoon & Bloom Season)" },
+  { label: "Best Time to Visit", value: "July to September (Peak bloom in July–August)" },
+];
+
+const VALLEY_OF_FLOWERS_FAQS = [
+  {
+    q: "When is the best time to see flowers in the Valley of Flowers?",
+    a: "The peak bloom occurs from mid-July to mid-August when the entire valley is carpeted in hundreds of colorful wildflower species. Early September offers crystal-clear skies, post-monsoon crisp vistas, and late-season blooms.",
+  },
+  {
+    q: "Can beginners undertake the Valley of Flowers trek?",
+    a: "Yes! Valley of Flowers is graded Moderate and has well-defined stone-paved trails. Beginners with basic cardio fitness can comfortably complete the trek.",
+  },
+  {
+    q: "What is the altitude of Hemkund Sahib?",
+    a: "Hemkund Sahib is situated at an elevation of 4,329 meters (14,200 ft), making it the highest Gurdwara in the world, beside a serene glacial lake.",
+  },
+  {
+    q: "Are mules or helicopter services available?",
+    a: "Yes, mules, porters, and palanquins are available between Govindghat and Ghangaria, and from Ghangaria to Hemkund Sahib. Note: Mules are not allowed inside Valley of Flowers National Park itself (walking only).",
+  },
+  {
+    q: "Is network connectivity available on the trek?",
+    a: "Mobile connectivity (BSNL/Jio) is available at Govindghat and intermittently at Ghangaria, but there is no mobile network inside the Valley of Flowers National Park.",
+  },
+];
+
+const VALLEY_OF_FLOWERS_GALLERY = [
+  "/valley_of_flowers_gallery_1.jpg",
+  "/valley_of_flowers_gallery_2.jpg",
+  "/valley_of_flowers_gallery_3.jpg",
+  "/valley_of_flowers_gallery_4.jpg",
+  "/valley_of_flowers_gallery_5.jpg",
+  "/valley_of_flowers_gallery_6.jpg",
+  "/valley_of_flowers_gallery_7.jpg",
+  "/valley_of_flowers_gallery_8.jpg",
+];
+
 function TrekDetails() {
   const [t, e] = React.useState(!1),
     [n, a] = React.useState(!1),
@@ -497,6 +632,8 @@ function TrekDetails() {
         ? PANCHACHULI_TREK
         : slug === "rudranath-yatra-trek" || slug === "rudranath-yatra" || slug?.toLowerCase().includes("rudranath")
         ? RUDRANATH_TREK
+        : slug === "valley-of-flowers-trek" || slug === "valley-of-flowers" || slug?.toLowerCase().includes("flowers")
+        ? VALLEY_OF_FLOWERS_TREK
         : null),
     [c, setTrekEvent] = React.useState(initialEvent),
     [d, u] = React.useState(!1),
@@ -535,6 +672,15 @@ function TrekDetails() {
     slug === "rudranath-yatra" ||
     slug?.toLowerCase().includes("rudranath");
 
+  const isValleyOfFlowers =
+    c?.slug === "valley-of-flowers-trek" ||
+    c?.slug === "valley-of-flowers" ||
+    c?.id === "valley-of-flowers" ||
+    c?.title?.toLowerCase().includes("flowers") ||
+    slug === "valley-of-flowers-trek" ||
+    slug === "valley-of-flowers" ||
+    slug?.toLowerCase().includes("flowers");
+
   React.useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [slug]);
@@ -549,6 +695,8 @@ function TrekDetails() {
         setTrekEvent(PANCHACHULI_TREK);
       } else if (slug === "rudranath-yatra-trek" || slug === "rudranath-yatra" || slug?.toLowerCase().includes("rudranath")) {
         setTrekEvent(RUDRANATH_TREK);
+      } else if (slug === "valley-of-flowers-trek" || slug === "valley-of-flowers" || slug?.toLowerCase().includes("flowers")) {
+        setTrekEvent(VALLEY_OF_FLOWERS_TREK);
       } else {
         fetchTreks().then((treks) => {
           const found = treks.find((item) => item.slug === slug);
@@ -571,6 +719,8 @@ function TrekDetails() {
                   ? "/panchachuli_card.jpg"
                   : found.slug === "rudranath-yatra-trek" || found.slug === "rudranath-yatra"
                   ? "/rudranath_card.jpg"
+                  : found.slug === "valley-of-flowers-trek" || found.slug === "valley-of-flowers"
+                  ? "/valley_of_flowers_card.jpg"
                   : found.featured_image?.startsWith("/")
                   ? found.featured_image
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
@@ -583,6 +733,8 @@ function TrekDetails() {
                   ? "/panchachuli_banner.jpg"
                   : found.slug === "rudranath-yatra-trek" || found.slug === "rudranath-yatra"
                   ? "/rudranath_banner.jpg"
+                  : found.slug === "valley-of-flowers-trek" || found.slug === "valley-of-flowers"
+                  ? "/valley_of_flowers_banner.jpg"
                   : found.banner_image?.startsWith("/")
                   ? found.banner_image
                   : `${BACKEND_STORAGE_URL}/${found.banner_image}`,
@@ -618,6 +770,11 @@ function TrekDetails() {
       w(!1);
       return;
     }
+    if (isValleyOfFlowers) {
+      v(VALLEY_OF_FLOWERS_ITINERARY);
+      w(!1);
+      return;
+    }
     c?.id &&
       GTe(c.id)
         .then(v)
@@ -626,7 +783,7 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers]);
 
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
@@ -657,6 +814,12 @@ function TrekDetails() {
       P(!1);
       return;
     }
+    if (isValleyOfFlowers) {
+      C(VALLEY_OF_FLOWERS_INCLUSIONS);
+      j(VALLEY_OF_FLOWERS_EXCLUSIONS);
+      P(!1);
+      return;
+    }
     c?.id &&
       Promise.all([_X(c.id), CX(c.id)])
         .then(([Q, be]) => {
@@ -669,7 +832,7 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers]);
 
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
@@ -695,6 +858,11 @@ function TrekDetails() {
       Z(!1);
       return;
     }
+    if (isValleyOfFlowers) {
+      U(VALLEY_OF_FLOWERS_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
     c?.id &&
       MX(c.id)
         .then((Q) => U(Q || []))
@@ -703,7 +871,7 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers]);
 
   const defaultFaqs = [
     {
@@ -736,6 +904,8 @@ function TrekDetails() {
     ? PANCHACHULI_FAQS
     : isRudranath
     ? RUDRANATH_FAQS
+    : isValleyOfFlowers
+    ? VALLEY_OF_FLOWERS_FAQS
     : defaultFaqs;
 
   if (c) console.log("event details passed : ", c);
@@ -912,6 +1082,8 @@ function TrekDetails() {
                     ? `Why to do Summer & Winter Trek – ${c.title}?`
                     : isPanchachuli || isRudranath
                     ? `Why to do Summer & Post-Monsoon Trek – ${c.title}?`
+                    : isValleyOfFlowers
+                    ? `Why to do Post-Monsoon Trek – ${c.title}?`
                     : `Why to do ${c?.category?.name || "Winter Trek"} – ${c.title}?`}
                 </h2>
               }
@@ -1093,7 +1265,7 @@ function TrekDetails() {
                   {c?.title || "the trek"}.
                 </p>
               }
-              {isBrahmatal || isNiti || isPanchachuli || isRudranath ? (
+              {isBrahmatal || isNiti || isPanchachuli || isRudranath || isValleyOfFlowers ? (
                 <div className="space-y-6 text-[#2b241d]">
                   <div>
                     <h3 className="font-semibold text-lg mb-2">
@@ -1102,7 +1274,7 @@ function TrekDetails() {
                     <ul className="pl-3 space-y-1 text-[#2b241d]">
                       <li>
                         • Authentic Government ID Card (Aadhar card / Voter ID / Passport
-                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : isRudranath ? " - Mandatory for Kedarnath Sanctuary Forest Registration" : ""})
+                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : isRudranath ? " - Mandatory for Kedarnath Sanctuary Forest Registration" : isValleyOfFlowers ? " - Mandatory for Valley of Flowers National Park Entry Permit" : ""})
                       </li>
                     </ul>
                   </div>
@@ -1293,6 +1465,8 @@ function TrekDetails() {
                     ? PANCHACHULI_GALLERY
                     : isRudranath
                     ? RUDRANATH_GALLERY
+                    : isValleyOfFlowers
+                    ? VALLEY_OF_FLOWERS_GALLERY
                     : [
                         "/gallery_1.png",
                         "/gallery_2.png",
