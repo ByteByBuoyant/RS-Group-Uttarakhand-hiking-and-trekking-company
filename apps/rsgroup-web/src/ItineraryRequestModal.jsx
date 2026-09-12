@@ -70,8 +70,20 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "valley-of-flowers" ||
           e === "valley-of-flowers-trek" ||
           (typeof e === "string" && e.includes("flowers"));
+        const isAdiKailash =
+          e === "adi-kailash" ||
+          e === "adi-kailash-om-parvat-yatra" ||
+          (typeof e === "string" && (e.includes("kailash") || e.includes("parvat")));
+        const isPanchKedar =
+          e === "panch-kedar" ||
+          e === "panch-kedar-yatra" ||
+          (typeof e === "string" && e.includes("panch-kedar"));
 
-        const downloadUrl = isValleyOfFlowers
+        const downloadUrl = isAdiKailash
+          ? "/adi_kailash_itinerary.pdf"
+          : isPanchKedar
+          ? "/panch_kedar_itinerary.pdf"
+          : isValleyOfFlowers
           ? "/valley_of_flowers_itinerary.pdf"
           : isRudranath
           ? "/rudranath_itinerary.pdf"
@@ -80,7 +92,11 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isValleyOfFlowers
+        const downloadFileName = isAdiKailash
+          ? "Adi_Kailash_Om_Parvat_Itinerary_RS_Group.pdf"
+          : isPanchKedar
+          ? "Panch_Kedar_Yatra_Itinerary_RS_Group.pdf"
+          : isValleyOfFlowers
           ? "Valley_of_Flowers_Hemkund_Sahib_Itinerary_RS_Group.pdf"
           : isRudranath
           ? "Rudranath_Yatra_Itinerary_RS_Group.pdf"
@@ -122,8 +138,20 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           e === "valley-of-flowers" ||
           e === "valley-of-flowers-trek" ||
           (typeof e === "string" && e.includes("flowers"));
+        const isAdiKailash =
+          e === "adi-kailash" ||
+          e === "adi-kailash-om-parvat-yatra" ||
+          (typeof e === "string" && (e.includes("kailash") || e.includes("parvat")));
+        const isPanchKedar =
+          e === "panch-kedar" ||
+          e === "panch-kedar-yatra" ||
+          (typeof e === "string" && e.includes("panch-kedar"));
 
-        const downloadUrl = isValleyOfFlowers
+        const downloadUrl = isAdiKailash
+          ? "/adi_kailash_itinerary.pdf"
+          : isPanchKedar
+          ? "/panch_kedar_itinerary.pdf"
+          : isValleyOfFlowers
           ? "/valley_of_flowers_itinerary.pdf"
           : isRudranath
           ? "/rudranath_itinerary.pdf"
@@ -132,7 +160,11 @@ function ItineraryRequestModal({ onClose: t, trekId: e }) {
           : isNiti
           ? "/niti_valley_itinerary.pdf"
           : "/brahmatal_itinerary.pdf";
-        const downloadFileName = isValleyOfFlowers
+        const downloadFileName = isAdiKailash
+          ? "Adi_Kailash_Om_Parvat_Itinerary_RS_Group.pdf"
+          : isPanchKedar
+          ? "Panch_Kedar_Yatra_Itinerary_RS_Group.pdf"
+          : isValleyOfFlowers
           ? "Valley_of_Flowers_Hemkund_Sahib_Itinerary_RS_Group.pdf"
           : isRudranath
           ? "Rudranath_Yatra_Itinerary_RS_Group.pdf"

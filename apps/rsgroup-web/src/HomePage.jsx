@@ -36,6 +36,10 @@ function HomePage() {
             ? "/rudranath_card.jpg"
             : m.slug === "valley-of-flowers-trek" || m.slug === "valley-of-flowers" || m.id === "valley-of-flowers"
             ? "/valley_of_flowers_card.jpg"
+            : m.slug === "adi-kailash-om-parvat-yatra" || m.id === "adi-kailash"
+            ? "/adi_kailash_card.jpg"
+            : m.slug === "panch-kedar-yatra" || m.id === "panch-kedar"
+            ? "/panch_kedar_card.jpg"
             : m.featured_image
             ? (m.featured_image.startsWith("/") ? m.featured_image : `${BACKEND_STORAGE_URL}/${m.featured_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
@@ -49,6 +53,10 @@ function HomePage() {
             ? "/rudranath_banner.jpg"
             : m.slug === "valley-of-flowers-trek" || m.slug === "valley-of-flowers" || m.id === "valley-of-flowers"
             ? "/valley_of_flowers_banner.jpg"
+            : m.slug === "adi-kailash-om-parvat-yatra" || m.id === "adi-kailash"
+            ? "/adi_kailash_banner.jpg"
+            : m.slug === "panch-kedar-yatra" || m.id === "panch-kedar"
+            ? "/panch_kedar_banner.jpg"
             : m.banner_image
             ? (m.banner_image.startsWith("/") ? m.banner_image : `${BACKEND_STORAGE_URL}/${m.banner_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",

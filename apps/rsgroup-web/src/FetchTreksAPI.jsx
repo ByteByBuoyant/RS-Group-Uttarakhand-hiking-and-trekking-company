@@ -201,6 +201,86 @@ export const VALLEY_OF_FLOWERS_TREK = {
   season: "July to September (Post-Monsoon & Bloom Season)",
 };
 
+export const ADI_KAILASH_TREK = {
+  id: "adi-kailash",
+  category_id: 3,
+  name: "ADI KAILASH & OM PARVAT YATRA",
+  title: "ADI KAILASH & OM PARVAT YATRA",
+  slug: "adi-kailash-om-parvat-yatra",
+  location: "Vyas Valley, Pithoragarh, Uttarakhand",
+  venue: "Gunji & Nabi Village, Dharchula",
+  difficulty: "Easy to Moderate",
+  grade: "Easy to Moderate",
+  duration_days: 5,
+  duration_nights: 4,
+  days: "5 Days / 4 Nights",
+  max_altitude: 15000,
+  altitude: 15000,
+  price: "7500.00",
+  featured_image: "/adi_kailash_card.jpg",
+  image: "/adi_kailash_card.jpg",
+  banner_image: "/adi_kailash_banner.jpg",
+  itinerary_pdf: "/adi_kailash_itinerary.pdf",
+  url: "/treks/adi-kailash-om-parvat-yatra",
+  short_description: "Sacred Chhota Kailash, Parvati Sarovar & Mystical Om Parvat Expedition",
+  why_choose: `<p><strong>Adi Kailash &amp; Om Parvat Yatra</strong> is a soul-stirring journey through the remote Vyas Valley in the Kumaon Himalayas near the Indo-Tibet and Indo-Nepal borders.</p><p>Revered as the sacred counterpart of Mount Kailash (Chhota Kailash), Adi Kailash stands majestically at 15,000 feet beside the holy <strong>Parvati Sarovar</strong>, whose mirror-like waters reflect the divine peak.</p><p>The pilgrimage also takes you to the mystical <strong>Om Parvat</strong>, where the sacred Vedic syllable <em>\"ॐ\"</em> naturally appears etched in snow on the dark mountain face. Far from commercial tourist trails, this expedition combines high spiritual devotion with raw Himalayan grandeur and warm Bhotiya village hospitality.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>Sacred Adi Kailash (Chhota Kailash):</strong> Seek divine blessings and meditate beneath the towering sacred peak at 15,000 ft.</p><p>• <strong>Mystical Om Parvat:</strong> Witness the miraculous natural snow formation of the sacred \"ॐ\" symbol.</p><p>• <strong>Holy Parvati Sarovar:</strong> Tranquil alpine lake reflection providing a deeply spiritual setting for prayers and rituals.</p><p>• <strong>Remote Vyas Valley Culture:</strong> Experience traditional stone-and-wood carved architecture, homestays, and Bhotiya culture in Nabi and Gunji villages.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 3,
+    name: "Summer & Post-Monsoon Trek",
+    slug: "monsoon",
+    sort_order: 3,
+    status: true,
+    image: "category_valley_of_flowers.jpg",
+    short_description: "Sacred Himalayan pilgrimage to Chhota Kailash, Parvati Sarovar & Om Parvat.",
+    icon: "Sun",
+  },
+  categories: ["summer", "monsoon", "post-monsoon"],
+  season: "Summer & Post-Monsoon (May - Jun & Sep - Oct)",
+};
+
+export const PANCH_KEDAR_TREK = {
+  id: "panch-kedar",
+  category_id: 3,
+  name: "PANCH KEDAR YATRA",
+  title: "PANCH KEDAR YATRA",
+  slug: "panch-kedar-yatra",
+  location: "Garhwal Himalayas, Uttarakhand",
+  venue: "Kedarnath, Madhyamaheshwar, Tungnath, Rudranath, Kalpeshwar",
+  difficulty: "Moderate to Challenging",
+  grade: "Moderate to Challenging",
+  duration_days: 12,
+  duration_nights: 11,
+  days: "12 Days / 11 Nights",
+  max_altitude: 12073,
+  altitude: 12073,
+  price: "14500.00",
+  featured_image: "/panch_kedar_card.jpg",
+  image: "/panch_kedar_card.jpg",
+  banner_image: "/panch_kedar_banner.jpg",
+  itinerary_pdf: "/panch_kedar_itinerary.pdf",
+  url: "/treks/panch-kedar-yatra",
+  short_description: "The Ultimate Holy Pilgrimage to All Five Sacred Shiva Temples in One Journey",
+  why_choose: `<p><strong>Panch Kedar Yatra</strong> is the ultimate sacred pilgrimage across the Garhwal Himalayas, paying homage to all five revered shrines of Lord Shiva: <strong>Kedarnath, Madhyamaheshwar, Tungnath, Rudranath, and Kalpeshwar</strong>.</p><p>Rooted in the timeless epic of the Mahabharata, this legendary circuit takes you through diverse landscapes — from snow-covered mountain ridges and ancient rhododendron forests to tranquil alpine bugyals and roaring glacial rivers.</p><p>Covering approximately 785 km of scenic mountain drives and 107–115 km of trekking, it is a life-transforming journey of deep faith, inner discovery, and raw Himalayan adventure.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>All Five Shrines of Shiva:</strong> Complete darshan of Kedarnath (Hump), Madhyamaheshwar (Navel), Tungnath (Arms), Rudranath (Face), and Kalpeshwar (Hair/Jata).</p><p>• <strong>World's Highest Shiva Temple:</strong> Trek to Tungnath at 12,073 ft with optional sunrise summit to Chandrashila.</p><p>• <strong>Budha Madhyamaheshwar:</strong> Pristine morning reflections of the mighty Chaukhamba massif in alpine tarns.</p><p>• <strong>Spiritual &amp; Cultural Immersion:</strong> Traditional Garhwali village stays in Bantoli, Ransi, Sagar, and Chopta.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 3,
+    name: "Summer & Post-Monsoon Trek",
+    slug: "monsoon",
+    sort_order: 3,
+    status: true,
+    image: "category_valley_of_flowers.jpg",
+    short_description: "Visit all five sacred Panch Kedar temples in one epic Himalayan pilgrimage.",
+    icon: "Sun",
+  },
+  categories: ["summer", "monsoon", "post-monsoon"],
+  season: "Summer & Post-Monsoon (May - Jun & Sep - Oct)",
+};
+
 async function fetchTreks(t = {}) {
   const e = new URLSearchParams(t).toString(),
     n = await fetch(`${x2}/${e ? `?${e}` : ""}`),
@@ -299,6 +379,54 @@ async function fetchTreks(t = {}) {
   ) {
     if (!cat || cat === "all" || isPostMonsoonCat || t.upcoming) {
       list.push(VALLEY_OF_FLOWERS_TREK);
+    }
+  }
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "adi-kailash-om-parvat-yatra" ||
+        item.name?.toLowerCase().includes("adi kailash")
+    )
+  ) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+      const adaptedAdiKailash = {
+        ...ADI_KAILASH_TREK,
+        category: {
+          ...ADI_KAILASH_TREK.category,
+          name:
+            isPostMonsoonCat
+              ? "Post-Monsoon Trek"
+              : cat === "summer"
+              ? "Summer Trek"
+              : "Summer & Post-Monsoon Trek",
+          slug: isPostMonsoonCat ? "monsoon" : "summer",
+        },
+      };
+      list.push(adaptedAdiKailash);
+    }
+  }
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "panch-kedar-yatra" ||
+        item.name?.toLowerCase().includes("panch kedar")
+    )
+  ) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+      const adaptedPanchKedar = {
+        ...PANCH_KEDAR_TREK,
+        category: {
+          ...PANCH_KEDAR_TREK.category,
+          name:
+            isPostMonsoonCat
+              ? "Post-Monsoon Trek"
+              : cat === "summer"
+              ? "Summer Trek"
+              : "Summer & Post-Monsoon Trek",
+          slug: isPostMonsoonCat ? "monsoon" : "summer",
+        },
+      };
+      list.push(adaptedPanchKedar);
     }
   }
   return list;

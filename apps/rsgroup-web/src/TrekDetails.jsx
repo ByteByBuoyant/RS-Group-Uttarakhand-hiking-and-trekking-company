@@ -12,7 +12,15 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
-import fetchTreks, { BRAHMATAL_TREK, NITI_VALLEY_TREK, PANCHACHULI_TREK, RUDRANATH_TREK, VALLEY_OF_FLOWERS_TREK } from "./FetchTreksAPI";
+import fetchTreks, {
+  BRAHMATAL_TREK,
+  NITI_VALLEY_TREK,
+  PANCHACHULI_TREK,
+  RUDRANATH_TREK,
+  VALLEY_OF_FLOWERS_TREK,
+  ADI_KAILASH_TREK,
+  PANCH_KEDAR_TREK,
+} from "./FetchTreksAPI";
 import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
@@ -616,6 +624,245 @@ const VALLEY_OF_FLOWERS_GALLERY = [
   "/valley_of_flowers_gallery_8.jpg",
 ];
 
+const ADI_KAILASH_ITINERARY = [
+  {
+    day_number: 1,
+    title: "Kathgodam to Dharchula",
+    activity: "Drive: 300 km | 9–11 Hours",
+    description: "Your spiritual Himalayan journey begins with arrival at Kathgodam Railway Station, where our representative will warmly welcome you. After the meet & greet session, begin a scenic drive towards Dharchula, a beautiful Himalayan town situated near the Indo-Nepal border. The journey takes you through the picturesque Kumaon region of Uttarakhand. En route, pass through the charming hill town of Almora, known for its cultural heritage and panoramic mountain views. Continue driving through Pithoragarh, often referred to as 'Little Kashmir' because of its lush valleys and stunning Himalayan surroundings. Upon reaching Dharchula by evening, check in to the hotel and relax after the long yet scenic drive along the Kali River. Dinner and overnight stay in Dharchula.",
+  },
+  {
+    day_number: 2,
+    title: "Dharchula to Nabi Village (via Tawaghat & Gunji)",
+    activity: "Drive: 70 km | 4–5 Hours",
+    description: "Start the morning with an early breakfast before proceeding towards Nabi Village, one of the remote Himalayan villages located in the Vyas Valley region. Since this area falls under the Inner Line zone near the Indo-Tibet border, permit verification will be completed before continuing the journey. The drive from Dharchula to Nabi Village is one of the most breathtaking Himalayan routes. Travel through rugged mountain roads, waterfalls, deep gorges, and dramatic landscapes. Pass through the important junction of Tawaghat, where the route follows the roaring Kali River. Continue further into higher Himalayan terrain via Gunji Village. On arrival at Nabi Village, check in to the homestay or camp. The rest of the day is reserved for acclimatization to the high altitude. Guests may explore the traditional Himalayan village, interact with locals, and experience the simple lifestyle of the border communities. Dinner and overnight stay in homestay/camp at Nabi Village.",
+  },
+  {
+    day_number: 3,
+    title: "Nabi Village to Adi Kailash & Return to Nabi",
+    activity: "Drive: 70 km | 5–6 Hours | Short Trek: ~4 km",
+    description: "Wake up early in the morning for the most spiritual and significant day of the yatra. After breakfast, begin the drive and short trek towards the sacred Adi Kailash, also known as Chhota Kailash. Surrounded by majestic Himalayan peaks and pristine natural beauty, the route towards Adi Kailash offers a deeply spiritual experience. Visit the holy Parvati Sarovar, a beautiful high-altitude lake believed to hold immense spiritual significance. The crystal-clear waters of the lake reflect the magnificent Adi Kailash peak, creating a breathtaking and peaceful setting for meditation and prayer. Enjoy darshan of the sacred Adi Kailash peak at 15,000 ft. Packed lunch will be provided during the excursion amidst stunning Himalayan landscapes. Dinner and overnight stay at Nabi Village.",
+  },
+  {
+    day_number: 4,
+    title: "Nabi Village to Om Parvat & Back to Dharchula",
+    activity: "Drive: 130 km | 8–9 Hours",
+    description: "Begin the day early with a drive towards the sacred Om Parvat, one of the most mysterious and revered mountains in the Himalayas. Om Parvat is famous for the naturally formed 'ॐ' symbol that appears on the mountain surface due to snow deposition patterns. This rare phenomenon is considered highly sacred among Hindu devotees. On reaching the viewpoint, witness the divine symbol of 'ॐ' shining prominently against the dark mountain background. After completing the visit, begin the return journey towards Dharchula, driving through scenic mountain roads, river valleys, and remote Himalayan villages. Upon arrival in Dharchula, check in to the hotel and relax. Dinner and overnight stay in hotel in Dharchula.",
+  },
+  {
+    day_number: 5,
+    title: "Dharchula to Kathgodam Departure",
+    activity: "Drive: 300 km | 11 Hours",
+    description: "After breakfast, check out from the hotel and begin the return journey towards Kathgodam. Enjoy the final drive through the beautiful Kumaon hills, passing through scenic valleys, mountain villages, rivers, and forests. On arrival at Kathgodam, the yatra concludes with divine blessings, peaceful memories, and an unforgettable experience of visiting the sacred lands of Adi Kailash and Om Parvat.",
+  },
+];
+
+const ADI_KAILASH_INCLUSIONS = [
+  "Accommodation (Guest house, Traditional Homestay, Camping at Nabi/Dharchula)",
+  "All nutritious pure vegetarian meals while on the trip/trek",
+  "Trek & camp equipment: Sleeping bags, mattresses, alpine tents, utensils, dining & toilet tents",
+  "All necessary Inner Line permits, border permissions, and entry fees",
+  "First aid medical kits and basic high-altitude safety support",
+  "Mountaineering qualified & professional trek leader, local guides, and support staff",
+  "Transportation for the entire circuit from Kathgodam to Kathgodam",
+];
+
+const ADI_KAILASH_EXCLUSIONS = [
+  "Any kind of personal expenses, tips, and laundry",
+  "Food/meals during transit on highway stopovers",
+  "Personal travel / medical insurance",
+  "Any emergency evacuation or medical charges",
+  "Mules or personal porters to carry personal luggage / backpack offloading",
+  "Anything not specifically mentioned under the inclusions list",
+];
+
+const ADI_KAILASH_ATTRIBUTES = [
+  { label: "Region", value: "Vyas Valley, Pithoragarh, Kumaon Himalayas" },
+  { label: "Duration", value: "5 Days / 4 Nights" },
+  { label: "Altitude", value: "4,572 m (15,000 ft) at Adi Kailash" },
+  { label: "Grade", value: "Easy to Moderate" },
+  { label: "Base Camp / Villages", value: "Gunji & Nabi Village, Dharchula" },
+  { label: "Trek Distance", value: "~4 km (round trip depending on vehicle approach)" },
+  { label: "Pickup & Drop", value: "Kathgodam Railway Station" },
+  { label: "Season", value: "Summer & Post-Monsoon (May–June & September–October)" },
+  { label: "Best Time to Visit", value: "May to June (Clear mountain views) & September to October (Crisp autumn & golden valleys)" },
+];
+
+const ADI_KAILASH_FAQS = [
+  {
+    q: "Is an Inner Line Permit required for Adi Kailash and Om Parvat?",
+    a: "Yes, since Vyas Valley is located along the Indo-Tibet and Indo-Nepal border, an official Inner Line Permit (ILP) along with police verification and medical fitness certificate is mandatory. RS Group manages all permit processing for registered guests.",
+  },
+  {
+    q: "What is the best time to undertake the Adi Kailash Yatra?",
+    a: "The ideal months are May to June (pre-monsoon summer) and September to October (post-monsoon autumn). The weather during these windows is generally clear, with unobstructed views of the sacred peaks and Parvati Sarovar.",
+  },
+  {
+    q: "Can beginners or senior citizens join this yatra?",
+    a: "Yes! Most of the distance is covered in sturdy 4x4 or SUV mountain vehicles with only short walks and gentle hikes (approx 2–4 km) near Parvati Sarovar and the Om Parvat viewpoint, making it accessible for spiritually inclined travelers of reasonable fitness.",
+  },
+  {
+    q: "What kind of accommodation is provided during the yatra?",
+    a: "Guests stay in standard hotels at Dharchula, and cozy traditional Himalayan homestays or equipped camps at Nabi and Gunji villages, offering authentic local hospitality and warm bedding.",
+  },
+  {
+    q: "Is mobile network connectivity available?",
+    a: "Mobile connectivity (BSNL and Jio) is available up to Dharchula. Beyond Dharchula in Vyas Valley, connectivity is very limited or intermittent (mainly BSNL). We recommend informing families beforehand.",
+  },
+];
+
+const ADI_KAILASH_GALLERY = [
+  "/adi_kailash_gallery_1.jpg",
+  "/adi_kailash_gallery_2.jpg",
+  "/adi_kailash_gallery_3.jpg",
+  "/adi_kailash_gallery_4.jpg",
+  "/adi_kailash_gallery_5.jpg",
+  "/adi_kailash_gallery_6.jpg",
+  "/adi_kailash_gallery_7.jpg",
+  "/adi_kailash_gallery_8.jpg",
+];
+
+const PANCH_KEDAR_ITINERARY = [
+  {
+    day_number: 1,
+    title: "Rishikesh to Guptkashi",
+    activity: "Drive: 205 km | 8–10 Hours",
+    description: "Your spiritual journey begins from Rishikesh as you drive through breathtaking Himalayan roads. En route, witness the sacred confluences of the Alaknanda and Mandakini rivers while passing through Devprayag, Srinagar, Rudraprayag, Agastyamuni, and Kund. By evening, arrive at Guptkashi, a peaceful town known for its deep spiritual significance and beautiful mountain surroundings. Dinner and overnight stay in Guptkashi.",
+  },
+  {
+    day_number: 2,
+    title: "Guptkashi to Kedarnath (First Kedar)",
+    activity: "Drive: Sonprayag/Gaurikund | Trek: 16–18 km",
+    description: "Drive to Gaurikund and begin the revered trek to the sacred Kedarnath Temple. The trail passes through Jungle Chatti, Bheembali, and Linchauli, offering spectacular mountain views and the soothing sound of the Mandakini River. By evening, reach one of the most sacred Jyotirlingas of Lord Shiva at 3,583 m and experience the divine atmosphere of Kedarnath. Overnight stay at Kedarnath.",
+  },
+  {
+    day_number: 3,
+    title: "Kedarnath Morning Darshan to Guptkashi",
+    activity: "Trek: 16–18 km | Drive: Gaurikund to Guptkashi",
+    description: "Begin the day with the peaceful morning Aarti and darshan at Kedarnath Temple. After seeking blessings, trek back down to Gaurikund while enjoying the stunning Himalayan scenery once again. Later, drive back to Guptkashi and relax after a fulfilling day. Dinner and overnight stay in Guptkashi.",
+  },
+  {
+    day_number: 4,
+    title: "Guptkashi to Ransi and Trek to Bantoli",
+    activity: "Drive: 30 km | Trek: 6–7 km",
+    description: "After breakfast, drive to Ransi, the starting point for the Madhyamaheshwar trek. Walk through traditional Garhwali villages, lush forests, and scenic mountain trails before reaching the peaceful village of Bantoli, located at the scenic confluence of two mountain rivers. Dinner and overnight stay in Bantoli.",
+  },
+  {
+    day_number: 5,
+    title: "Bantoli to Madhyamaheshwar (Second Kedar)",
+    activity: "Trek: 14–15 km | Gradual Forest & Meadow Ascent",
+    description: "Today's trek gradually ascends through dense forests, alpine meadows, and beautiful mountain landscapes. As you approach Madhyamaheshwar Temple (3,289 m), breathtaking views of the mighty Chaukhamba Peak make every step worthwhile. Spend the evening in the serene surroundings of this sacred temple where Shiva's navel (Nabhi) is worshipped. Overnight stay at Madhyamaheshwar.",
+  },
+  {
+    day_number: 6,
+    title: "Madhyamaheshwar to Budha Madhyamaheshwar & Descent to Bantoli",
+    activity: "Trek: 10–11 km",
+    description: "Wake up early for a memorable trek to Budha Madhyamaheshwar, famous for its mesmerizing sunrise over the Himalayan peaks and reflections in glacial pools. After spending peaceful moments amidst the breathtaking scenery, return to Madhyamaheshwar and continue your descent back to Bantoli for dinner and overnight stay.",
+  },
+  {
+    day_number: 7,
+    title: "Bantoli to Ransi Trek & Drive to Chopta",
+    activity: "Trek: 6–7 km | Drive: Ransi via Ukhimath to Chopta",
+    description: "After trekking back to Ransi, continue your scenic drive through Ukhimath towards the picturesque hill station of Chopta. Surrounded by dense forests and snow-capped peaks, Chopta is often called the 'Mini Switzerland of Uttarakhand' and offers a perfect alpine retreat to relax before the next trek. Dinner and overnight stay in Chopta.",
+  },
+  {
+    day_number: 8,
+    title: "Chopta to Tungnath (Third Kedar) & Drive to Sagar Village",
+    activity: "Trek: 8 km | Drive to Sagar Village",
+    description: "Start early for a scenic trek to Tungnath (3,680 m / 12,073 ft), the world's highest Shiva temple where Shiva's arms (Bahu) are worshipped. Surrounded by majestic Himalayan views, the trail is both spiritually rewarding and visually stunning. Optional hike to Chandrashila Summit (4,000 m). After darshan, return to Chopta and drive to Sagar Village for dinner and overnight stay.",
+  },
+  {
+    day_number: 9,
+    title: "Sagar Village to Lweti Bugyal",
+    activity: "Trek: 10–11 km | Steep Forest & Meadow Ascent",
+    description: "Today's trek takes you deep into dense oak and rhododendron forests as you make your way towards the beautiful alpine meadows of Lweti Bugyal. Surrounded by untouched nature and peaceful mountain landscapes, this high-altitude campsite offers a truly memorable Himalayan camping experience. Overnight stay in Lweti Bugyal.",
+  },
+  {
+    day_number: 10,
+    title: "Lweti Bugyal to Rudranath (Fourth Kedar)",
+    activity: "Trek: 10 km | Cross Pitra Dhar Ridge",
+    description: "Continue your journey across scenic ridges and alpine landscapes, crossing the high pass of Pitra Dhar before reaching the sacred Rudranath Temple (3,600 m). Nestled amidst the high Himalayas, this cave shrine where Shiva's divine face (Mukha) is worshipped offers spectacular views of Nanda Devi, Trishul, and Chaukhamba. Dinner and overnight stay at Rudranath.",
+  },
+  {
+    day_number: 11,
+    title: "Rudranath to Sagar Village Descent",
+    activity: "Trek: 20–22 km | Return Journey",
+    description: "After offering your morning prayers at Rudranath Temple, begin the scenic descent towards Sagar Village. The trail passes through ancient shepherd routes, dense Himalayan forests, and charming mountain settlements. Arrive at Sagar Village for a celebratory dinner and restful overnight stay.",
+  },
+  {
+    day_number: 12,
+    title: "Sagar Village to Kalpeshwar (Fifth Kedar) & Drive to Rishikesh",
+    activity: "Drive & Short Trek to Kalpeshwar | Drive to Rishikesh (205 km)",
+    description: "On the final day, drive towards Helang and enter the beautiful Urgam Valley. A short, gentle trek leads to Kalpeshwar Temple (2,200 m), where Lord Shiva's matted hair (Jata) is worshipped in a tranquil rock cave. After seeking blessings and completing all five shrines of the sacred Panch Kedar, begin your return journey to Rishikesh with a profound sense of spiritual fulfillment.",
+  },
+];
+
+const PANCH_KEDAR_INCLUSIONS = [
+  "Accommodation (Hotels, Himalayan Guesthouses, Homestays & Alpine Camping)",
+  "All nutritious pure vegetarian meals while on the trek & expedition",
+  "Trek equipment: High-grade sleeping bags, mattresses, tents, dining & toilet tents, utensils",
+  "All necessary Kedarnath sanctuary, forest permits, and entry fees",
+  "Comprehensive first aid medical kits and high-altitude safety gear",
+  "Mountaineering qualified & professional trek leader, temple guides, and experienced support staff",
+  "Transport for all transfers from Rishikesh to Rishikesh across the complete 12-day circuit",
+];
+
+const PANCH_KEDAR_EXCLUSIONS = [
+  "Any kind of personal expenses, laundry, telephone calls, and personal donations",
+  "Food/meals during transit stopovers on highways",
+  "Personal trekking / medical insurance",
+  "Any emergency evacuation or medical hospitalisation charges",
+  "Mules or personal porters to carry personal luggage / backpack offloading",
+  "Anything not specifically mentioned under the inclusions list",
+];
+
+const PANCH_KEDAR_ATTRIBUTES = [
+  { label: "Region", value: "Garhwal Himalayas (Rudraprayag & Chamoli Districts), Uttarakhand" },
+  { label: "Duration", value: "12 Days / 11 Nights" },
+  { label: "Total Trek Distance", value: "Approx. 107–115 km" },
+  { label: "Total Drive Distance", value: "Approx. 785 km" },
+  { label: "Maximum Altitude", value: "3,680 m (12,073 ft) at Tungnath Temple" },
+  { label: "Highest Overnight Stay", value: "Kedarnath – 3,583 m (11,755 ft)" },
+  { label: "Difficulty Grade", value: "Moderate to Challenging" },
+  { label: "Pickup & Drop", value: "Rishikesh Railway Station / Haridwar" },
+  { label: "Season", value: "Summer & Post-Monsoon (May–June & September–October)" },
+  { label: "Best Time to Visit", value: "May to June & September to October" },
+];
+
+const PANCH_KEDAR_FAQS = [
+  {
+    q: "What are the five temples covered in the Panch Kedar Yatra?",
+    a: "The circuit covers: Kedarnath (Hump), Madhyamaheshwar (Navel/Nabhi), Tungnath (Arms/Bahu), Rudranath (Face/Mukha), and Kalpeshwar (Matted Hair/Jata) — all worshipped as different manifestations of Lord Shiva.",
+  },
+  {
+    q: "How physically demanding is the 12-day Panch Kedar Yatra?",
+    a: "It is graded Moderate to Challenging. You will trek between 107 and 115 km across varying terrains, including steep climbs to Tungnath and Rudranath. Prior trekking experience and good cardiovascular fitness are recommended.",
+  },
+  {
+    q: "What is the best time to undertake the complete Panch Kedar Yatra?",
+    a: "The pilgrimage is best done in May to June (pleasant weather, blooming rhododendrons) and September to October (crystal-clear skies, post-monsoon greenery, and crisp mountain views before temple closures in November).",
+  },
+  {
+    q: "Are mules or porters available for all five temples?",
+    a: "Mules and porters are readily available for Kedarnath and Tungnath. For Madhyamaheshwar and Rudranath, mules are limited or unavailable on several steep sections, so walking is primarily required. Personal porters can be arranged with prior notice.",
+  },
+  {
+    q: "Where is mobile network available on the route?",
+    a: "Good mobile connectivity is available in Rishikesh, Guptkashi, Ukhimath, and parts of Chopta. Kedarnath has reliable Jio/Airtel/BSNL. Connectivity is intermittent or absent on the trails to Madhyamaheshwar and Rudranath.",
+  },
+];
+
+const PANCH_KEDAR_GALLERY = [
+  "/panch_kedar_gallery_1.jpg",
+  "/panch_kedar_gallery_2.jpg",
+  "/panch_kedar_gallery_3.jpg",
+  "/panch_kedar_gallery_4.jpg",
+  "/panch_kedar_gallery_5.jpg",
+  "/panch_kedar_gallery_6.jpg",
+  "/panch_kedar_gallery_7.jpg",
+  "/panch_kedar_gallery_8.jpg",
+];
+
 function TrekDetails() {
   const [t, e] = React.useState(!1),
     [n, a] = React.useState(!1),
@@ -634,6 +881,10 @@ function TrekDetails() {
         ? RUDRANATH_TREK
         : slug === "valley-of-flowers-trek" || slug === "valley-of-flowers" || slug?.toLowerCase().includes("flowers")
         ? VALLEY_OF_FLOWERS_TREK
+        : slug === "adi-kailash-om-parvat-yatra" || slug?.toLowerCase().includes("adi-kailash") || slug?.toLowerCase().includes("om-parvat")
+        ? ADI_KAILASH_TREK
+        : slug === "panch-kedar-yatra" || slug?.toLowerCase().includes("panch-kedar")
+        ? PANCH_KEDAR_TREK
         : null),
     [c, setTrekEvent] = React.useState(initialEvent),
     [d, u] = React.useState(!1),
@@ -681,6 +932,20 @@ function TrekDetails() {
     slug === "valley-of-flowers" ||
     slug?.toLowerCase().includes("flowers");
 
+  const isAdiKailash =
+    c?.slug === "adi-kailash-om-parvat-yatra" ||
+    c?.id === "adi-kailash" ||
+    c?.title?.toLowerCase().includes("adi kailash") ||
+    slug === "adi-kailash-om-parvat-yatra" ||
+    slug?.toLowerCase().includes("adi-kailash");
+
+  const isPanchKedar =
+    c?.slug === "panch-kedar-yatra" ||
+    c?.id === "panch-kedar" ||
+    c?.title?.toLowerCase().includes("panch kedar") ||
+    slug === "panch-kedar-yatra" ||
+    slug?.toLowerCase().includes("panch-kedar");
+
   React.useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [slug]);
@@ -697,6 +962,10 @@ function TrekDetails() {
         setTrekEvent(RUDRANATH_TREK);
       } else if (slug === "valley-of-flowers-trek" || slug === "valley-of-flowers" || slug?.toLowerCase().includes("flowers")) {
         setTrekEvent(VALLEY_OF_FLOWERS_TREK);
+      } else if (slug === "adi-kailash-om-parvat-yatra" || slug?.toLowerCase().includes("adi-kailash") || slug?.toLowerCase().includes("om-parvat")) {
+        setTrekEvent(ADI_KAILASH_TREK);
+      } else if (slug === "panch-kedar-yatra" || slug?.toLowerCase().includes("panch-kedar")) {
+        setTrekEvent(PANCH_KEDAR_TREK);
       } else {
         fetchTreks().then((treks) => {
           const found = treks.find((item) => item.slug === slug);
@@ -721,6 +990,10 @@ function TrekDetails() {
                   ? "/rudranath_card.jpg"
                   : found.slug === "valley-of-flowers-trek" || found.slug === "valley-of-flowers"
                   ? "/valley_of_flowers_card.jpg"
+                  : found.slug === "adi-kailash-om-parvat-yatra"
+                  ? "/adi_kailash_card.jpg"
+                  : found.slug === "panch-kedar-yatra"
+                  ? "/panch_kedar_card.jpg"
                   : found.featured_image?.startsWith("/")
                   ? found.featured_image
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
@@ -735,6 +1008,10 @@ function TrekDetails() {
                   ? "/rudranath_banner.jpg"
                   : found.slug === "valley-of-flowers-trek" || found.slug === "valley-of-flowers"
                   ? "/valley_of_flowers_banner.jpg"
+                  : found.slug === "adi-kailash-om-parvat-yatra"
+                  ? "/adi_kailash_banner.jpg"
+                  : found.slug === "panch-kedar-yatra"
+                  ? "/panch_kedar_banner.jpg"
                   : found.banner_image?.startsWith("/")
                   ? found.banner_image
                   : `${BACKEND_STORAGE_URL}/${found.banner_image}`,
@@ -775,6 +1052,16 @@ function TrekDetails() {
       w(!1);
       return;
     }
+    if (isAdiKailash) {
+      v(ADI_KAILASH_ITINERARY);
+      w(!1);
+      return;
+    }
+    if (isPanchKedar) {
+      v(PANCH_KEDAR_ITINERARY);
+      w(!1);
+      return;
+    }
     c?.id &&
       GTe(c.id)
         .then(v)
@@ -783,7 +1070,7 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
 
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
@@ -820,6 +1107,18 @@ function TrekDetails() {
       P(!1);
       return;
     }
+    if (isAdiKailash) {
+      C(ADI_KAILASH_INCLUSIONS);
+      j(ADI_KAILASH_EXCLUSIONS);
+      P(!1);
+      return;
+    }
+    if (isPanchKedar) {
+      C(PANCH_KEDAR_INCLUSIONS);
+      j(PANCH_KEDAR_EXCLUSIONS);
+      P(!1);
+      return;
+    }
     c?.id &&
       Promise.all([_X(c.id), CX(c.id)])
         .then(([Q, be]) => {
@@ -832,7 +1131,7 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
 
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
@@ -863,6 +1162,16 @@ function TrekDetails() {
       Z(!1);
       return;
     }
+    if (isAdiKailash) {
+      U(ADI_KAILASH_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
+    if (isPanchKedar) {
+      U(PANCH_KEDAR_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
     c?.id &&
       MX(c.id)
         .then((Q) => U(Q || []))
@@ -871,7 +1180,7 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers]);
+  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
 
   const defaultFaqs = [
     {
@@ -906,6 +1215,10 @@ function TrekDetails() {
     ? RUDRANATH_FAQS
     : isValleyOfFlowers
     ? VALLEY_OF_FLOWERS_FAQS
+    : isAdiKailash
+    ? ADI_KAILASH_FAQS
+    : isPanchKedar
+    ? PANCH_KEDAR_FAQS
     : defaultFaqs;
 
   if (c) console.log("event details passed : ", c);
@@ -1080,7 +1393,7 @@ function TrekDetails() {
                 <h2 className="text-3xl font-display font-semibold mb-4 text-[#2b241d]">
                   {isNiti
                     ? `Why to do Summer & Winter Trek – ${c.title}?`
-                    : isPanchachuli || isRudranath
+                    : isPanchachuli || isRudranath || isAdiKailash || isPanchKedar
                     ? `Why to do Summer & Post-Monsoon Trek – ${c.title}?`
                     : isValleyOfFlowers
                     ? `Why to do Post-Monsoon Trek – ${c.title}?`
@@ -1265,7 +1578,7 @@ function TrekDetails() {
                   {c?.title || "the trek"}.
                 </p>
               }
-              {isBrahmatal || isNiti || isPanchachuli || isRudranath || isValleyOfFlowers ? (
+              {isBrahmatal || isNiti || isPanchachuli || isRudranath || isValleyOfFlowers || isAdiKailash || isPanchKedar ? (
                 <div className="space-y-6 text-[#2b241d]">
                   <div>
                     <h3 className="font-semibold text-lg mb-2">
@@ -1274,7 +1587,7 @@ function TrekDetails() {
                     <ul className="pl-3 space-y-1 text-[#2b241d]">
                       <li>
                         • Authentic Government ID Card (Aadhar card / Voter ID / Passport
-                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : isRudranath ? " - Mandatory for Kedarnath Sanctuary Forest Registration" : isValleyOfFlowers ? " - Mandatory for Valley of Flowers National Park Entry Permit" : ""})
+                        {isNiti ? " - Mandatory for Niti Valley Inner Line Permit" : isPanchachuli ? " - Mandatory for Darma Valley Border Permit" : isRudranath ? " - Mandatory for Kedarnath Sanctuary Forest Registration" : isValleyOfFlowers ? " - Mandatory for Valley of Flowers National Park Entry Permit" : isAdiKailash ? " - Mandatory for Vyas Valley Inner Line Permit (ILP)" : isPanchKedar ? " - Mandatory for Kedarnath Forest & Temple Registration" : ""})
                       </li>
                     </ul>
                   </div>
@@ -1467,6 +1780,10 @@ function TrekDetails() {
                     ? RUDRANATH_GALLERY
                     : isValleyOfFlowers
                     ? VALLEY_OF_FLOWERS_GALLERY
+                    : isAdiKailash
+                    ? ADI_KAILASH_GALLERY
+                    : isPanchKedar
+                    ? PANCH_KEDAR_GALLERY
                     : [
                         "/gallery_1.png",
                         "/gallery_2.png",
