@@ -24,7 +24,9 @@ function HomePage() {
           days: `${m.duration_days} Days / ${m.duration_nights} Nights`,
           venue: m.location ?? "-",
           altitude: m.max_altitude ?? "-",
-          image: m.slug === "kuari-pass-trek"
+          image: m.slug === "kedarkantha-trek" || m.id === "kedarkantha"
+            ? "/about_kedarkantha.png"
+            : m.slug === "kuari-pass-trek" || m.id === "kuari-pass"
             ? "/kuari_pass_card.png"
             : m.slug === "brahmatal-winter-trek" || m.id === "brahmatal"
             ? "/brahmatal_card.jpg"
@@ -43,7 +45,11 @@ function HomePage() {
             : m.featured_image
             ? (m.featured_image.startsWith("/") ? m.featured_image : `${BACKEND_STORAGE_URL}/${m.featured_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
-          banner_image: m.slug === "brahmatal-winter-trek" || m.id === "brahmatal"
+          banner_image: m.slug === "kedarkantha-trek" || m.id === "kedarkantha"
+            ? "/about_kedarkantha.png"
+            : m.slug === "kuari-pass-trek" || m.id === "kuari-pass"
+            ? "/kuari_pass_card.png"
+            : m.slug === "brahmatal-winter-trek" || m.id === "brahmatal"
             ? "/brahmatal_banner.jpg"
             : m.slug === "niti-valley-timmersain-mahadev" || m.id === "niti-valley"
             ? "/niti_valley_banner.jpg"

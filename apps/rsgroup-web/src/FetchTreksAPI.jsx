@@ -3,6 +3,86 @@ import { BACKEND_API_URL } from "@/lib/config";
 
 const x2 = `${BACKEND_API_URL}/treks`;
 
+export const KEDARKANTHA_TREK = {
+  id: "kedarkantha",
+  category_id: 2,
+  name: "KEDARKANTHA TREK",
+  title: "KEDARKANTHA TREK",
+  slug: "kedarkantha-trek",
+  location: "Uttarkashi, Uttarakhand",
+  venue: "Sankri Village",
+  difficulty: "Easy to Moderate",
+  grade: "Easy to Moderate",
+  duration_days: 5,
+  duration_nights: 4,
+  days: "5 Days / 4 Nights",
+  max_altitude: 12500,
+  altitude: 12500,
+  price: "7500.00",
+  featured_image: "/about_kedarkantha.png",
+  image: "/about_kedarkantha.png",
+  banner_image: "/about_kedarkantha.png",
+  itinerary_pdf: "/kedarkantha_itinerary.pdf",
+  url: "/treks/kedarkantha-trek",
+  short_description: "Queen of Winter Treks & 360-degree Himalayan Summit View",
+  why_choose: `<p><strong>Kedarkantha Trek</strong> is universally acclaimed as the Queen of Winter Treks in the Indian Himalayas, situated inside the Govind Wildlife Sanctuary in Uttarkashi district.</p><p>With a summit elevation of 12,500 feet (3,810 m), it offers an unmatched 360-degree panoramic vista of iconic Himalayan giants including Swargarohini, Bandarpoonch, Black Peak (Kalanag), and the Chaunsar ridge.</p><p>The journey winds through enchanting pine and oak forests, frozen glacial lakes like the revered Juda Ka Talab, and vast snowfields, making it the most loved winter expedition for both beginners and experienced mountain enthusiasts.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>The Legendary Summit:</strong> Reach the 12,500 ft summit marked by a Trishul and cairn at sunrise for golden vistas across 13 major peaks.</p><p>• <strong>Juda Ka Talab:</strong> Camp beside the mythical high-altitude frozen lake surrounded by towering snow-draped pine trees.</p><p>• <strong>Scenic Winter Forests:</strong> Trek along pristine snowy trails under dense canopies of oak and deodar.</p><p>• <strong>Cultural Sankri Base:</strong> Experience authentic wooden Garhwali heritage architecture and mountain hospitality.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 2,
+    name: "Winter Trek",
+    slug: "winter",
+    sort_order: 1,
+    status: true,
+    image: "category_winter.png",
+    short_description: "Traverse snow-covered trails and magical valleys.",
+    icon: "Snowflake",
+  },
+  categories: ["winter"],
+  season: "December to April (Peak Winter Snow)",
+};
+
+export const KUARI_PASS_TREK = {
+  id: "kuari-pass",
+  category_id: 2,
+  name: "KUARI PASS TREK",
+  title: "KUARI PASS TREK",
+  slug: "kuari-pass-trek",
+  location: "Chamoli, Uttarakhand",
+  venue: "Joshimath / Dhak Village",
+  difficulty: "Easy to Moderate",
+  grade: "Easy to Moderate",
+  duration_days: 6,
+  duration_nights: 5,
+  days: "6 Days / 5 Nights",
+  max_altitude: 12516,
+  altitude: 12516,
+  price: "8500.00",
+  featured_image: "/kuari_pass_card.png",
+  image: "/kuari_pass_card.png",
+  banner_image: "/kuari_pass_card.png",
+  itinerary_pdf: "/kuari_pass_itinerary.pdf",
+  url: "/treks/kuari-pass-trek",
+  short_description: "Lord Curzon's Historic Trail & Grand Views of Mt. Nanda Devi",
+  why_choose: `<p><strong>Kuari Pass Trek</strong>, also known as Lord Curzon's Trail, is one of the most scenic alpine ridge traverses in the Garhwal Himalayas of Chamoli.</p><p>Standing at 12,516 ft, Kuari Pass delivers dramatic front-row views of India's second-highest peak — Mt. Nanda Devi (7,816 m) — alongside Kamet, Dronagiri, Chaukhamba, Hathi-Ghodi Parvat, and Trishul.</p><p>The trail traverses ancient oak and rhododendron forests, sprawling meadows of Gorson Bugyal and Chitrakantha, and quaint mountain hamlets like Dhak and Tugasi.</p><p><strong>Expedition Highlights:</strong></p><p>• <strong>Grand Mt. Nanda Devi Views:</strong> Unrivaled close-up views of the sacred twin peaks of Nanda Devi and surrounding sanctuaries.</p><p>• <strong>Gorson &amp; Chitrakantha Bugyals:</strong> Vast undulating alpine grasslands offering spectacular ridge walking.</p><p>• <strong>Lord Curzon's Heritage Trail:</strong> Historic mountain route established in 1905 through pristine Garhwal wilderness.</p><p>• <strong>Auli Alpine Meadows:</strong> Descend into world-famous ski slopes and cedar forests overlooking Joshimath.</p>`,
+  is_upcoming: true,
+  is_popular: true,
+  status: 1,
+  category: {
+    id: 2,
+    name: "Winter & Spring Trek",
+    slug: "winter",
+    sort_order: 1,
+    status: true,
+    image: "category_winter.png",
+    short_description: "Experience iconic mountain passes and alpine meadows.",
+    icon: "Snowflake",
+  },
+  categories: ["winter", "spring"],
+  season: "November to April (Winter) & May (Spring)",
+};
+
 export const BRAHMATAL_TREK = {
   id: "brahmatal",
   category_id: 2,
@@ -282,14 +362,56 @@ export const PANCH_KEDAR_TREK = {
 };
 
 async function fetchTreks(t = {}) {
-  const e = new URLSearchParams(t).toString(),
-    n = await fetch(`${x2}/${e ? `?${e}` : ""}`),
-    a = await n.json();
-  if (!n.ok) throw a;
-  const list = a.data ? [...a.data] : [];
+  let list = [];
+  try {
+    const e = new URLSearchParams(t).toString();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const n = await fetch(`${x2}/${e ? `?${e}` : ""}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (n.ok) {
+      const a = await n.json();
+      if (a && a.data && Array.isArray(a.data)) {
+        list = [...a.data];
+      }
+    }
+  } catch (err) {
+    console.warn("fetchTreks remote API unavailable, using local trek dataset:", err);
+  }
+
   const cat = (t.category || t.type || "").toLowerCase();
   const isPostMonsoonCat = cat === "monsoon" || cat === "post-monsoon";
+  const isUpcoming = Boolean(t.upcoming || cat === "upcoming");
 
+  // 1. Kedarkantha Trek
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "kedarkantha-trek" ||
+        item.slug === "kedarkantha" ||
+        item.name?.toLowerCase().includes("kedarkantha")
+    )
+  ) {
+    if (!cat || cat === "all" || cat === "winter" || isUpcoming) {
+      list.unshift(KEDARKANTHA_TREK);
+    }
+  }
+
+  // 2. Kuari Pass Trek
+  if (
+    !list.some(
+      (item) =>
+        item.slug === "kuari-pass-trek" ||
+        item.slug === "kuari-pass" ||
+        item.name?.toLowerCase().includes("kuari")
+    )
+  ) {
+    if (!cat || cat === "all" || cat === "winter" || isUpcoming) {
+      list.push(KUARI_PASS_TREK);
+    }
+  }
+
+  // 3. Brahmatal Winter Trek
   if (
     !list.some(
       (item) =>
@@ -297,10 +419,12 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("brahmatal")
     )
   ) {
-    if (!cat || cat === "all" || cat === "winter" || t.upcoming) {
+    if (!cat || cat === "all" || cat === "winter" || isUpcoming) {
       list.push(BRAHMATAL_TREK);
     }
   }
+
+  // 4. Niti Valley & Timmersain Mahadev
   if (
     !list.some(
       (item) =>
@@ -309,7 +433,7 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("timmersain")
     )
   ) {
-    if (!cat || cat === "all" || cat === "winter" || cat === "summer" || t.upcoming) {
+    if (!cat || cat === "all" || cat === "winter" || cat === "summer" || isUpcoming) {
       const adaptedNiti = {
         ...NITI_VALLEY_TREK,
         category: {
@@ -321,6 +445,8 @@ async function fetchTreks(t = {}) {
       list.push(adaptedNiti);
     }
   }
+
+  // 5. Panchachuli Base Camp Trek
   if (
     !list.some(
       (item) =>
@@ -328,7 +454,7 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("panchachuli")
     )
   ) {
-    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || isUpcoming) {
       const adaptedPanchachuli = {
         ...PANCHACHULI_TREK,
         category: {
@@ -345,6 +471,8 @@ async function fetchTreks(t = {}) {
       list.push(adaptedPanchachuli);
     }
   }
+
+  // 6. Rudranath Yatra Trek
   if (
     !list.some(
       (item) =>
@@ -352,7 +480,7 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("rudranath")
     )
   ) {
-    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || isUpcoming) {
       const adaptedRudranath = {
         ...RUDRANATH_TREK,
         category: {
@@ -369,6 +497,8 @@ async function fetchTreks(t = {}) {
       list.push(adaptedRudranath);
     }
   }
+
+  // 7. Valley of Flowers & Hemkund Sahib
   if (
     !list.some(
       (item) =>
@@ -377,10 +507,12 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("valley of flowers")
     )
   ) {
-    if (!cat || cat === "all" || isPostMonsoonCat || t.upcoming) {
+    if (!cat || cat === "all" || isPostMonsoonCat || isUpcoming) {
       list.push(VALLEY_OF_FLOWERS_TREK);
     }
   }
+
+  // 8. Adi Kailash & Om Parvat Yatra
   if (
     !list.some(
       (item) =>
@@ -388,7 +520,7 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("adi kailash")
     )
   ) {
-    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || isUpcoming) {
       const adaptedAdiKailash = {
         ...ADI_KAILASH_TREK,
         category: {
@@ -405,6 +537,8 @@ async function fetchTreks(t = {}) {
       list.push(adaptedAdiKailash);
     }
   }
+
+  // 9. Panch Kedar Yatra
   if (
     !list.some(
       (item) =>
@@ -412,7 +546,7 @@ async function fetchTreks(t = {}) {
         item.name?.toLowerCase().includes("panch kedar")
     )
   ) {
-    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || t.upcoming) {
+    if (!cat || cat === "all" || cat === "summer" || isPostMonsoonCat || isUpcoming) {
       const adaptedPanchKedar = {
         ...PANCH_KEDAR_TREK,
         category: {
@@ -429,6 +563,7 @@ async function fetchTreks(t = {}) {
       list.push(adaptedPanchKedar);
     }
   }
+
   return list;
 }
 

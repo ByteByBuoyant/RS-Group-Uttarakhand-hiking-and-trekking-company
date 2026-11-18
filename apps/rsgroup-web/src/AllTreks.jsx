@@ -30,7 +30,9 @@ function AllTreks() {
   React.useEffect(() => {
     const newCategory = new URLSearchParams(t.search).get("category")?.toLowerCase() || new URLSearchParams(t.search).get("type")?.toLowerCase();
     if (newCategory) {
-      c(newCategory);
+      c(oIe[newCategory] || newCategory);
+    } else {
+      c("all");
     }
   }, [t.search]);
 
@@ -49,75 +51,87 @@ function AllTreks() {
   React.useEffect(() => {
     async function w() {
       v(!0);
-      const _ = {};
-      s === "upcoming" ? (_.upcoming = 1) : s !== "all" && (_.category = s);
-      const searchParam = new URLSearchParams(t.search).get("search")?.toLowerCase();
-      let rawTreks = await fetchTreks(_);
-      if (searchParam) {
-        rawTreks = rawTreks.filter(
-          (j) =>
-            j.name?.toLowerCase().includes(searchParam) ||
-            j.title?.toLowerCase().includes(searchParam) ||
-            j.location?.toLowerCase().includes(searchParam) ||
-            j.venue?.toLowerCase().includes(searchParam) ||
-            j.short_description?.toLowerCase().includes(searchParam) ||
-            j.category?.name?.toLowerCase().includes(searchParam) ||
-            j.category?.slug?.toLowerCase().includes(searchParam) ||
-            (Array.isArray(j.categories) &&
-              j.categories.some((cat) => cat.toLowerCase().includes(searchParam))) ||
-            j.why_choose?.toLowerCase().includes(searchParam)
-        );
+      try {
+        const _ = {};
+        s === "upcoming" ? (_.upcoming = 1) : s !== "all" && (_.category = s);
+        const searchParam = new URLSearchParams(t.search).get("search")?.toLowerCase();
+        let rawTreks = await fetchTreks(_);
+        if (searchParam) {
+          rawTreks = rawTreks.filter(
+            (j) =>
+              j.name?.toLowerCase().includes(searchParam) ||
+              j.title?.toLowerCase().includes(searchParam) ||
+              j.location?.toLowerCase().includes(searchParam) ||
+              j.venue?.toLowerCase().includes(searchParam) ||
+              j.short_description?.toLowerCase().includes(searchParam) ||
+              j.category?.name?.toLowerCase().includes(searchParam) ||
+              j.category?.slug?.toLowerCase().includes(searchParam) ||
+              (Array.isArray(j.categories) &&
+                j.categories.some((cat) => cat.toLowerCase().includes(searchParam))) ||
+              j.why_choose?.toLowerCase().includes(searchParam)
+          );
+        }
+        const N = rawTreks.map((j) => ({
+          id: j.id,
+          title: j.name ?? "-",
+          grade: j.difficulty ?? "-",
+          days: `${j.duration_days} Days / ${j.duration_nights} Nights`,
+          venue: j.location ?? "-",
+          altitude: j.max_altitude ?? "-",
+          image: j.slug === "kedarkantha-trek" || j.id === "kedarkantha"
+            ? "/about_kedarkantha.png"
+            : j.slug === "kuari-pass-trek" || j.id === "kuari-pass"
+            ? "/kuari_pass_card.png"
+            : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
+            ? "/brahmatal_card.jpg"
+            : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
+            ? "/niti_valley_card.jpg"
+            : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
+            ? "/panchachuli_card.jpg"
+            : j.slug === "rudranath-yatra-trek" || j.slug === "rudranath-yatra" || j.id === "rudranath"
+            ? "/rudranath_card.jpg"
+            : j.slug === "valley-of-flowers-trek" || j.slug === "valley-of-flowers" || j.id === "valley-of-flowers"
+            ? "/valley_of_flowers_card.jpg"
+            : j.slug === "adi-kailash-om-parvat-yatra" || j.id === "adi-kailash"
+            ? "/adi_kailash_card.jpg"
+            : j.slug === "panch-kedar-yatra" || j.id === "panch-kedar"
+            ? "/panch_kedar_card.jpg"
+            : j.featured_image
+            ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
+            : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
+          banner_image: j.slug === "kedarkantha-trek" || j.id === "kedarkantha"
+            ? "/about_kedarkantha.png"
+            : j.slug === "kuari-pass-trek" || j.id === "kuari-pass"
+            ? "/kuari_pass_card.png"
+            : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
+            ? "/brahmatal_banner.jpg"
+            : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
+            ? "/niti_valley_banner.jpg"
+            : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
+            ? "/panchachuli_banner.jpg"
+            : j.slug === "rudranath-yatra-trek" || j.slug === "rudranath-yatra" || j.id === "rudranath"
+            ? "/rudranath_banner.jpg"
+            : j.slug === "valley-of-flowers-trek" || j.slug === "valley-of-flowers" || j.id === "valley-of-flowers"
+            ? "/valley_of_flowers_banner.jpg"
+            : j.slug === "adi-kailash-om-parvat-yatra" || j.id === "adi-kailash"
+            ? "/adi_kailash_banner.jpg"
+            : j.slug === "panch-kedar-yatra" || j.id === "panch-kedar"
+            ? "/panch_kedar_banner.jpg"
+            : j.banner_image
+            ? (j.banner_image.startsWith("/") ? j.banner_image : `${BACKEND_STORAGE_URL}/${j.banner_image}`)
+            : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",
+          url: `/treks/${j.slug}`,
+          price: j.price ?? "00",
+          short_description: j.short_description,
+          why_choose: j.why_choose,
+        }));
+        u(N);
+      } catch (err) {
+        console.error("AllTreks fetch error:", err);
+        u([]);
+      } finally {
+        v(!1);
       }
-      const N = rawTreks.map((j) => ({
-        id: j.id,
-        title: j.name ?? "-",
-        grade: j.difficulty ?? "-",
-        days: `${j.duration_days} Days / ${j.duration_nights} Nights`,
-        venue: j.location ?? "-",
-        altitude: j.max_altitude ?? "-",
-        image: j.slug === "kuari-pass-trek"
-          ? "/kuari_pass_card.png"
-          : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
-          ? "/brahmatal_card.jpg"
-          : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
-          ? "/niti_valley_card.jpg"
-          : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
-          ? "/panchachuli_card.jpg"
-          : j.slug === "rudranath-yatra-trek" || j.slug === "rudranath-yatra" || j.id === "rudranath"
-          ? "/rudranath_card.jpg"
-          : j.slug === "valley-of-flowers-trek" || j.slug === "valley-of-flowers" || j.id === "valley-of-flowers"
-          ? "/valley_of_flowers_card.jpg"
-          : j.slug === "adi-kailash-om-parvat-yatra" || j.id === "adi-kailash"
-          ? "/adi_kailash_card.jpg"
-          : j.slug === "panch-kedar-yatra" || j.id === "panch-kedar"
-          ? "/panch_kedar_card.jpg"
-          : j.featured_image
-          ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
-          : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
-        banner_image: j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
-          ? "/brahmatal_banner.jpg"
-          : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
-          ? "/niti_valley_banner.jpg"
-          : j.slug === "panchachuli-base-camp-trek" || j.id === "panchachuli"
-          ? "/panchachuli_banner.jpg"
-          : j.slug === "rudranath-yatra-trek" || j.slug === "rudranath-yatra" || j.id === "rudranath"
-          ? "/rudranath_banner.jpg"
-          : j.slug === "valley-of-flowers-trek" || j.slug === "valley-of-flowers" || j.id === "valley-of-flowers"
-          ? "/valley_of_flowers_banner.jpg"
-          : j.slug === "adi-kailash-om-parvat-yatra" || j.id === "adi-kailash"
-          ? "/adi_kailash_banner.jpg"
-          : j.slug === "panch-kedar-yatra" || j.id === "panch-kedar"
-          ? "/panch_kedar_banner.jpg"
-          : j.banner_image
-          ? (j.banner_image.startsWith("/") ? j.banner_image : `${BACKEND_STORAGE_URL}/${j.banner_image}`)
-          : "https://rsgrouputtarakhand.in/images/trek_banner.JPG",
-        url: `/treks/${j.slug}`,
-        price: j.price ?? "00",
-        short_description: j.short_description,
-        why_choose: j.why_choose,
-      }));
-      u(N);
-      v(!1);
     }
     w();
   }, [s, t.search]);

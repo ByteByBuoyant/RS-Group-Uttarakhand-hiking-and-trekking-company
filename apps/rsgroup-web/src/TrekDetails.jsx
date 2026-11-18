@@ -13,6 +13,8 @@ import {
 import { motion } from "framer-motion";
 import { BACKEND_API_URL, BACKEND_STORAGE_URL } from "@/lib/config";
 import fetchTreks, {
+  KEDARKANTHA_TREK,
+  KUARI_PASS_TREK,
   BRAHMATAL_TREK,
   NITI_VALLEY_TREK,
   PANCHACHULI_TREK,
@@ -25,28 +27,237 @@ import BookingModal from "./BookingModal";
 import ItineraryRequestModal from "./ItineraryRequestModal";
 
 const GTe = async (trekId) => {
-  const res = await fetch(`${BACKEND_API_URL}/trek-itineraries/trek/${trekId}`);
-  const data = await res.json();
-  return data.data;
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const res = await fetch(`${BACKEND_API_URL}/trek-itineraries/trek/${trekId}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.data ?? [];
+  } catch (err) {
+    console.warn("GTe failed:", err);
+    return [];
+  }
 };
 
 const _X = async (trekId) => {
-  const res = await fetch(`${BACKEND_API_URL}/trek-inclusions/trek/${trekId}`);
-  const data = await res.json();
-  return data.data ?? [];
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const res = await fetch(`${BACKEND_API_URL}/trek-inclusions/trek/${trekId}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.data ?? [];
+  } catch (err) {
+    console.warn("_X failed:", err);
+    return [];
+  }
 };
 
 const CX = async (trekId) => {
-  const res = await fetch(`${BACKEND_API_URL}/trek-exclusions/trek/${trekId}`);
-  const data = await res.json();
-  return data.data ?? [];
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const res = await fetch(`${BACKEND_API_URL}/trek-exclusions/trek/${trekId}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.data ?? [];
+  } catch (err) {
+    console.warn("CX failed:", err);
+    return [];
+  }
 };
 
 const MX = async (trekId) => {
-  const res = await fetch(`${BACKEND_API_URL}/trek-attributes/trek/${trekId}`);
-  const data = await res.json();
-  return data.data ?? [];
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const res = await fetch(`${BACKEND_API_URL}/trek-attributes/trek/${trekId}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.data ?? [];
+  } catch (err) {
+    console.warn("MX failed:", err);
+    return [];
+  }
 };
+
+const KEDARKANTHA_ITINERARY = [
+  {
+    day_number: 1,
+    title: "DEHRADUN TO SANKRI (DRIVE 210 KM | 7-8 HOURS | 6,400 FT)",
+    description:
+      "<p>Your expedition begins with an early morning pickup from Dehradun. The drive winds through scenic hill highways passing Mussoorie, Nainbagh, Damta, Purola, and Mori along the pristine Yamuna and Tons rivers.</p><p>Arrive in the picturesque mountain hamlet of Sankri inside the Govind Wildlife Sanctuary by late afternoon. Check into a traditional wooden guesthouse, enjoy hot evening tea, and participate in the trek briefing. Dinner & overnight stay.</p>",
+  },
+  {
+    day_number: 2,
+    title: "SANKRI TO JUDA KA TALAB (TREK 4 KM | 4-5 HOURS | 9,100 FT)",
+    description:
+      "<p>Begin your trek from Sankri village, passing stone cottages and apple orchards before entering dense Himalayan pine and maple forests.</p><p>The trail offers gradual climbs with crisp mountain air and gentle streams. By afternoon, reach the legendary high-altitude frozen lake of Juda Ka Talab, ringed by tall snow-draped pine trees. Settle into lakeside alpine camps under starlit mountain skies.</p>",
+  },
+  {
+    day_number: 3,
+    title: "JUDA KA TALAB TO KEDARKANTHA BASE CAMP (TREK 4 KM | 3-4 HOURS | 11,250 FT)",
+    description:
+      "<p>Trek through enchanting oak and rhododendron clearings that gradually yield to wide open snowfields.</p><p>As you gain altitude, the grand panorama opens up: Bandarpoonch, Swargarohini, Black Peak (Kalanag), and the Chaunsar ridge stand prominent. Reach the Kedarkantha Base Camp by lunch. Rest, acclimatize, and gear up with microspikes/gaiters for tomorrow's sunrise summit push.</p>",
+  },
+  {
+    day_number: 4,
+    title: "BASE CAMP TO KEDARKANTHA SUMMIT (12,500 FT) & DESCEND TO HARGAON (TREK 6 KM | 6-7 HOURS | 8,900 FT)",
+    description:
+      "<p>Start before dawn (around 3:30 AM) with headlamps beneath a sky filled with shooting stars. Conquer the steady snowy ridge leading to the summit of Kedarkantha (12,500 ft).</p><p>Reach the summit shrine marked by the sacred Trishul as the first rays of the sun bathe 13 major Himalayan peaks in golden light. After celebrating the summit, descend to Hargaon campsite for lunch and a well-deserved rest amidst scenic oak glades.</p>",
+  },
+  {
+    day_number: 5,
+    title: "HARGAON TO SANKRI & DRIVE BACK TO DEHRADUN (TREK 6 KM | 3-4 HOURS, DRIVE 210 KM | 7-8 HOURS)",
+    description:
+      "<p>Descend gently through pine forests from Hargaon back to Sankri base village. Enjoy your final mountain breakfast and bid farewell to the guides and staff.</p><p>Board your vehicle for the scenic drive along the Tons and Yamuna valleys, arriving in Dehradun by evening with memories of an unforgettable Himalayan winter summit.</p>",
+  },
+];
+
+const KEDARKANTHA_INCLUSIONS = [
+  { item: "Accommodation (Guesthouse in Sankri, alpine tents on trek)" },
+  { item: "Nutritious vegetarian meals & hot beverages while on trek" },
+  { item: "Trek equipment: Sleeping bags, mattresses, 4-season tents, crampons/microspikes & gaiters" },
+  { item: "Qualified Mountaineering Trek Leader, local guides and mountain cook staff" },
+  { item: "Govind Wildlife Sanctuary permits, entry fees & forest camping charges" },
+  { item: "First aid medical kit, pulse oximeter & emergency oxygen support" },
+  { item: "Transport from Dehradun to Sankri and return" },
+];
+
+const KEDARKANTHA_EXCLUSIONS = [
+  { item: "Food during highway transit between Dehradun and Sankri" },
+  { item: "Personal expenses, telephone calls, battery charging charges" },
+  { item: "Backpack offloading onto mules or porters (available at extra cost)" },
+  { item: "Personal trekking gear (boots, warm jackets, trekking poles)" },
+  { item: "Emergency evacuation charges and personal travel insurance" },
+  { item: "Anything not explicitly listed in inclusions" },
+];
+
+const KEDARKANTHA_ATTRIBUTES = [
+  { label: "Region", value: "Garhwal Himalayas, Uttarkashi, Uttarakhand" },
+  { label: "Base Village", value: "Sankri Village" },
+  { label: "Nearest City", value: "Dehradun (210 km)" },
+  { label: "Highest Altitude", value: "12,500 ft (3,810 m)" },
+  { label: "Trek Distance", value: "~20 km total (round trip)" },
+  { label: "Best Time to Visit", value: "December to April (Snow Summit) & May to June (Lush Summer)" },
+  { label: "Difficulty Level", value: "Easy to Moderate" },
+  { label: "Best For", value: "First-timers, beginners & winter snow trek enthusiasts" },
+];
+
+const KEDARKANTHA_FAQS = [
+  {
+    q: "Can a beginner go for Kedarkantha trek?",
+    a: "Yes! Kedarkantha is universally acclaimed as the most beginner-friendly winter summit trek in the Indian Himalayas.",
+  },
+  {
+    q: "What is the summit altitude of Kedarkantha?",
+    a: "The summit elevation is 12,500 ft (3,810 meters), delivering an unobstructed 360-degree panorama of Swargarohini, Bandarpoonch, and Black Peak.",
+  },
+  {
+    q: "Is there electricity available on the Kedarkantha trek?",
+    a: "Electricity is available only at Sankri base village. Beyond Sankri, there is no electricity at the campsites, so bring portable power banks.",
+  },
+  {
+    q: "Is there an offloading service available on the trek?",
+    a: "Yes, mule or porter offloading is available for personal backpacks upon prior notice at an additional nominal charge.",
+  },
+  {
+    q: "Is there any ATM available on the route?",
+    a: "The last ATMs are located at Purola and Mori before Sankri. We advise carrying sufficient cash from Dehradun.",
+  },
+];
+
+const KUARI_PASS_ITINERARY = [
+  {
+    day_number: 1,
+    title: "RISHIKESH TO JOSHIMATH (DRIVE 255 KM | 9-10 HOURS | 6,150 FT)",
+    description:
+      "<p>Depart early morning from Rishikesh along the Badrinath National Highway. Drive alongside the holy Alaknanda River, witnessing the sacred river confluences (Panchaprayag) of Devprayag, Rudraprayag, and Karnaprayag.</p><p>Arrive in Joshimath by evening, check into your hotel, and attend the trek orientation. Overnight stay in Joshimath.</p>",
+  },
+  {
+    day_number: 2,
+    title: "JOSHIMATH TO DHAK & TREK TO GULLING TOP (DRIVE 12 KM | TREK 5 KM | 4-5 HOURS | 9,600 FT)",
+    description:
+      "<p>Drive a short distance from Joshimath to Dhak village, the starting point of the trek. Hike along scenic mountain trails passing terraced barley fields and traditional Garhwali stone houses in Tugasi village.</p><p>Ascend gently through oak and rhododendron canopies to reach the picturesque Gulling campsite offering upfront views of Mt. Dronagiri.</p>",
+  },
+  {
+    day_number: 3,
+    title: "GULLING TOP TO KHULLARA / TALI TOP (TREK 5.5 KM | 4-5 HOURS | 11,000 FT)",
+    description:
+      "<p>Begin with a steady ascent through ancient walnut and conifer forests. As the tree line recedes, step onto expansive alpine meadows blanketed in snow or vibrant greenery depending on the season.</p><p>Camp at Khullara or Tali Top surrounded by towering snowy massifs like Hathi-Ghodi Parvat and Chaukhamba.</p>",
+  },
+  {
+    day_number: 4,
+    title: "KHULLARA TO KUARI PASS SUMMIT (12,516 FT) & RETURN (TREK 8 KM | 6-7 HOURS)",
+    description:
+      "<p>Summit day on Lord Curzon's historic route. Trek across high alpine ridges to reach the Kuari Pass at 12,516 ft.</p><p>Enjoy awe-inspiring, up-close views of India's second-highest peak — Mt. Nanda Devi (7,816 m) — along with Kamet, Dronagiri, Neelkanth, and Trishul. Return to camp for celebratory dinner.</p>",
+  },
+  {
+    day_number: 5,
+    title: "CAMP TO AULI VIA GORSON BUGYAL & DRIVE TO JOSHIMATH (TREK 8 KM | 5 HOURS, DRIVE 13 KM)",
+    description:
+      "<p>Trek across the vast, undulating alpine bugyals of Gorson with spectacular continuous mountain vistas. Descend into the famous oak meadows and ski slopes of Auli.</p><p>From Auli, board vehicles for a short drive back to Joshimath for a comfortable hot-shower hotel stay.</p>",
+  },
+  {
+    day_number: 6,
+    title: "JOSHIMATH TO RISHIKESH (DRIVE 255 KM | 9-10 HOURS)",
+    description:
+      "<p>After an early breakfast, board your vehicle for the picturesque return drive through the Garhwal river valleys back to Rishikesh, carrying unforgettable memories of Mt. Nanda Devi and the Kuari Pass.</p>",
+  },
+];
+
+const KUARI_PASS_INCLUSIONS = [
+  { item: "Accommodation (Hotel/guesthouse in Joshimath, alpine tents on trek)" },
+  { item: "All vegetarian meals, evening snacks, and hot beverages on trek" },
+  { item: "Professional Mountaineering Trek Leaders, certified guides and cook crew" },
+  { item: "High altitude gear: 4-season tents, sleeping bags, insulated mattresses" },
+  { item: "Nanda Devi National Park permits, entry fees and forest camping fees" },
+  { item: "First aid kit, oxygen cylinder, and emergency support" },
+  { item: "Transport from Rishikesh to Joshimath and return" },
+];
+
+const KUARI_PASS_EXCLUSIONS = [
+  { item: "Meals during road travel between Rishikesh and Joshimath" },
+  { item: "Personal expenses, mule luggage offloading, or porter charges" },
+  { item: "Travel insurance and emergency evacuation expenses" },
+  { item: "Personal trekking equipment and apparel" },
+  { item: "Any expenses caused by unforeseen roadblocks or natural events" },
+];
+
+const KUARI_PASS_ATTRIBUTES = [
+  { label: "Region", value: "Garhwal Himalayas, Chamoli, Uttarakhand" },
+  { label: "Base Village", value: "Joshimath / Dhak Village" },
+  { label: "Nearest City", value: "Rishikesh / Haridwar (255 km)" },
+  { label: "Highest Altitude", value: "12,516 ft (3,815 m)" },
+  { label: "Trek Distance", value: "~33 km total" },
+  { label: "Best Time to Visit", value: "November to April (Winter Snow) & May to June, Sep to Oct" },
+  { label: "Difficulty Level", value: "Easy to Moderate" },
+  { label: "Best For", value: "Spectacular front-row views of Mt. Nanda Devi & Gorson Bugyal" },
+];
+
+const KUARI_PASS_FAQS = [
+  {
+    q: "Why is Kuari Pass Trek famous?",
+    a: "Kuari Pass, known as Lord Curzon's Trail, is legendary for offering the closest and most dramatic panoramic views of Mt. Nanda Devi (7,816m), Kamet, Dronagiri, and Chaukhamba.",
+  },
+  {
+    q: "Can a beginner do the Kuari Pass trek?",
+    a: "Yes! The gradients are gentle and gradual, making it ideal for fit beginners and enthusiasts wanting scenic Himalayan ridge traverses.",
+  },
+  {
+    q: "What is the best time to visit Kuari Pass?",
+    a: "December to March for pristine snow cover. May, June, September, and October for clear blue skies and green alpine meadows.",
+  },
+  {
+    q: "Are phone networks available on the Kuari Pass trail?",
+    a: "Jio and Airtel work reliably in Joshimath and Dhak village. Above Dhak, connectivity is intermittent.",
+  },
+];
 
 const BRAHMATAL_ITINERARY = [
   {
@@ -871,7 +1082,11 @@ function TrekDetails() {
     { slug } = useParams(),
     initialEvent =
       s?.event ||
-      (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")
+      (slug === "kedarkantha-trek" || slug === "kedarkantha" || slug?.toLowerCase().includes("kedarkantha")
+        ? KEDARKANTHA_TREK
+        : slug === "kuari-pass-trek" || slug === "kuari-pass" || slug?.toLowerCase().includes("kuari")
+        ? KUARI_PASS_TREK
+        : slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")
         ? BRAHMATAL_TREK
         : slug === "niti-valley-timmersain-mahadev" || slug?.toLowerCase().includes("niti")
         ? NITI_VALLEY_TREK
@@ -891,6 +1106,24 @@ function TrekDetails() {
     [y, m] = React.useState(null),
     [k, v] = React.useState([]),
     [b, w] = React.useState(!0);
+
+  const isKedarkantha =
+    c?.slug === "kedarkantha-trek" ||
+    c?.slug === "kedarkantha" ||
+    c?.id === "kedarkantha" ||
+    c?.title?.toLowerCase().includes("kedarkantha") ||
+    slug === "kedarkantha-trek" ||
+    slug === "kedarkantha" ||
+    slug?.toLowerCase().includes("kedarkantha");
+
+  const isKuariPass =
+    c?.slug === "kuari-pass-trek" ||
+    c?.slug === "kuari-pass" ||
+    c?.id === "kuari-pass" ||
+    c?.title?.toLowerCase().includes("kuari") ||
+    slug === "kuari-pass-trek" ||
+    slug === "kuari-pass" ||
+    slug?.toLowerCase().includes("kuari");
 
   const isBrahmatal =
     c?.slug === "brahmatal-winter-trek" ||
@@ -952,7 +1185,11 @@ function TrekDetails() {
 
   React.useEffect(() => {
     if (!c && slug) {
-      if (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")) {
+      if (slug === "kedarkantha-trek" || slug === "kedarkantha" || slug?.toLowerCase().includes("kedarkantha")) {
+        setTrekEvent(KEDARKANTHA_TREK);
+      } else if (slug === "kuari-pass-trek" || slug === "kuari-pass" || slug?.toLowerCase().includes("kuari")) {
+        setTrekEvent(KUARI_PASS_TREK);
+      } else if (slug === "brahmatal-winter-trek" || slug?.toLowerCase().includes("brahmatal")) {
         setTrekEvent(BRAHMATAL_TREK);
       } else if (slug === "niti-valley-timmersain-mahadev" || slug?.toLowerCase().includes("niti")) {
         setTrekEvent(NITI_VALLEY_TREK);
@@ -978,7 +1215,9 @@ function TrekDetails() {
               venue: found.location ?? "-",
               altitude: found.max_altitude ?? "-",
               image:
-                found.slug === "kuari-pass-trek"
+                found.slug === "kedarkantha-trek" || found.id === "kedarkantha"
+                  ? "/about_kedarkantha.png"
+                  : found.slug === "kuari-pass-trek" || found.id === "kuari-pass"
                   ? "/kuari_pass_card.png"
                   : found.slug === "brahmatal-winter-trek"
                   ? "/brahmatal_card.jpg"
@@ -998,7 +1237,11 @@ function TrekDetails() {
                   ? found.featured_image
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
               banner_image:
-                found.slug === "brahmatal-winter-trek"
+                found.slug === "kedarkantha-trek" || found.id === "kedarkantha"
+                  ? "/about_kedarkantha.png"
+                  : found.slug === "kuari-pass-trek" || found.id === "kuari-pass"
+                  ? "/kuari_pass_card.png"
+                  : found.slug === "brahmatal-winter-trek"
                   ? "/brahmatal_banner.jpg"
                   : found.slug === "niti-valley-timmersain-mahadev"
                   ? "/niti_valley_banner.jpg"
@@ -1027,6 +1270,16 @@ function TrekDetails() {
   }, [c, slug]);
 
   React.useEffect(() => {
+    if (isKedarkantha) {
+      v(KEDARKANTHA_ITINERARY);
+      w(!1);
+      return;
+    }
+    if (isKuariPass) {
+      v(KUARI_PASS_ITINERARY);
+      w(!1);
+      return;
+    }
     if (isBrahmatal) {
       v(BRAHMATAL_ITINERARY);
       w(!1);
@@ -1070,13 +1323,25 @@ function TrekDetails() {
           v([]);
         })
         .finally(() => w(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
+  }, [c, isKedarkantha, isKuariPass, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
 
   const [_, C] = React.useState([]),
     [N, j] = React.useState([]),
     [z, P] = React.useState(!0);
 
   React.useEffect(() => {
+    if (isKedarkantha) {
+      C(KEDARKANTHA_INCLUSIONS);
+      j(KEDARKANTHA_EXCLUSIONS);
+      P(!1);
+      return;
+    }
+    if (isKuariPass) {
+      C(KUARI_PASS_INCLUSIONS);
+      j(KUARI_PASS_EXCLUSIONS);
+      P(!1);
+      return;
+    }
     if (isBrahmatal) {
       C(BRAHMATAL_INCLUSIONS);
       j(BRAHMATAL_EXCLUSIONS);
@@ -1131,12 +1396,22 @@ function TrekDetails() {
           j([]);
         })
         .finally(() => P(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
+  }, [c, isKedarkantha, isKuariPass, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
 
   const [D, U] = React.useState([]),
     [H, Z] = React.useState(!0);
 
   React.useEffect(() => {
+    if (isKedarkantha) {
+      U(KEDARKANTHA_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
+    if (isKuariPass) {
+      U(KUARI_PASS_ATTRIBUTES);
+      Z(!1);
+      return;
+    }
     if (isBrahmatal) {
       U(BRAHMATAL_ATTRIBUTES);
       Z(!1);
@@ -1180,7 +1455,7 @@ function TrekDetails() {
           U([]);
         })
         .finally(() => Z(!1));
-  }, [c, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
+  }, [c, isKedarkantha, isKuariPass, isBrahmatal, isNiti, isPanchachuli, isRudranath, isValleyOfFlowers, isAdiKailash, isPanchKedar]);
 
   const defaultFaqs = [
     {
@@ -1205,7 +1480,11 @@ function TrekDetails() {
     },
   ];
 
-  const te = isBrahmatal
+  const te = isKedarkantha
+    ? KEDARKANTHA_FAQS
+    : isKuariPass
+    ? KUARI_PASS_FAQS
+    : isBrahmatal
     ? BRAHMATAL_FAQS
     : isNiti
     ? NITI_VALLEY_FAQS

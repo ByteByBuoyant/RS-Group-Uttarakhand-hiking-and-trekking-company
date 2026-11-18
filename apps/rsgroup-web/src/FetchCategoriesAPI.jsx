@@ -41,8 +41,11 @@ export const STATIC_CATEGORIES = [
 
 async function fetchCategories() {
   try {
-    const t = await fetch(k2),
-      e = await t.json();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+    const t = await fetch(k2, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    const e = await t.json();
     if (!t.ok) throw e;
     let list = e.data ? [...e.data] : [];
     list = list.map((item) => {
