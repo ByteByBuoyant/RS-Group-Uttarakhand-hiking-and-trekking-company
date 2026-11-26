@@ -173,17 +173,17 @@ function AllTreks() {
       {
         <div className="px-5 md:px-12 mt-[8rem] mb-12">
           {
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between gap-3 mb-6">
               {
-                <h1 className="text-3xl font-display font-semibold text-[#2b241d] flex items-center gap-2">
-                  {<Mountain className="text-[#f25b23]" />}All Trekking
+                <h1 className="text-2xl sm:text-3xl font-display font-semibold text-[#2b241d] flex items-center gap-2 min-w-0">
+                  {<Mountain className="text-[#f25b23] shrink-0" />}All Trekking
                   Adventures
                 </h1>
               }
               {
                 <button
                   onClick={() => e(-1)}
-                  className="px-4 py-2 text-sm font-semibold border border-gray-300 rounded-lg hover:bg-[#efe5d5]"
+                  className="px-3.5 py-2 sm:px-4 text-sm font-semibold border border-gray-300 rounded-lg hover:bg-[#efe5d5] shrink-0 whitespace-nowrap"
                 >
                   ← Back
                 </button>

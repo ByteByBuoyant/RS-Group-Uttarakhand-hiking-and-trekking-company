@@ -77,7 +77,7 @@ function Categories() {
   const ImgTag = shouldReduceMotion ? "img" : motion.img;
 
   return (
-    <div className="relative w-full min-h-[85vh] md:h-[90vh] flex flex-col justify-start md:justify-center items-center text-center bg-[#f4ede1] overflow-hidden px-4 md:px-6 pt-36 md:pt-32 pb-20 select-none">
+    <div className="relative w-full min-h-[85dvh] md:h-[90dvh] flex flex-col justify-start md:justify-center items-center text-center bg-[#f4ede1] overflow-hidden px-4 sm:px-6 pt-28 sm:pt-32 md:pt-32 pb-16 sm:pb-20 select-none">
       {/* Ambient glow washes */}
       <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80%] h-[60%] bg-gradient-to-b from-[#f25b23]/10 to-transparent rounded-full blur-3xl pointer-events-none z-10" />
       <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-b from-[#f25b23]/5 to-transparent rounded-full blur-3xl pointer-events-none z-10" />
@@ -111,10 +111,11 @@ function Categories() {
       </div>
 
       {/* Centered Content Container */}
-      <div className="relative z-20 flex flex-col items-center max-w-4xl">
+      <div className="relative z-20 flex flex-col items-center w-full max-w-4xl min-w-0">
         {/* Headline */}
         <HeadingTag
-          className="font-display font-semibold text-3xl sm:text-6xl md:text-7xl lg:text-[92px] text-[#2b241d] tracking-tight leading-[1.1] sm:leading-[1.0] mb-6 px-2"
+          style={{ textWrap: "balance" }}
+          className="font-display font-semibold text-[32px] sm:text-6xl md:text-7xl lg:text-[92px] text-[#2b241d] tracking-tight leading-[1.12] sm:leading-[1.0] mb-4 sm:mb-6 w-full px-1 sm:px-2"
           {...(!shouldReduceMotion && {
             initial: { opacity: 0, y: 26, filter: "blur(12px)" },
             animate: { opacity: 1, y: 0, filter: "blur(0)" },
@@ -126,7 +127,8 @@ function Categories() {
 
         {/* Description Subline */}
         <ParagraphTag
-          className="text-sm sm:text-lg md:text-xl text-[#2b241d] max-w-xl mb-10 leading-relaxed font-semibold px-2 sm:px-0"
+          style={{ textWrap: "balance" }}
+          className="w-full max-w-xl text-sm sm:text-lg md:text-xl text-[#2b241d] mb-7 sm:mb-10 leading-relaxed font-semibold px-2 sm:px-0"
           {...(!shouldReduceMotion && {
             initial: { opacity: 0, y: 15 },
             animate: { opacity: 1, y: 0 },
@@ -138,7 +140,7 @@ function Categories() {
 
         {/* Prompt Input Card */}
         <DivTag
-          className="w-full max-w-[680px] bg-white/62 backdrop-blur-xl border border-white/50 rounded-[22px] shadow-2xl shadow-[rgba(43,36,29,0.15)] p-2.5 pl-4 sm:p-3.5 sm:pl-7 flex items-center gap-3 sm:gap-5 mb-6 overflow-hidden"
+          className="w-full max-w-[680px] min-w-0 bg-white/62 backdrop-blur-xl border border-white/50 rounded-[18px] sm:rounded-[22px] shadow-2xl shadow-[rgba(43,36,29,0.15)] p-2 pl-3.5 sm:p-3.5 sm:pl-7 flex items-center gap-2 sm:gap-5 mb-5 sm:mb-6 overflow-hidden"
           {...(!shouldReduceMotion && {
             initial: { opacity: 0, y: 20, filter: "blur(8px)" },
             animate: { opacity: 1, y: 0, filter: "blur(0)" },
@@ -161,19 +163,19 @@ function Categories() {
           {/* Action CTA */}
           <button
             onClick={() => navigate("/alltreks")}
-            className="group bg-[#2b241d] hover:bg-[#f25b23] text-[#f4ede1] font-semibold text-xs sm:text-base px-4 py-2.5 sm:px-6 sm:py-3.5 rounded-[12px] sm:rounded-[16px] flex items-center justify-center gap-1.5 sm:gap-2.5 shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-[rgba(43,36,29,0.15)] w-[120px] sm:w-[220px]"
+            className="group bg-[#2b241d] hover:bg-[#f25b23] text-[#f4ede1] font-semibold text-xs sm:text-base whitespace-nowrap px-3.5 py-2.5 sm:px-6 sm:py-3.5 rounded-[12px] sm:rounded-[16px] flex items-center justify-center gap-1.5 sm:gap-2.5 shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg shadow-[rgba(43,36,29,0.15)] sm:w-[220px]"
           >
             Plan my trip
             <ArrowRight
               size={14}
-              className="transition-transform duration-200 group-hover:translate-x-0.5"
+              className="transition-transform duration-200 group-hover:translate-x-0.5 shrink-0"
             />
           </button>
         </DivTag>
 
         {/* Suggestion Chips */}
         <DivTag
-          className="flex flex-wrap gap-3 justify-center"
+          className="w-full flex flex-wrap gap-2 sm:gap-3 justify-center px-1"
           {...(!shouldReduceMotion && {
             initial: { opacity: 0, y: 15 },
             animate: { opacity: 1, y: 0 },
@@ -184,9 +186,9 @@ function Categories() {
             <button
               key={chip}
               onClick={() => navigate(`/alltreks?search=${encodeURIComponent(chip)}`)}
-              className="flex items-center gap-2 px-5 py-2.5 bg-white/55 backdrop-blur-md border border-[#2b241d]/15 rounded-full text-sm font-bold text-[#2b241d] hover:bg-white/90 hover:border-[#f25b23]/30 transition-all duration-200 shadow-sm"
+              className="flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 bg-white/65 backdrop-blur-md border border-[#2b241d]/15 rounded-full text-xs sm:text-sm font-bold text-[#2b241d] hover:bg-white/90 hover:border-[#f25b23]/30 transition-all duration-200 shadow-sm whitespace-nowrap"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f25b23]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#f25b23] shrink-0" />
               {chip}
             </button>
           ))}

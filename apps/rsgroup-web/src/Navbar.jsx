@@ -66,10 +66,10 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full Division-container z-50 flex items-center justify-between px-4 py-2 md:px-6 md:py-3">
+    <header className="fixed top-0 left-0 w-full Division-container z-50 flex items-center justify-between gap-2 px-3.5 py-2 md:px-6 md:py-3">
       <div
         onClick={() => t("/")}
-        className="flex items-center gap-3 cursor-pointer select-none"
+        className="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none min-w-0"
       >
         <img
           src="/logoExtraLarge.jpg"
@@ -78,13 +78,13 @@ function Navbar() {
           height="80"
           fetchPriority="high"
           decoding="sync"
-          className="h-14 md:h-20 w-auto object-contain rounded-lg shadow-lg border border-white/20"
+          className="h-12 sm:h-14 md:h-20 w-auto shrink-0 object-contain rounded-lg shadow-lg border border-white/20"
         />
-        <div className="leading-tight">
-          <div className="text-white font-display font-bold text-lg md:text-xl tracking-wide select-none drop-shadow">
+        <div className="leading-tight min-w-0">
+          <div className="text-white font-display font-bold text-[15px] sm:text-lg md:text-xl tracking-wide select-none drop-shadow truncate">
             RS Group Uttarakhand
           </div>
-          <div className="text-white text-xs md:text-sm mt-0.5 font-semibold tracking-wider select-none drop-shadow-sm">
+          <div className="text-white text-[11px] sm:text-xs md:text-sm mt-0.5 font-semibold tracking-wide sm:tracking-wider select-none drop-shadow-sm truncate">
             Your Trusted Path To Adventure
           </div>
         </div>
@@ -136,7 +136,7 @@ function Navbar() {
         </ul>
       </div>
 
-      <div className="md:hidden flex items-center gap-2">
+      <div className="md:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
         <button
           onClick={() => c((w) => !w)}
           className="p-2 rounded-xl bg-white/10 border border-white/20 text-white hover:bg-white/20"

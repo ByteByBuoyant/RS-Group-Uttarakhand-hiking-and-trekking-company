@@ -1592,33 +1592,33 @@ function TrekDetails() {
       {
         <div className="max-w-5xl mx-auto px-6 py-10 space-y-10">
           {
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
               {
-                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center">
-                  {<MapPin className="text-[#f25b23] w-7 h-7" />}
-                  {<p className="text-sm text-[#6f6357] mt-1">Location</p>}
-                  {<p className="font-semibold">{c.venue}</p>}
+                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-4 sm:p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center text-center min-w-0">
+                  {<MapPin className="text-[#f25b23] w-6 h-6 sm:w-7 sm:h-7 shrink-0" />}
+                  {<p className="text-xs sm:text-sm text-[#6f6357] mt-1">Location</p>}
+                  {<p className="font-semibold text-sm sm:text-base break-words w-full">{c.venue}</p>}
                 </div>
               }
               {
-                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center">
-                  {<Mountain className="text-[#f25b23] w-7 h-7" />}
-                  {<p className="text-sm text-[#6f6357] mt-1">Altitude</p>}
-                  {<p className="font-semibold">{c.altitude} ft</p>}
+                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-4 sm:p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center text-center min-w-0">
+                  {<Mountain className="text-[#f25b23] w-6 h-6 sm:w-7 sm:h-7 shrink-0" />}
+                  {<p className="text-xs sm:text-sm text-[#6f6357] mt-1">Altitude</p>}
+                  {<p className="font-semibold text-sm sm:text-base break-words w-full">{c.altitude} ft</p>}
                 </div>
               }
               {
-                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center">
-                  {<Calendar className="text-[#f25b23] w-7 h-7" />}
-                  {<p className="text-sm text-[#6f6357] mt-1">Duration</p>}
-                  {<p className="font-semibold">{c.days}</p>}
+                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-4 sm:p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center text-center min-w-0">
+                  {<Calendar className="text-[#f25b23] w-6 h-6 sm:w-7 sm:h-7 shrink-0" />}
+                  {<p className="text-xs sm:text-sm text-[#6f6357] mt-1">Duration</p>}
+                  {<p className="font-semibold text-sm sm:text-base break-words w-full">{c.days}</p>}
                 </div>
               }
               {
-                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center">
-                  {<Mountain className="text-[#f25b23] w-7 h-7" />}
-                  {<p className="text-sm text-[#6f6357] mt-1">Grade</p>}
-                  {<p className="font-semibold">{c.grade}</p>}
+                <div className="bg-[#efe5d5]/60 border border-[#2b241d]/12 backdrop-blur-md p-4 sm:p-5 rounded-xl shadow-lg shadow-[rgba(43,36,29,0.12)] flex flex-col items-center text-center min-w-0">
+                  {<Mountain className="text-[#f25b23] w-6 h-6 sm:w-7 sm:h-7 shrink-0" />}
+                  {<p className="text-xs sm:text-sm text-[#6f6357] mt-1">Grade</p>}
+                  {<p className="font-semibold text-sm sm:text-base break-words w-full">{c.grade}</p>}
                 </div>
               }
             </div>

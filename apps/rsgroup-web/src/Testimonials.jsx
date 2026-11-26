@@ -85,20 +85,20 @@ function Testimonials() {
           {/* Navigation Arrows */}
           <button
             onClick={a}
-            className="absolute left-0 sm:left-4 z-30 bg-white/60 hover:bg-white/80 border border-[#2b241d]/12 text-[#2b241d] rounded-full p-3 shadow-md transition-all duration-200 hover:scale-110 active:scale-95"
+            className="absolute -left-2 sm:left-4 z-30 bg-white/80 hover:bg-white border border-[#2b241d]/12 text-[#2b241d] rounded-full p-2 sm:p-3 shadow-md transition-all duration-200 hover:scale-110 active:scale-95"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
           <button
             onClick={n}
-            className="absolute right-0 sm:right-4 z-30 bg-white/60 hover:bg-white/80 border border-[#2b241d]/12 text-[#2b241d] rounded-full p-3 shadow-md transition-all duration-200 hover:scale-110 active:scale-95"
+            className="absolute -right-2 sm:right-4 z-30 bg-white/80 hover:bg-white border border-[#2b241d]/12 text-[#2b241d] rounded-full p-2 sm:p-3 shadow-md transition-all duration-200 hover:scale-110 active:scale-95"
           >
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
           {/* Testimonial Card */}
-          <div className="relative w-full max-w-3xl px-8 sm:px-16 min-h-[260px] flex items-center justify-center">
+          <div className="relative w-full max-w-3xl px-5 sm:px-16 min-h-[260px] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={t}
@@ -106,7 +106,7 @@ function Testimonials() {
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.96, x: -20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="bg-white rounded-3xl border border-[#2b241d]/12 p-8 sm:p-10 text-[#2b241d] w-full shadow-lg flex flex-col items-center justify-center"
+                className="bg-white rounded-3xl border border-[#2b241d]/12 p-6 sm:p-10 text-[#2b241d] w-full shadow-lg flex flex-col items-center justify-center"
               >
                 <Quote className="w-10 h-10 text-[#f25b23] mb-6 opacity-90" />
 
