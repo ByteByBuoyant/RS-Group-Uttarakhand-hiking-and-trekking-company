@@ -8,6 +8,7 @@ import TrekCard from "./TrekCard";
 import Testimonials from "./Testimonials";
 import AboutHighlight from "./AboutHighlight";
 import StatsHighlight from "./StatsHighlight";
+import FoundersStory from "./FoundersStory";
 function HomePage() {
   const [t, e] = React.useState(""),
     [n, a] = React.useState([]),
@@ -137,6 +138,7 @@ function HomePage() {
         </section>
       </main>
 
+      {<FoundersStory />}
       {<Testimonials />}
       {<AboutHighlight />}
       {<StatsHighlight />}

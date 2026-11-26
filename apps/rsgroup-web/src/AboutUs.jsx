@@ -41,8 +41,9 @@ function AboutUs() {
                   </span>
                 </h1>
                 <p className="max-w-3xl mx-auto text-lg text-[#2b241d]/85 leading-relaxed font-semibold">
-                  We specialize in trekking and adventure activities, offering
-                  safe, authentic, and memorable experiences in the heart of the
+                  Based in Nainital, Uttarakhand and led by three friends —
+                  Sagar, Rishabh, and Pankaj — we craft safe, authentic, and
+                  unforgettable trekking experiences in the heart of the
                   Himalayas.
                 </p>
               </div>
@@ -169,12 +170,13 @@ function AboutUs() {
                   }
                   {
                     <p className="max-w-4xl mx-auto text-[#6f6357] leading-relaxed text-center">
-                      Two friends met in 2017 and shared a common passion for
-                      running and the mountains. What began as a running
-                      expedition across Uttarakhand soon turned into a bigger
-                      vision. This journey led to the formation of{" "}
-                      {<strong>RS Group Uttarakhand</strong>}, which later
-                      evolved into a full-fledged trekking company dedicated to
+                      Founded in Nainital in 2017, our journey began with a
+                      shared passion for mountain running, cycling, and the
+                      Himalayas. Together as three friends —{" "}
+                      {<strong>Sagar, Rishabh, and Pankaj</strong>} — what
+                      started as endurance expeditions across Uttarakhand and
+                      India grew into {<strong>RS Group Uttarakhand</strong>}, a
+                      full-fledged trekking and adventure company dedicated to
                       exploring and promoting Himalayan trails.
                     </p>
                   }
