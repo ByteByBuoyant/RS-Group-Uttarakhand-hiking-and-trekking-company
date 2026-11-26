@@ -118,6 +118,8 @@ function Testimonials() {
                   <img
                     src={Zh[t].image}
                     alt={Zh[t].name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-12 h-12 rounded-full border-2 border-[#f25b23]/50 object-cover shadow-lg"
                   />
                   <div className="text-left">

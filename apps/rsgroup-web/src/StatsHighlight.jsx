@@ -56,7 +56,7 @@ const PLe = [
   },
   {
     name: "Run 2 Live",
-    logo: "/partner_run2live.png",
+    logo: "/partner_run2live.webp",
   },
   {
     name: "TripAdvisor",
@@ -174,6 +174,8 @@ function StatsHighlight() {
                   <img
                     src={t.img}
                     alt={t.name}
+                    loading="lazy"
+                    decoding="async"
                     className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                   />
                   <p className="text-xs text-[#6f6357] mt-4 tracking-wide uppercase font-semibold">
@@ -190,6 +192,8 @@ function StatsHighlight() {
                   <img
                     src={t.img}
                     alt={t.name}
+                    loading="lazy"
+                    decoding="async"
                     className="h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                   />
                   <p className="text-xs text-[#6f6357] mt-4 tracking-wide uppercase font-semibold">
@@ -232,6 +236,8 @@ function StatsHighlight() {
                 <img
                   src={t.logo}
                   alt={t.name}
+                  loading="lazy"
+                  decoding="async"
                   className="max-h-16 w-auto object-contain transition-all duration-300"
                 />
               </motion.div>

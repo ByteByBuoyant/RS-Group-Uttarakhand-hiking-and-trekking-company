@@ -24,6 +24,8 @@ function TrekCard({ event: t, className }) {
         <img
           src={t.image}
           alt={t.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         {/* Soft gradient overlay on image */}

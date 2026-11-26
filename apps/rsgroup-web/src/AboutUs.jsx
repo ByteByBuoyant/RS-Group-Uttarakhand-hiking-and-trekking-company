@@ -19,8 +19,10 @@ function AboutUs() {
               {/* Pinned Adventure Landscape */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
                 <img
-                  src="https://zxdefgavgwfxastwmmjm.supabase.co/storage/v1/object/public/assets/rove.png"
+                  src="/rove.webp"
                   alt="Adventure Landscape"
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover object-[center_42%]"
                 />
                 {/* Melt dissolve overlay gradient from top to bottom */}

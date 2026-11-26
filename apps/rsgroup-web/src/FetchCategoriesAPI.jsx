@@ -10,7 +10,7 @@ export const STATIC_CATEGORIES = [
     slug: "winter",
     sort_order: 1,
     status: true,
-    image: "category_winter.png",
+    image: "category_winter.webp",
     short_description: "Traverse snow-covered trails and magical valleys.",
     icon: "Snowflake",
     isLocal: true,
@@ -21,7 +21,7 @@ export const STATIC_CATEGORIES = [
     slug: "summer",
     sort_order: 2,
     status: true,
-    image: "category_summer_monsoon.png",
+    image: "category_summer_monsoon.webp",
     short_description: "Explore lush green meadows, border valleys & alpine passes.",
     icon: "Sun",
     isLocal: true,
@@ -40,35 +40,7 @@ export const STATIC_CATEGORIES = [
 ];
 
 async function fetchCategories() {
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500);
-    const t = await fetch(k2, { signal: controller.signal });
-    clearTimeout(timeoutId);
-    const e = await t.json();
-    if (!t.ok) throw e;
-    let list = e.data ? [...e.data] : [];
-    list = list.map((item) => {
-      if (item.slug === "monsoon" || item.slug === "post-monsoon") {
-        return {
-          ...item,
-          name: "Post-Monsoon Trek",
-          short_description: "Crisp mountain air, crystal clear peaks & golden meadows.",
-        };
-      }
-      return item;
-    });
-    if (!list.some((item) => item.slug === "summer")) {
-      list.push(STATIC_CATEGORIES[1]);
-    }
-    if (!list.some((item) => item.slug === "monsoon" || item.slug === "post-monsoon")) {
-      list.push(STATIC_CATEGORIES[2]);
-    }
-    return { success: true, data: list };
-  } catch (err) {
-    console.warn("fetchCategories failed, using static categories fallback:", err);
-    return { success: true, data: STATIC_CATEGORIES };
-  }
+  return { success: true, data: STATIC_CATEGORIES };
 }
 
 export default fetchCategories;

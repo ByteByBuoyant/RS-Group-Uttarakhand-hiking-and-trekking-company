@@ -79,9 +79,9 @@ function AllTreks() {
           venue: j.location ?? "-",
           altitude: j.max_altitude ?? "-",
           image: j.slug === "kedarkantha-trek" || j.id === "kedarkantha"
-            ? "/about_kedarkantha.png"
+            ? "/about_kedarkantha.webp"
             : j.slug === "kuari-pass-trek" || j.id === "kuari-pass"
-            ? "/kuari_pass_card.png"
+            ? "/kuari_pass_card.webp"
             : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
             ? "/brahmatal_card.jpg"
             : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"
@@ -100,9 +100,9 @@ function AllTreks() {
             ? (j.featured_image.startsWith("/") ? j.featured_image : `${BACKEND_STORAGE_URL}/${j.featured_image}`)
             : "https://rsgrouputtarakhand.in/images/trek_list_home.JPG",
           banner_image: j.slug === "kedarkantha-trek" || j.id === "kedarkantha"
-            ? "/about_kedarkantha.png"
+            ? "/about_kedarkantha.webp"
             : j.slug === "kuari-pass-trek" || j.id === "kuari-pass"
-            ? "/kuari_pass_card.png"
+            ? "/kuari_pass_card.webp"
             : j.slug === "brahmatal-winter-trek" || j.id === "brahmatal"
             ? "/brahmatal_banner.jpg"
             : j.slug === "niti-valley-timmersain-mahadev" || j.id === "niti-valley"

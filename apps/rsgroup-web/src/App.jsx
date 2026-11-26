@@ -18,42 +18,43 @@ function ScrollToTop() {
   return null;
 }
 
-// Front-facing pages & components
+// Front-facing pages & components (critical path eager, secondary lazy)
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import HomePage from "./HomePage";
 import Categories from "./Categories";
-import TrekDetails from "./TrekDetails";
-import SelectTicket from "./SelectTicket";
-import CancellationPolicy from "./CancellationPolicy";
 import AllTreks from "./AllTreks";
-import Contact from "./Contact";
-import TermsAndConditions from "./TermsAndConditions";
-import AboutUs from "./AboutUs";
-import FAQs from "./FAQs";
-import PrivateTours from "./PrivateTours";
-import Signup from "./Signup";
 
-// Admin pages & components
-import AdminLogin from "./AdminLogin";
-import AdminAuthCheck from "./AdminAuthCheck";
-import AdminLayout from "./AdminLayout";
-import AdminDashboard from "./AdminDashboard";
-import AdminTrekCreateEdit from "./AdminTrekCreateEdit";
-import AdminTrekList from "./AdminTrekList";
-import AdminTrekItinerary from "./AdminTrekItinerary";
-import AdminTrekInclusions from "./AdminTrekInclusions";
-import AdminTrekExclusions from "./AdminTrekExclusions";
-import AdminTrekAttributes from "./AdminTrekAttributes";
-import AdminTrekCarry from "./AdminTrekCarry";
-import AdminTrekCarrySectionModal from "./AdminTrekCarrySectionModal";
-import AdminFAQList from "./AdminFAQList";
-import AdminFAQCreateEdit from "./AdminFAQCreateEdit";
-import AdminCategoryList from "./AdminCategoryList";
-import AdminCategoryCreateEdit from "./AdminCategoryCreateEdit";
-import AdminTrekEnquiries from "./AdminTrekEnquiries";
-import AdminItineraryEnquiries from "./AdminItineraryEnquiries";
-import AdminContactEnquiries from "./AdminContactEnquiries";
+const TrekDetails = React.lazy(() => import("./TrekDetails"));
+const SelectTicket = React.lazy(() => import("./SelectTicket"));
+const CancellationPolicy = React.lazy(() => import("./CancellationPolicy"));
+const Contact = React.lazy(() => import("./Contact"));
+const TermsAndConditions = React.lazy(() => import("./TermsAndConditions"));
+const AboutUs = React.lazy(() => import("./AboutUs"));
+const FAQs = React.lazy(() => import("./FAQs"));
+const PrivateTours = React.lazy(() => import("./PrivateTours"));
+const Signup = React.lazy(() => import("./Signup"));
+
+// Admin pages & components (lazy-loaded so visitors never download admin code)
+const AdminLogin = React.lazy(() => import("./AdminLogin"));
+const AdminAuthCheck = React.lazy(() => import("./AdminAuthCheck"));
+const AdminLayout = React.lazy(() => import("./AdminLayout"));
+const AdminDashboard = React.lazy(() => import("./AdminDashboard"));
+const AdminTrekCreateEdit = React.lazy(() => import("./AdminTrekCreateEdit"));
+const AdminTrekList = React.lazy(() => import("./AdminTrekList"));
+const AdminTrekItinerary = React.lazy(() => import("./AdminTrekItinerary"));
+const AdminTrekInclusions = React.lazy(() => import("./AdminTrekInclusions"));
+const AdminTrekExclusions = React.lazy(() => import("./AdminTrekExclusions"));
+const AdminTrekAttributes = React.lazy(() => import("./AdminTrekAttributes"));
+const AdminTrekCarry = React.lazy(() => import("./AdminTrekCarry"));
+const AdminTrekCarrySectionModal = React.lazy(() => import("./AdminTrekCarrySectionModal"));
+const AdminFAQList = React.lazy(() => import("./AdminFAQList"));
+const AdminFAQCreateEdit = React.lazy(() => import("./AdminFAQCreateEdit"));
+const AdminCategoryList = React.lazy(() => import("./AdminCategoryList"));
+const AdminCategoryCreateEdit = React.lazy(() => import("./AdminCategoryCreateEdit"));
+const AdminTrekEnquiries = React.lazy(() => import("./AdminTrekEnquiries"));
+const AdminItineraryEnquiries = React.lazy(() => import("./AdminItineraryEnquiries"));
+const AdminContactEnquiries = React.lazy(() => import("./AdminContactEnquiries"));
 
 // Layout wrapper for front-facing pages
 function FrontLayout() {
@@ -61,7 +62,9 @@ function FrontLayout() {
     <div className="min-h-screen flex flex-col justify-between bg-[#f4ede1] text-[#2b241d] selection:bg-[#f25b23]/30 selection:text-[#2b241d]">
       <Navbar />
       <div className="flex-grow">
-        <Outlet />
+        <React.Suspense fallback={<div className="min-h-[60vh]" />}>
+          <Outlet />
+        </React.Suspense>
       </div>
       <Footer />
     </div>
@@ -73,7 +76,8 @@ function App() {
     <AuthProvider>
       <Router>
         <ScrollToTop />
-        <Routes>
+        <React.Suspense fallback={<div className="min-h-screen bg-[#f4ede1]" />}>
+          <Routes>
           {/* Front-facing routes wrapped in layout */}
           <Route element={<FrontLayout />}>
             <Route path="/" element={<HomePage />} />
@@ -150,6 +154,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
+        </React.Suspense>
       </Router>
     </AuthProvider>
   );

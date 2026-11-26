@@ -74,6 +74,10 @@ function Navbar() {
         <img
           src="/logoExtraLarge.jpg"
           alt="RS Group Uttarakhand"
+          width="80"
+          height="80"
+          fetchPriority="high"
+          decoding="sync"
           className="h-14 md:h-20 w-auto object-contain rounded-lg shadow-lg border border-white/20"
         />
         <div className="leading-tight">

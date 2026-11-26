@@ -1216,9 +1216,9 @@ function TrekDetails() {
               altitude: found.max_altitude ?? "-",
               image:
                 found.slug === "kedarkantha-trek" || found.id === "kedarkantha"
-                  ? "/about_kedarkantha.png"
+                  ? "/about_kedarkantha.webp"
                   : found.slug === "kuari-pass-trek" || found.id === "kuari-pass"
-                  ? "/kuari_pass_card.png"
+                  ? "/kuari_pass_card.webp"
                   : found.slug === "brahmatal-winter-trek"
                   ? "/brahmatal_card.jpg"
                   : found.slug === "niti-valley-timmersain-mahadev"
@@ -1238,9 +1238,9 @@ function TrekDetails() {
                   : `${BACKEND_STORAGE_URL}/${found.featured_image}`,
               banner_image:
                 found.slug === "kedarkantha-trek" || found.id === "kedarkantha"
-                  ? "/about_kedarkantha.png"
+                  ? "/about_kedarkantha.webp"
                   : found.slug === "kuari-pass-trek" || found.id === "kuari-pass"
-                  ? "/kuari_pass_card.png"
+                  ? "/kuari_pass_card.webp"
                   : found.slug === "brahmatal-winter-trek"
                   ? "/brahmatal_banner.jpg"
                   : found.slug === "niti-valley-timmersain-mahadev"
@@ -2064,14 +2064,14 @@ function TrekDetails() {
                     : isPanchKedar
                     ? PANCH_KEDAR_GALLERY
                     : [
-                        "/gallery_1.png",
-                        "/gallery_2.png",
-                        "/gallery_3.png",
-                        "/gallery_4.png",
-                        "/gallery_5.png",
-                        "/gallery_6.png",
-                        "/gallery_7.png",
-                        "/gallery_8.png",
+                        "/gallery_1.webp",
+                        "/gallery_2.webp",
+                        "/gallery_3.webp",
+                        "/gallery_4.webp",
+                        "/gallery_5.webp",
+                        "/gallery_6.webp",
+                        "/gallery_7.webp",
+                        "/gallery_8.webp",
                       ]
                   ).map((Q, be) => (
                     <div
@@ -2088,6 +2088,8 @@ function TrekDetails() {
                         <img
                           src={Q}
                           alt="trek gallery item"
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-40 object-cover group-hover:scale-110 transition-all duration-300"
                         />
                       }

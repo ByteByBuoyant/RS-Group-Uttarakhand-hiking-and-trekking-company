@@ -19,9 +19,9 @@ export const KEDARKANTHA_TREK = {
   max_altitude: 12500,
   altitude: 12500,
   price: "7500.00",
-  featured_image: "/about_kedarkantha.png",
-  image: "/about_kedarkantha.png",
-  banner_image: "/about_kedarkantha.png",
+  featured_image: "/about_kedarkantha.webp",
+  image: "/about_kedarkantha.webp",
+  banner_image: "/about_kedarkantha.webp",
   itinerary_pdf: "/kedarkantha_itinerary.pdf",
   url: "/treks/kedarkantha-trek",
   short_description: "Queen of Winter Treks & 360-degree Himalayan Summit View",
@@ -35,7 +35,7 @@ export const KEDARKANTHA_TREK = {
     slug: "winter",
     sort_order: 1,
     status: true,
-    image: "category_winter.png",
+    image: "category_winter.webp",
     short_description: "Traverse snow-covered trails and magical valleys.",
     icon: "Snowflake",
   },
@@ -59,9 +59,9 @@ export const KUARI_PASS_TREK = {
   max_altitude: 12516,
   altitude: 12516,
   price: "8500.00",
-  featured_image: "/kuari_pass_card.png",
-  image: "/kuari_pass_card.png",
-  banner_image: "/kuari_pass_card.png",
+  featured_image: "/kuari_pass_card.webp",
+  image: "/kuari_pass_card.webp",
+  banner_image: "/kuari_pass_card.webp",
   itinerary_pdf: "/kuari_pass_itinerary.pdf",
   url: "/treks/kuari-pass-trek",
   short_description: "Lord Curzon's Historic Trail & Grand Views of Mt. Nanda Devi",
@@ -75,7 +75,7 @@ export const KUARI_PASS_TREK = {
     slug: "winter",
     sort_order: 1,
     status: true,
-    image: "category_winter.png",
+    image: "category_winter.webp",
     short_description: "Experience iconic mountain passes and alpine meadows.",
     icon: "Snowflake",
   },
@@ -153,7 +153,7 @@ export const NITI_VALLEY_TREK = {
     slug: "winter",
     sort_order: 1,
     status: true,
-    image: "category_summer_monsoon.png",
+    image: "category_summer_monsoon.webp",
     short_description: "Traverse snow-covered trails and ice caves in winter and lush alpine border meadows in summer.",
     icon: "Sun",
   },
@@ -363,21 +363,6 @@ export const PANCH_KEDAR_TREK = {
 
 async function fetchTreks(t = {}) {
   let list = [];
-  try {
-    const e = new URLSearchParams(t).toString();
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3500);
-    const n = await fetch(`${x2}/${e ? `?${e}` : ""}`, { signal: controller.signal });
-    clearTimeout(timeoutId);
-    if (n.ok) {
-      const a = await n.json();
-      if (a && a.data && Array.isArray(a.data)) {
-        list = [...a.data];
-      }
-    }
-  } catch (err) {
-    console.warn("fetchTreks remote API unavailable, using local trek dataset:", err);
-  }
 
   const cat = (t.category || t.type || "").toLowerCase();
   const isPostMonsoonCat = cat === "monsoon" || cat === "post-monsoon";

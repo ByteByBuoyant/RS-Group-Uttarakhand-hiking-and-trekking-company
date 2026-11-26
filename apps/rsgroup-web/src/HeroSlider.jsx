@@ -1,18 +1,18 @@
-const $Le = "Compass";
 const ELe = "https://rsgrouputtarakhand.in/images/category_winter.heif";
-import * as UT from "lucide-react";
-import fetchCategories from "./FetchCategoriesAPI";
+import fetchCategories, { STATIC_CATEGORIES } from "./FetchCategoriesAPI";
 const az = fetchCategories;
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Mountain, SquareBottomDashedScissors } from "lucide-react";
+import { Mountain, Snowflake, Sun, CloudRain, Compass } from "lucide-react";
 import { BACKEND_STORAGE_URL } from "@/lib/config";
 import { motion } from "framer-motion";
 
+const ICON_MAP = { Snowflake, Sun, CloudRain, Compass };
+
 function HeroSlider() {
   const t = useNavigate(),
-    [e, n] = React.useState([]),
-    [a, o] = React.useState(!0);
+    [e, n] = React.useState(STATIC_CATEGORIES),
+    [a, o] = React.useState(!1);
 
   React.useEffect(() => {
     (async () => {
@@ -62,7 +62,7 @@ function HeroSlider() {
             name: "Summer Trek",
             slug: "summer",
             icon: "Sun",
-            image: "category_summer_monsoon.png",
+            image: "category_summer_monsoon.webp",
             short_description: "Explore lush green meadows, border valleys & alpine passes.",
             isLocal: true,
           };
@@ -111,9 +111,9 @@ function HeroSlider() {
       {
         <div className="flex flex-wrap gap-6">
           {e.map((s, idx) => {
-            const c = UT[s.icon] || UT[$Le],
+            const c = ICON_MAP[s.icon] || Compass,
               d = s.slug === "winter" || s.name.toLowerCase().includes("winter")
-                ? "/category_winter.png"
+                ? "/category_winter.webp"
                 : s.isLocal
                 ? `/${s.image}`
                 : s.image
@@ -135,6 +135,8 @@ function HeroSlider() {
                       <img
                         src={d}
                         alt={s.name}
+                        loading="lazy"
+                        decoding="async"
                         className={`h-full w-full object-cover
                              group-hover:scale-110
                              transition-transform duration-500`}

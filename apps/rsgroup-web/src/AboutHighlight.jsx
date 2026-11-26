@@ -6,25 +6,25 @@ const ULe = [
   {
     id: 1,
     type: "image",
-    src: "/about_kedarkantha.png",
+    src: "/about_kedarkantha.webp",
     title: "Kedarkantha Summit",
   },
   {
     id: 2,
     type: "image",
-    src: "/about_highlights.png",
+    src: "/about_highlights.webp",
     title: "Team Adventure Highlights",
   },
   {
     id: 3,
     type: "image",
-    src: "/about_campsite.png",
+    src: "/about_campsite.webp",
     title: "Campsite Morning",
   },
   {
     id: 4,
     type: "image",
-    src: "/about_trail.png",
+    src: "/about_trail.webp",
     title: "Trail Through the Pines",
   },
   {
@@ -36,7 +36,7 @@ const ULe = [
   {
     id: 6,
     type: "image",
-    src: "/about_alpine_lakes.png",
+    src: "/about_alpine_lakes.webp",
     title: "Experience Hidden Alpine Lakes",
   },
 ];
@@ -107,6 +107,8 @@ function AboutHighlight() {
                 <img
                   src={moment.src}
                   alt={moment.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               ) : (

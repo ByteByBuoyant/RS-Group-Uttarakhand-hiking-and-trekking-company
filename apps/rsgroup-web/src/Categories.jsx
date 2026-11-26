@@ -85,8 +85,10 @@ function Categories() {
       {/* Pinned Bottom Adventure Landscape */}
       <div className="absolute bottom-0 left-0 right-0 h-[55vh] pointer-events-none overflow-hidden select-none z-0">
         <ImgTag
-          src="https://zxdefgavgwfxastwmmjm.supabase.co/storage/v1/object/public/assets/rove.png"
+          src="/rove.webp"
           alt="Adventure Landscape"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-[center_42%] origin-[center_68%]"
           {...(!shouldReduceMotion && {
             initial: { scale: 1 },
