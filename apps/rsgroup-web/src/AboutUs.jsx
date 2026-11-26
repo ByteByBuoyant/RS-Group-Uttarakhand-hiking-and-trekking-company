@@ -61,7 +61,8 @@ function AboutUs() {
                       }
                       {
                         <p className="text-[#6f6357] leading-relaxed mb-4">
-                          We, {<strong>RS Group Uttarakhand</strong>}, conduct
+                          Based in <strong>Nainital, Uttarakhand</strong>, we at{" "}
+                          {<strong>RS Group Uttarakhand</strong>} conduct
                           treks across Uttarakhand, Himachal Pradesh, and other
                           Himalayan regions. Along with trekking, we organize
                           school programs where children are introduced to

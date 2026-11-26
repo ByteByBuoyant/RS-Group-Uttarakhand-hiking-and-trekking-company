@@ -26,9 +26,9 @@ function Footer() {
               }
               {
                 <p className="text-[15px] leading-relaxed font-semibold text-[#6f6357] mb-4">
-                  Experience adventure, culture, and nature with our curated
-                  trekking and travel packages across Uttarakhand. Your journey
-                  begins here.
+                  Based in Nainital, Uttarakhand — experience adventure,
+                  culture, and nature with our curated Himalayan trekking and
+                  travel expeditions. Your journey begins here.
                 </p>
               }
               {

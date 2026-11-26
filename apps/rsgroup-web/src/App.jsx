@@ -13,6 +13,35 @@ function ScrollToTop() {
 
   React.useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+    const titles = {
+      "/": "RS Group Uttarakhand | Himalayan Trekking & Adventure Company in Nainital",
+      "/alltreks": "All Himalayan Treks | RS Group Uttarakhand",
+      "/aboutUs": "About Us | RS Group Uttarakhand (Nainital)",
+      "/contact": "Contact Us | RS Group Uttarakhand, Nainital",
+      "/faqs": "FAQs | RS Group Uttarakhand",
+      "/cancellationPolicy": "Cancellation Policy | RS Group Uttarakhand",
+      "/termsAndConditions": "Terms & Conditions | RS Group Uttarakhand",
+      "/privateTours": "Customized & Private Tours | RS Group Uttarakhand",
+    };
+    if (titles[pathname]) {
+      document.title = titles[pathname];
+    } else if (pathname.startsWith("/treks/")) {
+      const trekName = pathname
+        .replace("/treks/", "")
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ");
+      document.title = `${trekName} | RS Group Uttarakhand`;
+    }
+
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute(
+        "href",
+        `https://www.rsgrouputtarakhand.in${pathname === "/" ? "/" : pathname}`
+      );
+    }
   }, [pathname]);
 
   return null;
